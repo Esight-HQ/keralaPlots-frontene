@@ -11,7 +11,9 @@ export default function PropertiesBanner({
     title = "Find Your Perfect Property in Kerala",
     subtitle = "Discover verified properties across Kerala – from cozy apartments to scenic plots, all in one place.",
     image = "https://imagedelivery.net/QePV2rqDMo30QKb63DbO_w/f45dc2ca-f2e8-436d-a3d9-e1a6d7badf00/public",
+    headingLevel = "h2",
 }) {
+    const Heading = headingLevel;
     return (
         <section className={`${styles.banner} ${headingFallback.variable}`} aria-label={eyebrow}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -20,7 +22,7 @@ export default function PropertiesBanner({
 
             <div className={styles.content}>
                 <span className={styles.eyebrow}>{eyebrow}</span>
-                <h2 className={styles.title}>{title}</h2>
+                <Heading className={styles.title}>{title}</Heading>
                 <p className={styles.subtitle}>{subtitle}</p>
             </div>
         </section>

@@ -30,76 +30,13 @@
   white-space: nowrap;
 }
 
-/* ───────── Hero ───────── */
-.hero {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  width: 100%;
-  margin-top: 80px;
-  background:rgb(9 48 0) 0% 0%;
-  min-height: 460px;
-  display: flex;
-  align-items: center;
+/* ───────── Hero (shared PropertiesBanner) ───────── */
+/* Clears the fixed nav — same offset the /properties page uses */
+.bannerWrap {
+  padding-top: 80px;
 }
 
-.heroImg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: bottom;
-  z-index: -2;
-}
-
-.heroOverlay {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(90deg, rgb(9 48 0) 0% 0%, rgb(1 43 0 / 77%) 45%, rgba(1, 27, 0, 0) 100%);
-}
-
-.heroInner {
-  padding: 56px 56px 48px;
-  max-width: 760px;
-  color: #fff;
-}
-
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 18px;
-}
-
-.heroTitle {
-  font-family: "Nelphim", var(--font-banner-fallback), Georgia, serif;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 1.1;
-  margin-bottom: 14px;
-  max-width: 14em;
-}
-
-.heroSub {
-  font-size: 16px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.88);
-  max-width: 580px;
-  margin-bottom: 28px;
-  font-weight: 300;
-}
-
+/* Search bar sits just below the banner */
 .heroSearch {
   display: grid;
   grid-template-columns: 1.5fr 1fr auto;
@@ -107,8 +44,10 @@
   background: #fff;
   padding: 8px;
   border-radius: 16px;
-  box-shadow: 0 18px 40px rgba(0, 10, 50, 0.28);
-  max-width: 720px;
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  max-width: 820px;
+  margin-bottom: 8px;
 }
 
 .heroField {
@@ -178,29 +117,6 @@
   background: var(--navy-deep);
 }
 
-.heroStats {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-  margin-top: 30px;
-}
-
-.heroStats li {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.heroStats strong {
-  font-size: 26px;
-  font-weight: 700;
-}
-
-.heroStats span {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.78);
-}
 /* ───────── Minimalist Verification Pending Alert ───────── */
 .verificationAlert {
   margin-top: 24px;
@@ -1090,21 +1006,13 @@
 }
 
 @media (max-width: 900px) {
-  .heroTitle { font-size: 38px; }
-  .heroInner { padding: 44px 32px 40px; }
   .heroSearch { grid-template-columns: 1fr 1fr; }
   .heroBtn { grid-column: 1 / -1; }
 }
 
 @media (max-width: 680px) {
   .container { width: calc(100% - 30px); }
-  .hero { margin-top: 70px; min-height: 0; }
-  .heroInner { padding: 32px 20px 28px; }
-  .heroTitle { font-size: 30px; }
-  .heroSub { font-size: 14.5px; margin-bottom: 22px; }
   .heroSearch { grid-template-columns: 1fr; }
-  .heroStats { gap: 22px; margin-top: 24px; }
-  .heroStats strong { font-size: 22px; }
 
   .listTitle { font-size: 22px; }
   .toolbar { width: 100%; flex-wrap: nowrap; }
