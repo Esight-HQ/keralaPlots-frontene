@@ -1,0 +1,30 @@
+.badge {
+  display: inline-flex;
+    align-items: center;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #ff4802;
+    background: #fff4f0;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #ffe0d3;
+    white-space: nowrap;
+    width: fit-content;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+/* the card's own date badge keeps its look; the row handles spacing */
+.row > span {
+  margin-bottom: 0;
+}

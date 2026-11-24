@@ -1,0 +1,490 @@
+/* ==========================================================================
+   EDIT PERSONAL DETAILS
+   ========================================================================== */
+.wrap {
+  display: block;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.backLink svg {
+  font-size: 18px;
+}
+
+.backLink:focus-visible,
+.saveBtn:focus-visible,
+.cancelBtn:focus-visible,
+.photoBtn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  margin-top: 2px;
+  border: none;
+  border-radius: 10px;
+  background: none;
+  color: #12296b;
+  font-size: 22px;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+
+.backBtn:hover {
+  background: #eef2fb;
+}
+
+.headText {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #12296b;
+  margin: 0;
+}
+
+.sub {
+  font-size: 14px;
+  color: #5b6b8c;
+  margin: 6px 0 0 0;
+}
+
+.saveBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+  background: #12296b;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 24px;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+
+.saveBtn:hover {
+  background: #0d1f52;
+}
+
+.saveBtn svg {
+  font-size: 17px;
+}
+
+.errorSummary {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 18px 0 0 0;
+  padding: 13px 16px;
+  border-radius: 10px;
+  background: #fef2f2;
+  border: 1px solid #f6cccc;
+  color: #b91c1c;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.errorSummary svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 17px;
+}
+
+/* ==========================================================================
+   SECTIONS
+   ========================================================================== */
+.section {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 34px;
+  background: #ffffff;
+  border: 1px solid #e8edf6;
+  border-radius: 16px;
+  padding: 26px;
+  margin-top: 14px;
+}
+
+.sectionSide {
+  border-right: 1px solid #eef2f8;
+  padding-right: 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.sectionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #eef3fd;
+  color: #2563eb;
+  font-size: 21px;
+  margin-bottom: 14px;
+}
+
+.sectionTitle {
+  font-size: 17px;
+  font-weight: 600;
+  color: #12296b;
+  margin: 0;
+}
+
+.sectionDesc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #64748b;
+  margin: 7px 0 0 0;
+}
+
+.sectionBody {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+
+.grid2,
+.grid3 {
+  display: grid;
+  gap: 18px;
+}
+
+.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* ==========================================================================
+   PHOTO
+   ========================================================================== */
+.photoWrap {
+  position: relative;
+  width: 100%;
+  max-width: 232px;
+  margin-top: 20px;
+}
+
+.photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  display: block;
+  box-sizing: border-box;
+}
+
+.photoLogo {
+  object-fit: contain !important;
+  padding: 22px;
+  background: #ffffff;
+}
+
+.photoBtn {
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #12296b;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+  transition: background 0.18s ease, color 0.18s ease;
+  z-index: 2;
+}
+
+.photoBtn:hover {
+  background: #12296b;
+  color: #ffffff;
+}
+
+.cropBtn {
+  position: absolute;
+  left: -8px;
+  bottom: -8px;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #2563eb;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+  transition: background 0.18s ease, color 0.18s ease;
+  z-index: 2;
+}
+
+.cropBtn:hover {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.cropBtn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+  border-radius: 50%;
+}
+
+/* Hidden but still reachable by the button above. */
+.fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   FIELDS
+   ========================================================================== */
+.field {
+  display: block;
+  min-width: 0;
+}
+
+.label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #12296b;
+  margin-bottom: 8px;
+}
+
+.req {
+  color: #dc2626;
+  font-style: normal;
+  margin-left: 4px;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  border: 1px solid #dbe3ef;
+  border-radius: 9px;
+  background: #ffffff;
+  padding: 13px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #12296b;
+  outline: none;
+  transition: border-color 0.18s ease;
+}
+
+.textarea {
+  resize: vertical;
+  line-height: 1.7;
+  min-height: 116px;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: #2563eb;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #94a3b8;
+}
+
+.inputInvalid {
+  border-color: #ef4444;
+  background: #fffbfb;
+}
+
+.counter {
+  display: block;
+  text-align: right;
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- inputs with a leading icon -------------------------------------------- */
+.inputIconWrap {
+  position: relative;
+  display: block;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  font-size: 17px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.inputWithIcon {
+  padding-left: 42px;
+}
+
+.inputIconWrap .select {
+  padding-left: 42px;
+}
+
+/* --- selects --------------------------------------------------------------- */
+.selectWrap {
+  position: relative;
+  display: block;
+}
+
+.select {
+  appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.selectChevron {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  font-size: 18px;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.footBar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.cancelBtn {
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 15px 30px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1e293b;
+  cursor: pointer;
+  transition: border-color 0.18s ease;
+}
+
+.cancelBtn:hover {
+  border-color: #12296b;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .grid3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  .sectionSide {
+    border-right: none;
+    border-bottom: 1px solid #eef2f8;
+    padding-right: 0;
+    padding-bottom: 22px;
+  }
+
+  .photoWrap {
+    max-width: 190px;
+  }
+}
+
+@media (max-width: 620px) {
+  .head {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .saveBtn {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cancelBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .grid2,
+  .grid3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .section {
+    padding: 20px;
+  }
+
+  .footBar {
+    flex-direction: column-reverse;
+  }
+}

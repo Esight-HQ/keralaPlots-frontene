@@ -1,0 +1,255 @@
+.categoriesSection {
+  width: 100%;
+  padding: 80px 0;
+  background: #f0f7fa;
+}
+@media(max-width:768px){
+  .categoriesSection{
+    padding: 60px 0px;
+  }
+}
+@media(max-width:480px){
+  .categoriesSection{
+    padding: 40px 0px;
+  }
+}
+
+.container {
+  max-width: 1360px;
+  width: 90%;
+  margin: 0 auto;
+}
+.categoriesMain{
+  width: 100%;
+}
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.sectionTitle {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.viewAllLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+  padding: 10px 22px;
+  border-radius: 12px;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.viewAllLink:hover {
+  border-color: #0b132b;
+  color: #0b132b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.gridRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.itemCard {
+  background: #ffffff;
+  border: 1px solid #e8ecef;
+  border-radius: 20px;
+  padding: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  /* box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03); */
+}
+.itemCard:hover {
+  border-color: var(--primaryColor);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 40%;
+  aspect-ratio: 16 / 12;
+  overflow: hidden;
+  background: #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+@media(max-width:1200px){
+  .imageWrapper{
+    width: 35%;
+  }
+}
+@media(max-width:768px){
+  .imageWrapper{
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+}
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.itemCard:hover .cardImage {
+  transform: scale(1.06);
+}
+
+.cardDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60%;
+  gap: 10px;
+  padding: 12px 14px 14px;
+}
+@media(max-width:1200px){
+  .cardDetails{
+    width: 65%;
+  }
+}
+@media(max-width:768px){
+  .cardDetails{
+    width: 100%;
+  }
+}
+
+.titleRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.itemTitle {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.countText {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.countSkeleton {
+  width: 80px;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #eef2f6 25%, #e2e8f0 50%, #eef2f6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite linear;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+.exploreBtn {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primaryColor);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s ease;
+}
+
+.itemCard:hover .exploreBtn {
+  gap: 10px;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .sectionTitle {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .gridRow {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .sectionTitle {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .categoriesMain {
+    border-radius: 16px;
+  }
+  .gridRow {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .itemCard {
+    border-radius: 16px;
+  }
+  .cardDetails {
+    padding: 8px 8px 10px;
+    gap: 8px;
+  }
+  .titleRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  .itemTitle {
+    font-size: 14px;
+  }
+  .countText {
+    font-size: 12px;
+  }
+  .exploreBtn {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+}
+
+@media(max-width:440px){
+  .gridRow{
+    gap: 10px;
+  }
+}
+@media (max-width: 360px) {
+  .gridRow {
+    grid-template-columns: 1fr;
+  }
+}

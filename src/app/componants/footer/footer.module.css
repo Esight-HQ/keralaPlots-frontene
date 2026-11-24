@@ -1,0 +1,267 @@
+.footer {
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  padding: 64px 0 60px 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.footerContainer {
+  max-width: 1360px;
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2.2fr 1fr 1fr 1.5fr;
+  gap: 32px;
+  padding-bottom: 48px;
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoMain {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.logoImage {
+  width: 200px;
+  display: block;
+  margin-bottom: 20px;
+  object-fit: contain;
+}
+@media(max-width:480px){
+  .logoImage{
+    width: 150px;
+  }
+}
+.brandDesc {
+  font-size: 14.5px;
+  color: #475569;
+  line-height: 1.7;
+  margin: 0 0 24px 0;
+  max-width: 340px;
+}
+@media(max-width:480px){
+  .brandDesc{
+    line-height: 1.4;
+  }
+}
+
+.socialRow {
+  display: flex;
+  gap: 12px;
+}
+
+.socialIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #001a72;
+  color: #001a72;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.socialIcon:hover {
+  background: #001a72;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.colTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #001a72;
+  margin: 0 0 20px 0;
+}
+
+/* .linksCol, .resourcesCol, .touchCol {
+  border-left: 1px solid #e2e8f0;
+  padding-left: 32px;
+} */
+
+.linksList, .resourcesList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+@media(max-width:480px){
+  .linksList, .resourcesList{
+    gap: 4px;
+  }
+}
+
+.linksList a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: fit-content;
+  font-size: 14.5px;
+  color: #475569;
+  text-decoration: none;
+  padding: 6px 0;
+  transition: color 0.15s;
+}
+
+.linksList a:hover {
+  color: #001a72;
+}
+
+.linksList a svg {
+  font-size: 16px;
+  color: #94a3b8;
+  transition: transform 0.15s, color 0.15s;
+  display: none;
+}
+
+.linksList a:hover svg {
+  color: #001a72;
+  transform: translateX(3px);
+}
+
+.resourcesList a {
+  font-size: 14.5px;
+  color: #475569;
+  text-decoration: none;
+  padding: 6px 0;
+  display: inline-block;
+  transition: color 0.15s;
+}
+
+.resourcesList a:hover {
+  color: #001a72;
+}
+
+.touchCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.touchItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.touchIconBox {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #eff4fc;
+  color: #001a72;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.touchText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.touchMain {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #001a72;
+}
+
+.touchSub {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.footerBottom {
+  border-top: 1px solid #e2e8f0;
+  padding: 24px 0;
+}
+
+.footerBottomContainer {
+  max-width: 1360px;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13.5px;
+  color: #64748b;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.copyrightText {
+  font-weight: 500;
+}
+
+.footerBottomLinks {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.footerBottomLinks p {
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.15s;
+  font-weight: 500;
+}
+.footerBottomLinks svg {
+  font-size: 14px;
+  color: #64748b;
+}
+.esightLogo{
+  width: 60px;
+}
+.esightLogo img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.footerBottomLinks p {
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.15s;
+  font-weight: 500;
+}
+
+.footerBottomLinks a:hover {
+  color: #001a72;
+  text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+  .footerContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+  .linksCol, .resourcesCol, .touchCol {
+    border-left: none;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .footerContainer {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .footerBottomContainer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+

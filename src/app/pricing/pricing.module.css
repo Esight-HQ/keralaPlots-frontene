@@ -1,0 +1,1238 @@
+/* ==========================================================================
+   PRICING — listing packages
+   Theme: white cards, purple actions, orange "Recommended" badge
+   ========================================================================== */
+.pageWrapper {
+  --text: #1c1c1c;
+  --body: #4b4b4b;
+  --muted: #9a9a9a;
+  --card: #f5f5f5;
+  --card-hi: #ffffff;
+  --line: #e6e6e6;
+  --bg: #ffffff;
+  --green: #5b9667;
+  --green-dark: #4a7f55;
+  --green-edge: #3f6f49;
+  --green-soft: #dcefdf;
+  --green-soft-text: #3f7a4b;
+  --gold: #c9a227;
+  --gold-soft: #fffaf0;
+  --gold-text: #b58a12;
+
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: system-ui, -apple-system, "Inter", sans-serif;
+  color: var(--text);
+  background: var(--card);
+}
+
+.main {
+  padding-bottom: 96px;
+}
+
+.container {
+  width: 92%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* ---------- Header ---------- */
+.hero {
+  padding: 140px 0 56px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green-soft-text);
+  background: var(--green-soft);
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+
+.title {
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0;
+}
+
+.subtitle {
+  max-width: 560px;
+  margin: 14px auto 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--body);
+}
+
+/* ---------- Cards ---------- */
+.cardsSection {
+  padding: 16px 0 24px;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: 1px solid #d7d7d7;
+  border-radius: 16px;
+  padding: 32px 24px 32px;
+}
+
+
+/* Recommended — lavender gradient, purple outline, orange badge */
+.cardRecommended {
+  background: linear-gradient(white, #6d53fd1f);
+  border: 1.5px solid var(--primaryColor);
+}
+
+.recommendedBadge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  background: #fff8f5;
+  color: var(--secondaryColor);
+  border: 1.5px solid var(--secondaryColor);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 999px;
+}
+
+.recommendedBadge svg {
+  color: var(--secondaryColor);
+  font-size: 16px;
+}
+
+.cardHead {
+  min-height: 108px;
+}
+
+.cardHeadCompact {
+  min-height: 0;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+
+.cardName {
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--text);
+}
+
+.durationPill {
+  font-size: 13px;
+  font-weight: 600;
+  color: #00ae23;
+  background: #ccedd1;
+  padding: 5px 10px;
+  border-radius: 999px;
+}
+
+.cardTagline {
+  margin: 14px 0 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--body);
+}
+
+.priceBlock {
+  margin: 24px 0 28px;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  row-gap: 6px;
+  margin: 0;
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--text);
+}
+
+.currency {
+  font-size: 22px;
+  font-weight: 600;
+  margin-right: 2px;
+}
+
+.priceNote {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* CTA — brand purple */
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  background: var(--primaryColor);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.cta:hover {
+  background: #00114d;
+}
+
+.cta:active {
+  transform: translateY(1px);
+}
+
+.cta:focus-visible,
+.tableCta:focus-visible,
+.accHeader:focus-visible {
+  outline: 3px solid #6d53fd66;
+  outline-offset: 2px;
+}
+
+/* Feature list */
+.featureList {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.featureList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.featureIcon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: black;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featureInherit {
+  font-weight: 600;
+  color: var(--text) !important;
+}
+
+/* ---------- Comparison (matches the package cards) ---------- */
+.compareSection {
+  padding: 72px 0 0;
+}
+
+.compareTitle {
+  text-align: center;
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 32px;
+  letter-spacing: -0.01em;
+}
+
+/* White card shell, same border & radius as the package cards */
+.tableWrap {
+  background: #fff;
+  border: 1px solid #d7d7d7;
+  border-radius: 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 26px 12px 4px; /* room for the badge above the Featured column */
+}
+
+.table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 15px;
+}
+
+.table th,
+.table td {
+  padding: 15px 16px;
+  text-align: center;
+  border-bottom: 1px solid #ececec;
+}
+
+.table tbody tr:last-child th,
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.table tfoot td {
+  border-bottom: 0;
+  padding: 20px 16px 24px;
+}
+
+.table tbody tr:hover th,
+.table tbody tr:hover td {
+  background: #fafafa;
+}
+
+.featureCol {
+  text-align: left !important;
+  font-weight: 500;
+  color: #333;
+  position: sticky;
+  left: 0;
+  background: #fff;
+  z-index: 1;
+  width: 26%;
+}
+
+.table thead th {
+  position: relative;
+  vertical-align: bottom;
+  padding-top: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.table thead .featureCol {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.thName {
+  display: block;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.thPrice {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.thPrice strong {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Recommended column — reads like the recommended card:
+   purple outline running top-to-bottom + the same soft lavender tint */
+.colRecommended {
+  background: #6d53fd0d !important;
+  border-left: 1.5px solid var(--primaryColor);
+  border-right: 1.5px solid var(--primaryColor);
+}
+
+.table thead .colRecommended {
+  position: relative;
+  border-top: 1.5px solid var(--primaryColor);
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  background: linear-gradient(#fff, #6d53fd0d) !important;
+}
+
+.table tfoot .colRecommended {
+  border-bottom: 1.5px solid var(--primaryColor);
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+.table tbody tr:hover .colRecommended {
+  background: #6d53fd17 !important;
+}
+
+/* Same orange outline badge as the recommended card */
+.thBadge {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--secondaryColor);
+  background: #fff8f5;
+  border: 1.5px solid var(--secondaryColor);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+/* Ticks match the card feature list: plain dark check, muted dash */
+.yes,
+.no {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: 18px;
+}
+
+.yes {
+  color: var(--text);
+}
+
+.colRecommended .yes {
+  color: var(--primaryColor);
+}
+
+.no {
+  color: #c4c4c4;
+}
+
+/* Table buttons = card buttons */
+.tableCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 170px;
+  min-height: 42px;
+  padding: 9px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  background: var(--primaryColor);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.tableCta:hover {
+  background: #00114d;
+  color: #fff;
+}
+
+.tableCta:active {
+  transform: translateY(1px);
+}
+
+/* Mobile accordion — each package is a card */
+.accordion {
+  display: none;
+}
+
+.accItem {
+  position: relative;
+  background: #fff;
+  border: 1px solid #d7d7d7;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.accItem + .accItem {
+  margin-top: 14px;
+}
+
+.accItemRecommended {
+  background: linear-gradient(white, #6d53fd1f);
+  border: 1.5px solid var(--primaryColor);
+}
+
+.accHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  background: none;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  min-height: 68px;
+}
+
+.accTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.accName {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.accBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--secondaryColor);
+  background: #fff8f5;
+  border: 1.5px solid var(--secondaryColor);
+  padding: 2px 9px;
+  border-radius: 999px;
+}
+
+.accMeta {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.accChevron {
+  flex-shrink: 0;
+  font-size: 24px;
+  color: var(--text);
+  transition: transform 0.25s ease;
+}
+
+.accItemOpen .accChevron {
+  transform: rotate(180deg);
+}
+
+.accPanel {
+  padding: 0 20px 20px;
+}
+
+.accList {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 6px 0 0;
+  border-top: 1px solid #ececec;
+}
+
+.accList li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 0;
+  font-size: 15px;
+  color: #333;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.accList li:last-child {
+  border-bottom: 0;
+}
+
+.accItemRecommended .accList li .yes {
+  color: var(--primaryColor);
+}
+
+.accOff {
+  color: #a8a8a8 !important;
+}
+
+/* ---------- Owner / Agent switch ---------- */
+.audienceToggle {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 5px;
+  margin-bottom: 26px;
+  background: #fff;
+  border: 1px solid #d7d7d7;
+  border-radius: 999px;
+}
+
+.audienceOption {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 140px;
+  min-height: 44px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--body);
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.audienceOption svg {
+  font-size: 18px;
+}
+
+.audienceOptionActive {
+  color: #fff;
+}
+
+.audienceThumb {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 5px;
+  width: calc(50% - 5px);
+  border-radius: 999px;
+  background: var(--secondaryColor);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.audienceOption:focus-visible,
+.billingOption:focus-visible {
+  outline: 3px solid #6d53fd66;
+  outline-offset: 2px;
+}
+
+.panel {
+  animation: panelIn 0.35s ease both;
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- Monthly / Yearly toggles ---------- */
+.billingAll {
+  margin-top: 26px;
+  display: flex;
+  justify-content: center;
+}
+
+.billingToggle {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  padding: 3px;
+  margin-top: 20px;
+  background: #f1f1f4;
+  border-radius: 10px;
+}
+
+.billingToggleLg {
+  margin-top: 0;
+  padding: 4px;
+  background: #fff;
+  border: 1px solid #d7d7d7;
+  border-radius: 999px;
+}
+
+.billingOption {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--body);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.billingToggleLg .billingOption {
+  min-height: 40px;
+  padding: 0 20px;
+  font-size: 14px;
+  border-radius: 999px;
+}
+
+.billingOptionActive {
+  background: #fff;
+  color: var(--text);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.billingToggleLg .billingOptionActive {
+  background: var(--primaryColor);
+  color: #fff;
+  box-shadow: none;
+}
+
+.saveTag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #00ae23;
+  background: #ccedd1;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+.billingToggleLg .billingOptionActive .saveTag {
+  color: var(--primaryColor);
+  background: #fff;
+}
+
+/* Agent price extras */
+.per {
+  margin-left: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+.oldPrice {
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: #b5b5b5;
+}
+
+.saveText {
+  font-weight: 700;
+  color: #00ae23;
+}
+
+/* Text values in the comparison (numbers, Basic / Advanced) */
+.cellText {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.colRecommended .cellText {
+  color: var(--primaryColor);
+}
+
+.accLabel {
+  flex: 1;
+}
+
+.accValue {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.accItemRecommended .accValue {
+  color: var(--primaryColor);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1180px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 24px;
+    max-width: 840px;
+  }
+
+  .cardHead {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 110px 0 40px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .tableWrap {
+    display: none;
+  }
+
+  .accordion {
+    display: block;
+  }
+
+  .main {
+    /* clear the fixed bottom nav */
+    padding-bottom: 130px;
+  }
+}
+
+@media (max-width: 640px) {
+  .audienceToggle {
+    display: grid;
+    width: 100%;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .audienceOption {
+    min-width: 0;
+  }
+
+  .billingToggle {
+    display: grid;
+    width: 100%;
+  }
+
+  .billingToggleLg {
+    width: auto;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .card {
+    padding: 28px 20px;
+  }
+
+  .cardName {
+    font-size: 24px;
+  }
+
+  .price {
+    font-size: 38px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .audienceThumb,
+  .card,
+  .cta,
+  .accChevron {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* ---------- Agent / Builder switch: 2 options ---------- */
+.audienceToggle {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.audienceThumb {
+  width: calc((100% - 10px) / 2);
+}
+
+/* Dynamic column counts based on active plans in Admin */
+@media (min-width: 769px) {
+  .cardsGridOne {
+    grid-template-columns: minmax(0, 420px);
+    justify-content: center;
+  }
+
+  .cardsGridTwo {
+    grid-template-columns: repeat(2, minmax(0, 390px));
+    justify-content: center;
+  }
+}
+
+/* Builder / 3-plan layout: 3 cards across on wide screens */
+@media (min-width: 1181px) {
+  .cardsGridThree {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 1120px;
+  }
+}
+
+/* Loading skeleton & empty state */
+.skeletonCard {
+  min-height: 460px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 16px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.skeletonLine {
+  height: 16px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #efefef 25%, #f8f8f8 50%, #efefef 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.emptyState {
+  max-width: 520px;
+  margin: 24px auto;
+  padding: 40px 28px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #d7d7d7;
+  border-radius: 16px;
+  color: var(--body);
+  font-size: 16px;
+}
+
+/* ---------- Purchased / Active Plan States & Gate Notices ---------- */
+.cardPurchased {
+  background: linear-gradient(180deg, #ffffff 0%, #ecfdf5 100%) !important;
+  border: 2px solid #10b981 !important;
+  box-shadow: 0 12px 32px rgba(16, 185, 129, 0.12);
+}
+
+.purchasedBadge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  background: #ecfdf5;
+  color: #047857;
+  border: 1.5px solid #10b981;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 999px;
+}
+
+.purchasedMetaBar {
+  margin: -12px 0 16px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #065f46;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ctaBtn {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  gap: 8px;
+}
+
+.ctaBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.ctaPurchased {
+  background: #059669 !important;
+  color: #ffffff !important;
+}
+
+.ctaPurchased:hover {
+  background: #047857 !important;
+}
+
+.ctaPending {
+  background: #fffbeb !important;
+  color: #b45309 !important;
+  border: 1.5px solid #f59e0b !important;
+}
+
+.ctaPending:hover {
+  background: #fef3c7 !important;
+}
+
+.ctaLocked {
+  background: #f1f5f9 !important;
+  color: #64748b !important;
+  border: 1.5px solid #cbd5e1 !important;
+  cursor: not-allowed !important;
+}
+
+.ctaLocked:hover {
+  background: #f1f5f9 !important;
+  transform: none !important;
+}
+
+/* ---------- Top-Up Quota Boosters Section ---------- */
+.topupSection {
+  padding: 40px 0 16px;
+}
+
+.topupHeader {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.topupEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6d28d9;
+  background: #f3e8ff;
+  border: 1px solid #d8b4fe;
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.topupTitle {
+  font-size: clamp(22px, 2.8vw, 30px);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.topupSubtitle {
+  max-width: 660px;
+  margin: 0 auto;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--body);
+}
+
+.cardTopup {
+  background: linear-gradient(180deg, #ffffff 0%, #faf5ff 100%);
+  border: 1.5px solid #c084fc;
+}
+
+.topupBadge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  background: #f5f3ff;
+  color: #6d28d9;
+  border: 1.5px solid #a855f7;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 999px;
+}
+
+.topupBadgeApplied {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #10b981;
+}
+
+.ctaTopup {
+  background: #7c3aed !important;
+  color: #ffffff !important;
+}
+
+.ctaTopup:hover {
+  background: #6d28d9 !important;
+}
+
+.statusAlertWrap {
+  margin: 0 auto 24px;
+  max-width: 860px;
+}
+
+.statusAlert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.statusAlertPending {
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  color: #92400e;
+}
+
+.statusAlertSuccess {
+  background: #ecfdf5;
+  border: 1px solid #6ee7b7;
+  color: #065f46;
+}
+
+.statusAlertError {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+}
+
+.statusAlertAction {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  background: #ffffff;
+  color: inherit;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+
+.gateModalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.gateModalCard {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px 24px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+  text-align: center;
+}
+
+.gateModalIcon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.gateModalTitle {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.gateModalText {
+  margin: 0 0 22px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.gateModalActions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.gateModalPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  background: var(--primaryColor);
+  color: #ffffff;
+}
+
+.gateModalSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+  cursor: pointer;
+}
+
+@media (min-width: 641px) and (max-width: 1180px) {
+  /* 2 + 1: centre the last card instead of leaving it on the left */
+  .cardsGridThree > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: min(100%, 408px);
+  }
+}
+
+@media (max-width: 640px) {
+  .audienceToggle {
+    max-width: 420px;
+  }
+
+  .audienceOption {
+    padding: 0 10px;
+    gap: 6px;
+    font-size: 14px;
+  }
+}

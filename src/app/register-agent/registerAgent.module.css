@@ -1,0 +1,738 @@
+/* ==========================================================================
+   REGISTER AS AGENT — standalone signup form
+
+   Its own page rather than a profile panel: this is filled in before there is
+   an agent profile to sit inside, so it carries no sidebar and links back to
+   the home page instead.
+   ========================================================================== */
+.page {
+  --raNavy: #12296b;
+  --raInk: #0f2b52;
+  --raBlue: #2563eb;
+  --raMuted: #64748b;
+  --raFaint: #94a3b8;
+  --raBorder: #e4eaf4;
+  min-height: 100vh;
+  background: #f7f9fc;
+  /* The nav is fixed and ~77px tall, so the top padding has to clear it and
+     still leave the breathing room the other pages have under it. */
+  padding: 124px 0 80px;
+}
+
+.wrap {
+  width: 92%;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.head {
+  margin-bottom: 26px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--raBlue);
+  margin-bottom: 14px;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.backLink svg {
+  font-size: 18px;
+}
+
+.title {
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--raNavy);
+  margin: 0;
+  line-height: 1.15;
+}
+
+.sub {
+  margin: 8px 0 0 0;
+  font-size: 15px;
+  color: #5b6b8c;
+}
+
+/* ==========================================================================
+   ERROR SUMMARY
+   ========================================================================== */
+.errorSummary {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 0 20px 0;
+  background: #fff5f5;
+  border: 1px solid #f6d3d3;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #b42318;
+}
+
+.errorSummary svg {
+  font-size: 19px;
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+/* ==========================================================================
+   SECTION CARDS
+   ========================================================================== */
+.section {
+  background: #ffffff;
+  border: 1px solid var(--raBorder);
+  border-radius: 16px;
+  padding: 26px 28px 30px;
+  margin-bottom: 22px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.sectionIcon {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #eef3fd;
+  color: var(--raBlue);
+  font-size: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sectionTitle {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--raNavy);
+  margin: 0;
+}
+
+.sectionDesc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--raMuted);
+  margin: 5px 0 0 0;
+}
+
+/* ==========================================================================
+   LAYOUT GRIDS
+   ========================================================================== */
+.basicGrid {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 34px;
+  align-items: start;
+}
+
+.basicFields {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+
+.grid2,
+.grid3 {
+  display: grid;
+  gap: 18px;
+}
+
+.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* ==========================================================================
+   FIELDS
+   ========================================================================== */
+.field {
+  display: block;
+  min-width: 0;
+}
+
+.label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--raNavy);
+  margin-bottom: 8px;
+}
+
+.req {
+  color: #ef4444;
+  font-style: normal;
+  margin-left: 4px;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  border: 1px solid #dbe3ef;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 13px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--raNavy);
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.textarea {
+  resize: vertical;
+  line-height: 1.7;
+  min-height: 132px;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: var(--raBlue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--raFaint);
+}
+
+.inputInvalid {
+  border-color: #ef4444;
+  background: #fffbfb;
+}
+
+.counter {
+  display: block;
+  text-align: right;
+  font-size: 12px;
+  color: var(--raFaint);
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.fieldError {
+  margin: 8px 0 0 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #dc2626;
+}
+
+/* --- inputs and selects with a leading icon -------------------------------- */
+.inputWrap,
+.selectWrap {
+  position: relative;
+  display: block;
+}
+
+.fieldIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 17px;
+  color: var(--raFaint);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.inputWithIcon {
+  padding-left: 42px;
+}
+
+.selectWrap .select {
+  appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.hasIcon .select {
+  padding-left: 42px;
+}
+
+.selectChevron {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--raMuted);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   PHOTO UPLOAD
+   ========================================================================== */
+.photoCol {
+  min-width: 0;
+}
+
+.dropzone {
+  width: 100%;
+  height: 330px;
+  border: 1px dashed #cdd8ea;
+  border-radius: 12px;
+  background: #fbfcfe;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 20px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.dropzone:hover {
+  border-color: var(--raBlue);
+  background: #f5f8ff;
+}
+
+.dropzoneInvalid {
+  border-color: #ef4444;
+  background: #fffbfb;
+}
+
+.dropzoneIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #eaeffb;
+  color: var(--raNavy);
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.dropzoneTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--raNavy);
+}
+
+.dropzoneHint {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--raMuted);
+  text-align: center;
+}
+
+.dropzoneActive {
+  border-color: var(--raBlue);
+  background: #f0f5ff;
+}
+
+.photoPreviewWrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photoPreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Actions overlay sitting over the bottom of the preview */
+.photoActionsOverlay {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 5px 10px;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  z-index: 4;
+  white-space: nowrap;
+}
+
+.photoActionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.photoActionBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.photoActionBtn svg {
+  font-size: 14px;
+}
+
+.photoActionDivider {
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.photoReplace {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  background: rgba(15, 43, 82, 0.82);
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 999px;
+}
+
+.dropzone {
+  position: relative;
+}
+
+.photoColFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding: 0 2px;
+}
+
+.reCropLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--raBlue);
+  cursor: pointer;
+}
+
+.reCropLink:hover {
+  text-decoration: underline;
+}
+
+.photoRemove {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #dc2626;
+  cursor: pointer;
+}
+
+.photoRemove:hover {
+  text-decoration: underline;
+}
+
+.fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   ACTIONS
+   ========================================================================== */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.cancelBtn,
+.submitBtn {
+  border-radius: 10px;
+  padding: 15px 32px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.16s ease, border-color 0.16s ease;
+}
+
+.cancelBtn {
+  border: 1px solid #d5dded;
+  background: #ffffff;
+  color: var(--raInk);
+}
+
+.cancelBtn:hover {
+  border-color: var(--raInk);
+  background: #f7f9fc;
+}
+
+.submitBtn {
+  border: none;
+  background: #13275e;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.submitBtn:hover {
+  background: #0d1c47;
+}
+
+.legal {
+  margin: 40px 0 0 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--raMuted);
+}
+
+.legal a {
+  color: var(--raBlue);
+  font-weight: 500;
+}
+
+.legal a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1080px) {
+  .grid3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .page {
+    padding-top: 108px;
+  }
+
+  .basicGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .dropzone {
+    height: 220px;
+  }
+
+  .title {
+    font-size: 27px;
+  }
+}
+
+@media (max-width: 620px) {
+  .section {
+    padding: 20px 18px 24px;
+  }
+
+  .grid2,
+  .grid3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancelBtn,
+  .submitBtn {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   SUBMITTED CONFIRMATION
+   ========================================================================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(15, 28, 56, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  overflow-y: auto;
+}
+
+.dialog {
+  position: relative;
+  width: 560px;
+  max-width: 100%;
+  margin: auto;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 40px 48px 44px;
+  text-align: center;
+  box-shadow: 0 30px 70px rgba(9, 20, 40, 0.32);
+}
+
+.dialogClose {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: #64748b;
+  font-size: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.dialogClose:hover {
+  background: #f1f5f9;
+  color: var(--raNavy);
+}
+
+.successArt {
+  display: block;
+  width: 240px;
+  max-width: 78%;
+  height: auto;
+  margin: 0px auto 0px;
+}
+
+.successTitle {
+  font-size: 29px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #12296b;
+  margin: 0;
+}
+
+/* The short green rule under the heading, as drawn. */
+.successRule {
+  display: block;
+  width: 56px;
+  height: 4px;
+  border-radius: 999px;
+  background: #22a45d;
+  margin: 14px auto 0;
+}
+
+.successBody {
+  margin: 18px auto 0;
+  max-width: 430px;
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: #46587a;
+}
+
+.successNote {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  margin-top: 26px;
+  background: #eaf7ef;
+  border-radius: 14px;
+  padding: 16px 18px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #46587a;
+}
+
+.successNoteIcon {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #1f3d75;
+  font-size: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.successBtn {
+  width: 68%;
+  margin-top: 28px;
+  border: none;
+  border-radius: 12px;
+  background: #13275e;
+  color: #ffffff;
+  padding: 17px 0;
+  font-size: 16.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.16s ease;
+}
+
+.successBtn:hover {
+  background: #0d1c47;
+}
+
+@media (max-width: 620px) {
+  .dialog {
+    padding: 32px 20px 30px;
+    border-radius: 18px;
+  }
+
+  .successTitle {
+    font-size: 23px;
+  }
+
+  .successBody {
+    font-size: 14.5px;
+  }
+
+  .successNote {
+    padding: 14px;
+    gap: 12px;
+    font-size: 13.5px;
+  }
+
+  .successBtn {
+    width: 100%;
+    font-size: 15.5px;
+    padding: 15px 0;
+  }
+}

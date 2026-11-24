@@ -1,0 +1,352 @@
+.pageWrapper {
+  min-height: 100vh;
+  background: #ffffff;
+  padding-top: 90px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.mainContent {
+  padding: 30px 0 80px 0;
+}
+
+.container {
+  max-width: 900px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   BREADCRUMBS
+   ========================================================================== */
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 32px;
+}
+
+.breadcrumbs a {
+  color: #64748b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.breadcrumbs a:hover {
+  color: #001a72;
+}
+
+.separator {
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.current {
+  color: #334155;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   HEADER SECTION
+   ========================================================================== */
+.headerArea {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.pageTitle {
+  font-size: 38px;
+  font-weight: 600;
+  color: #001a72;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.02em;
+}
+
+.pageSubtitle {
+  font-size: 15.5px;
+  color: #64748b;
+  line-height: 1.6;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   CATEGORY TABS ROW
+   ========================================================================== */
+.tabsWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 36px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tabsWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.tabsList {
+  display: flex;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.tabBtn {
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #475569;
+  padding: 10px 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.tabBtn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.tabBtnActive {
+  background: #001a72;
+  color: #ffffff;
+  border-color: #001a72;
+}
+
+/* ==========================================================================
+   FAQS ACCORDION
+   ========================================================================== */
+.faqWrapper {
+  margin-bottom: 56px;
+}
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faqCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.faqCardOpen {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 20px rgba(0, 26, 114, 0.02);
+}
+
+.faqHeader {
+  width: 100%;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  cursor: pointer;
+  text-align: left;
+  gap: 16px;
+  font-family: inherit;
+}
+
+.faqHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.categoryIcon {
+  font-size: 20px;
+  color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #eff6ff;
+  flex-shrink: 0;
+}
+
+.faqQuestion {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.4;
+}
+
+.toggleIcon {
+  font-size: 18px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+/* Smooth Accordion Height Triggers */
+.faqAnswerContainer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+}
+
+.answerOpen {
+  max-height: 500px;
+  transition: max-height 0.3s cubic-bezier(0.85, 0.15, 0.3, 1);
+}
+
+.faqAnswerContent {
+  padding: 0 24px 24px 76px; /* indent to align text with question text */
+}
+
+.faqAnswerText {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #475569;
+  margin: 0 0 12px 0;
+}
+
+.faqAnswerFooter {
+  display: flex;
+}
+
+.tagCategory {
+  font-size: 11px;
+  font-weight: 600;
+  background: #f1f5f9;
+  color: #64748b;
+  padding: 3px 10px;
+  border-radius: 50px;
+}
+
+/* Empty FAQ State */
+.emptyFaqState {
+  text-align: center;
+  padding: 56px 20px;
+  border: 1.5px dashed #e2e8f0;
+  border-radius: 16px;
+  background: #f8fafc;
+}
+
+.emptyIcon {
+  font-size: 40px;
+  color: #94a3b8;
+  margin-bottom: 16px;
+}
+
+.emptyTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+}
+
+.emptyDesc {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ==========================================================================
+   SUPPORT CONTACT CARD
+   ========================================================================== */
+.contactSupportCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 32px 40px;
+  gap: 28px;
+}
+
+.supportLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.supportTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #001a72;
+  margin: 0;
+}
+
+.supportDesc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0;
+}
+
+.supportRight {
+  flex-shrink: 0;
+}
+
+.supportBtn {
+  display: inline-block;
+  background: #001a72;
+  color: #ffffff;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.1s ease;
+  font-family: inherit;
+}
+
+.supportBtn:hover {
+  background: #00114d;
+}
+
+.supportBtn:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN RULES
+   ========================================================================== */
+@media (max-width: 768px) {
+  .pageTitle {
+    font-size: 30px;
+  }
+
+  .contactSupportCard {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 24px;
+  }
+
+  .faqAnswerContent {
+    padding-left: 24px; /* remove indent on smaller devices to save width */
+  }
+}
+
+@media (max-width: 600px) {
+  .pageWrapper {
+    padding-top: 80px;
+  }
+  
+  .faqHeader {
+    padding: 16px;
+  }
+
+  .faqAnswerContent {
+    padding: 0 16px 16px 16px;
+  }
+}

@@ -1,0 +1,584 @@
+/* ==========================================================================
+   PERSONAL DETAILS
+   ========================================================================== */
+.wrap {
+  display: block;
+  padding-bottom: 20px;
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 6px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #12296b;
+  margin: 0;
+}
+
+.sub {
+  font-size: 14px;
+  color: #5b6b8c;
+  margin: 7px 0 0 0;
+}
+
+.editBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+  background: #12296b;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 24px;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+
+.editBtn:hover {
+  background: #0d1f52;
+}
+
+.editBtn svg {
+  font-size: 17px;
+}
+
+.savedNote {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 0 0;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #e8f7ee;
+  color: #15803d;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   CARDS
+   ========================================================================== */
+.card {
+  background: #ffffff;
+  border: 1px solid #e8edf6;
+  border-radius: 16px;
+  padding: 26px;
+  margin-top: 14px;
+}
+
+.blockTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #12296b;
+  margin: 0 0 14px 0;
+}
+
+/* ==========================================================================
+   PROFILE CARD
+   ========================================================================== */
+.card:first-of-type {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 34px;
+}
+
+.identityCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid #eef2f8;
+  padding-right: 30px;
+}
+
+.photoWrap {
+  width: 100%;
+  max-width: 264px;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+}
+@media(max-width:900px){
+  .identityCol{
+    align-items: flex-start;
+  }
+  .photoWrap{
+    max-width: 160px;
+  }
+}
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photoLogo {
+  object-fit: contain !important;
+  padding: 24px;
+  background: #ffffff;
+}
+
+.socialRow {
+  display: flex;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.socialBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f1f5fc;
+  color: #12296b;
+  font-size: 19px;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.socialBtn:hover {
+  background: #12296b;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.socialBtn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.identityBody {
+  min-width: 0;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.name {
+  font-size: 28px;
+  font-weight: 500;
+  color: #12296b;
+  margin: 0;
+}
+
+.reviewsBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  background: #ffffff;
+  color: #1d4ed8;
+  border: 1.5px solid #c7d7f6;
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.reviewsBtn:hover {
+  background: #f1f5fc;
+  border-color: #1d4ed8;
+}
+
+.reviewsBtn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.role {
+  font-size: 12px;
+  color: #16a34a;
+  margin: 10px 0 0 0;
+  padding:4px 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  border-radius:20px;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  width: fit-content;
+}
+
+.intro {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: #12296b;
+  margin: 18px 0 0 0;
+}
+
+.metaRow {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin: 26px 0 0 0;
+  padding: 0;
+}
+
+.metaRow li {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+  color: #1e293b;
+}
+
+.metaRow svg {
+  color: #12296b;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   CONTACT STRIP
+   ========================================================================== */
+.contactCard {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  padding: 22px 0;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 24px;
+  min-width: 0;
+}
+
+.contactItem + .contactItem {
+  border-left: 1px solid #eef2f8;
+}
+
+.contactIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f1f5fc;
+  color: #12296b;
+  font-size: 15px;
+}
+
+.contactBody {
+  min-width: 0;
+}
+
+.contactLabel {
+  display: block;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.contactValue {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #1e293b;
+  margin-top: 3px;
+  word-break: break-word;
+}
+
+/* ==========================================================================
+   ABOUT
+   ========================================================================== */
+.aboutText {
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: #1e293b;
+  margin: 0;
+  max-width: 640px;
+}
+
+.statRow {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: 32px 0 0 0;
+  padding: 0;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 22px;
+}
+
+.statItem:first-child {
+  padding-left: 0;
+}
+
+.statItem + .statItem {
+  border-left: 1px solid #eef2f8;
+}
+
+.statIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #f1f5fc;
+  color: #12296b;
+  font-size: 26px;
+}
+
+.statValue {
+  display: block;
+  font-size: 24px;
+  font-weight: 600;
+  color: #12296b;
+  line-height: 1.15;
+}
+
+.statLabel {
+  display: block;
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 3px;
+}
+
+/* ==========================================================================
+   EDIT MODE
+   ========================================================================== */
+.field,
+.fieldGrow {
+  display: block;
+  margin-top: 16px;
+}
+
+.fieldGrow {
+  flex: 1 1 260px;
+  margin-top: 0;
+}
+
+.fieldLabel {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+.input,
+.inputSmall,
+.textarea {
+  width: 100%;
+  border: 1px solid #dbe3ef;
+  border-radius: 9px;
+  background: #ffffff;
+  padding: 11px 13px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #12296b;
+  outline: none;
+  transition: border-color 0.18s ease;
+}
+
+.inputSmall {
+  padding: 7px 10px;
+  font-size: 13.5px;
+  margin-top: 3px;
+}
+
+.textarea {
+  resize: vertical;
+  line-height: 1.65;
+}
+
+.input:focus,
+.inputSmall:focus,
+.textarea:focus {
+  border-color: #2563eb;
+}
+
+.input:invalid,
+.inputSmall:invalid {
+  border-color: #f0a9a9;
+}
+
+.editBar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.cancelBtn,
+.saveBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border-radius: 10px;
+  padding: 13px 26px;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.cancelBtn {
+  background: #ffffff;
+  color: #1e293b;
+  border: 1.5px solid #cbd5e1;
+}
+
+.cancelBtn:hover {
+  border-color: #12296b;
+}
+
+.saveBtn {
+  background: #12296b;
+  color: #ffffff;
+  border: 1.5px solid #12296b;
+}
+
+.saveBtn:hover:not(:disabled) {
+  background: #0d1f52;
+}
+
+.saveBtn:disabled {
+  background: #b6c0d8;
+  border-color: #b6c0d8;
+  cursor: not-allowed;
+}
+
+.cancelBtn:focus-visible,
+.saveBtn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .contactCard,
+  .statRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 22px;
+  }
+
+  /* Row-based dividers stop making sense once the grid wraps. */
+  .contactItem + .contactItem,
+  .statItem + .statItem {
+    border-left: none;
+  }
+
+  .statItem:first-child {
+    padding-left: 22px;
+  }
+}
+
+@media (max-width: 900px) {
+  .card:first-of-type {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .identityCol {
+    border-right: none;
+    border-bottom: 1px solid #eef2f8;
+    padding-right: 0;
+    /* padding-bottom: 24px; */
+  }
+}
+
+@media (max-width: 620px) {
+  .head {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .name {
+    font-size: 22px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .contactCard,
+  .statRow {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px 10px;
+  }
+
+  .contactItem,
+  .statItem,
+  .statItem:first-child {
+    padding: 0 8px;
+  }
+
+  .statIcon {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  .statValue {
+    font-size: 20px;
+  }
+
+  .statLabel {
+    font-size: 11.5px;
+  }
+
+  .metaRow {
+    gap: 12px 20px;
+    margin-top: 18px;
+  }
+
+  .editBar {
+    flex-direction: column-reverse;
+  }
+
+  .cancelBtn,
+  .saveBtn {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .photo {
+    max-width: 180px;
+  }
+}
+

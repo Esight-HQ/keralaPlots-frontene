@@ -1,0 +1,970 @@
+.pageWrapper {
+  min-height: 100vh;
+  background: #ffffff;
+  padding-top: 80px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.container {
+  max-width: 1140px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   HERO BANNER
+   ========================================================================== */
+.heroSection {
+  background: radial-gradient(circle at 100% 50%, #f0f7ff 0%, #ffffff 70%);
+  padding: 80px 0;
+  border-bottom: 1px solid #edf2f7;
+  position: relative;
+  z-index: 0;
+}
+.heroSection::after{
+  position: absolute;
+  content: '';
+  width: 65%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: linear-gradient(to right, #000000a6, #000000ab, #00000075, #0000);
+}
+
+.heroLeft {
+  flex: 0 0 52%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.heroBadge {
+  font-size: 11px;
+  font-weight: 700;
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 5px 12px;
+  border-radius: 50px;
+  letter-spacing: 0.03em;
+  margin-bottom: 20px;
+}
+
+.heroTitle {
+  font-size: 44px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.15;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+}
+
+.heroSubtitle {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #e4e4e4;
+  margin: 0 0 36px 0;
+  max-width: 480px;
+}
+
+/* Feature Item Row */
+.featuresRow {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  padding: 5px 20px 5px 5px;
+  border-radius: 50px;
+}
+
+.featureIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ff4701;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.featureInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.featureLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.featureDesc {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Hero Right: Signboard & House */
+.heroRight {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Yard sale sign badge overlay */
+.saleBadgeBox {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  background: #0e1d44;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  font-family: Impact, sans-serif;
+  letter-spacing: 0.05em;
+  transform: rotate(-3deg);
+}
+
+.saleBadgeText {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+.saleBadgeBold {
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 900;
+}
+
+/* ==========================================================================
+   CHOOSE OPTIONS GRID
+   ========================================================================== */
+.optionsSection {
+  padding: 80px 0;
+}
+
+.optionsTitle {
+  font-size: 28px;
+  font-weight: 600;
+  color: #001a72;
+  text-align: center;
+  margin: 0 0 40px 0;
+}
+
+.optionsDivider {
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: #2563eb;
+  border-radius: 99px;
+  margin: 0 auto 56px auto;
+}
+
+.optionsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.optionCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.optionCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 26, 114, 0.04);
+}
+
+.cardHeaderBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 10px;
+  min-height: 56px;
+}
+
+.cardIconCircle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.blueIcon {
+  background: #2563eb;
+  /* color: #2563eb; */
+}
+
+.greenIcon {
+  background: #16a34a;
+  /* color: #16a34a; */
+}
+
+.orangeIcon {
+  background: #ea580c;
+  /* color: #ea580c; */
+}
+
+.cardHeaderTitle {
+  font-size: 17px;
+  font-weight: 600;
+  color: #001a72;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.cardDivider {
+  display: block;
+  width: 40px;
+  height: 3px;
+  border-radius: 99px;
+  margin-bottom: 20px;
+}
+
+.blueDivider { background: #2563eb; }
+.greenDivider { background: #16a34a; }
+.orangeDivider { background: #ea580c; }
+
+.cardDesc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #64748b;
+  margin: 0 0 28px 0;
+  flex: 1;
+}
+
+.cardBtn {
+  width: 100%;
+  background: var(--primaryColor);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 0;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+  font-family: inherit;
+  margin-top: auto;
+}
+
+.cardBtn:hover {
+  background: #000;
+}
+
+.cardBtn:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   OPTION GRAPHICS
+   ========================================================================== */
+
+/* GRAPHICS 1: Mobile + Social badges */
+.cardGraphicsOne {
+  width: 100%;
+  background: #f8fafc;
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.cardGraphicsOne img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.phoneFrame {
+  width: 60px;
+  height: 120px;
+  border: 3px solid #1e293b;
+  border-radius: 10px;
+  background: #1e293b;
+  position: relative;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(12px) rotate(-5deg);
+}
+
+.phoneScreen {
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.phoneScreenImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.socialBadgesRow {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.socialBadgesRow span {
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fbIcon { color: #1877f2; }
+.igIcon { color: #e1306c; }
+.waIcon { color: #25d366; }
+
+/* GRAPHICS 2: Map & Car details */
+.cardGraphicsTwo {
+  width: 100%;
+  height: 160px;
+  background: #f8fafc;
+  border-radius: 12px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.mapGraphicBox {
+  position: relative;
+  width: 140px;
+  height: 90px;
+  background: #e2e8f0;
+  border-radius: 8px;
+  border: 1.5px solid #cbd5e1;
+  overflow: hidden;
+}
+
+.mapGridLines {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-image: 
+    linear-gradient(rgba(203, 213, 225, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(203, 213, 225, 0.4) 1px, transparent 1px);
+  background-size: 15px 15px;
+}
+
+.mapRoute {
+  position: absolute;
+  top: 40px;
+  left: -20px;
+  width: 180px;
+  height: 12px;
+  background: #cbd5e1;
+  transform: rotate(15deg);
+}
+
+.mapMarkerPin {
+  position: absolute;
+  top: 25px;
+  left: 60px;
+  color: #16a34a;
+  font-size: 24px;
+}
+
+.carGraphic {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  width: 70px;
+  height: 24px;
+}
+
+.carBody {
+  width: 100%;
+  height: 18px;
+  background: #001a72;
+  border-radius: 4px 6px 2px 2px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carWindows {
+  position: absolute;
+  top: 3px;
+  left: 10px;
+  width: 32px;
+  height: 6px;
+  background: #eff6ff;
+  border-radius: 2px 3px 0 0;
+}
+
+.carBrandText {
+  font-size: 4px;
+  font-weight: 800;
+  color: #ffffff;
+  position: absolute;
+  bottom: 2px;
+  letter-spacing: 0.5px;
+}
+
+.carWheelLeft,
+.carWheelRight {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1e293b;
+  border: 1.5px solid #ffffff;
+  position: absolute;
+  bottom: -4px;
+}
+
+.carWheelLeft { left: 12px; }
+.carWheelRight { right: 12px; }
+
+/* GRAPHICS 3: Client handshake networks */
+.cardGraphicsThree {
+  width: 100%;
+  height: 160px;
+  background: #f8fafc;
+  border-radius: 12px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.networkingBox {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.centerNode {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fff7ed;
+  color: #ea580c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(234, 88, 12, 0.15);
+  z-index: 10;
+}
+
+.clientNode {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1.5px solid #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+}
+
+.clientNode img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nodeTop { top: 6px; left: 50%; transform: translateX(-50%); }
+.nodeLeft { bottom: 12px; left: 6px; }
+.nodeRight { bottom: 12px; right: 6px; }
+
+.nodeLinesSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================================================
+   BOTTOM RIBBON BOX
+   ========================================================================== */
+.ribbonSection {
+  padding: 0 0 80px 0;
+}
+
+.ribbonContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 36px 40px;
+}
+
+.ribbonCol {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.ribbonIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #e2eeff;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.ribbonText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ribbonLabel {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+}
+
+.ribbonDesc {
+  font-size: 12.5px;
+  color: #64748b;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ==========================================================================
+   MODAL DIALOG FORM
+   ========================================================================== */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+.modalCard {
+  position: relative;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 40px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  animation: scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.modalCloseBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: background 0.15s, color 0.15s;
+}
+
+.modalCloseBtn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.modalTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #001a72;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.01em;
+}
+
+.modalSubtitle {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #64748b;
+  margin: 0 0 28px 0;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fieldLabel {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.formInput,
+.formSelect,
+.formTextarea {
+  width: 100%;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #0f172a;
+  font-family: inherit;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: #ffffff;
+}
+
+.inputError,
+.selectError,
+.textareaError {
+  border-color: #ef4444;
+}
+
+.errorSpan {
+  font-size: 12px;
+  color: #ef4444;
+}
+
+/* File Dropzone */
+.dropzone {
+  border: 1.5px dashed #cbd5e1;
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.dropzone:hover {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.dropzoneError {
+  border-color: #ef4444;
+}
+
+.uploadIcon {
+  font-size: 32px;
+  color: #94a3b8;
+}
+
+.uploadHint {
+  font-size: 11px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* File Previews */
+.previewList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.previewItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f1f5f9;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.previewName {
+  font-size: 12.5px;
+  color: #334155;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 80%;
+}
+
+.removePreviewBtn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+}
+
+.submitBtn {
+  width: 100%;
+  background: var(--primaryColor);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 15px 0;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+  font-family: inherit;
+  margin-top: 8px;
+}
+
+.submitBtn:hover {
+  background: #000;
+}
+
+.submitBtn:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   SUCCESS TOAST NOTIFICATION
+   ========================================================================== */
+.toastSuccess {
+  position: fixed;
+  top: 110px;
+  right: 24px;
+  z-index: 10000;
+  background: #ffffff;
+  border: 1.5px solid #10b981;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.12);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: toastSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.toastIcon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ecfdf5;
+  color: #10b981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.toastContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.toastTitle {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.toastDesc {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 1px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes toastSlideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN RULES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .heroSection {
+    padding: 40px 0px 48px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    background: #001a72;
+  }
+  .heroSection::after {
+    display: none;
+  }
+  .heroLeft {
+    align-items: center;
+    flex: 1;
+    text-align: center;
+  }
+  .heroRight {
+    position: relative;
+    width: 95%;
+    aspect-ratio: 16 / 9;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+  .featuresRow {
+    justify-content: center;
+  }
+  .optionsGrid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+    gap: 24px;
+  }
+  .ribbonContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pageWrapper {
+    padding-top: 80px;
+  }
+  .heroTitle {
+    font-size: 28px;
+  }
+  .heroSubtitle {
+    font-size: 14.5px;
+    margin-bottom: 24px;
+  }
+  .ribbonContainer {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+  .modalCard {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageWrapper{
+    padding-top: 60px;
+  }
+  .featuresRow {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+  }
+  .featureItem {
+    padding: 8px 10px;
+    border-radius: 12px;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .featureIcon {
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+  }
+  .modalCard {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+  .modalTitle {
+    font-size: 18px;
+  }
+  .modalSubtitle {
+    font-size: 12.5px;
+    margin-bottom: 20px;
+  }
+}

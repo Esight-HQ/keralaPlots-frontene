@@ -1,0 +1,289 @@
+/* ───────── Minimalist Builder Verification Alert in Dashboard ───────── */
+.verificationAlert {
+  margin-top: 18px;
+  margin-bottom: 20px;
+  background: #ffffff;
+  border: 1px solid #f59e0b;
+  border-left: 4px solid #f59e0b;
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  position: relative;
+  animation: fadeInDown 0.3s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alertMain {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex: 1;
+  min-width: 0;
+}
+
+.alertIconWrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #fef3c7;
+  color: #d97706;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.alertBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.alertHeaderRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.alertBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.pulseDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #d97706;
+}
+
+.alertCompanyName {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #475569;
+  background: #f1f5f9;
+  padding: 2px 8px;
+  border-radius: 4px;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.alertTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 3px 0;
+  line-height: 1.35;
+}
+
+.alertText {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #64748b;
+  margin: 0;
+}
+
+.alertText strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* Right Section with Mini Stepper and Action Button */
+.alertRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.miniStepper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 10px;
+}
+
+.miniStep {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.miniStepDot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.miniStepLabel {
+  font-size: 11.5px;
+  letter-spacing: -0.01em;
+}
+
+.miniStepDone {
+  color: #16a34a;
+}
+
+.miniStepActive {
+  color: #d97706;
+  font-weight: 600;
+}
+
+.miniStepUpcoming {
+  color: #94a3b8;
+}
+
+.miniStepLine {
+  width: 16px;
+  height: 1.5px;
+  background: #cbd5e1;
+}
+
+.alertActionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.alertBtnSuccess {
+  background: #15803d;
+  color: #ffffff;
+}
+
+.alertBtnSuccess:hover {
+  background: #166534;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.alertBtnFailed {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.alertBtnFailed:hover {
+  background: #b91c1c;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.alertCloseBtn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 18px;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.alertCloseBtn:hover {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+/* Success variation */
+.verificationAlertSuccess {
+  border-color: #10b981;
+  border-left-color: #10b981;
+}
+
+.alertIconSuccess {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.alertBadgeSuccess {
+  background: #dcfce7;
+  border-color: #86efac;
+  color: #166534;
+}
+
+/* Failed variation */
+.verificationAlertFailed {
+  border-color: #ef4444;
+  border-left-color: #ef4444;
+}
+
+.alertIconFailed {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.alertBadgeFailed {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+
+@media (max-width: 992px) {
+  .verificationAlert {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .alertRight {
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 10px;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .miniStepper {
+    flex: 1;
+    justify-content: space-between;
+  }
+
+  .alertActionBtn {
+    flex: 1;
+    justify-content: center;
+  }
+}

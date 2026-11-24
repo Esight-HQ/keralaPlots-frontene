@@ -1,0 +1,275 @@
+.pageWrapper {
+  min-height: 100vh;
+  background: #ffffff;
+  padding-top: 90px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.mainContent {
+  padding: 30px 0 80px 0;
+}
+
+.container {
+  max-width: 1140px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   BREADCRUMBS
+   ========================================================================== */
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 32px;
+}
+
+.breadcrumbs a {
+  color: #64748b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.breadcrumbs a:hover {
+  color: #001a72;
+}
+
+.separator {
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.current {
+  color: #334155;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   HEADER SECTION
+   ========================================================================== */
+.pageTitle {
+  font-size: 38px;
+  font-weight: 600;
+  color: #001a72;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.02em;
+}
+
+.lastUpdated {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+  margin: 0 0 24px 0;
+}
+
+.introParagraph {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: #475569;
+  margin: 0 0 36px 0;
+}
+
+/* ==========================================================================
+   DISCLAIMER BANNER
+   ========================================================================== */
+.disclaimerBox {
+  display: flex;
+  gap: 20px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 30px 32px;
+  margin-bottom: 56px;
+}
+
+.disclaimerIconBox {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.disclaimerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.disclaimerTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #001a72;
+  margin: 0;
+}
+
+.disclaimerBody {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0;
+}
+
+.disclaimerBold {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #0f172a;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ==========================================================================
+   TERMS 2-COLUMN GRID
+   ========================================================================== */
+.termsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 56px;
+  row-gap: 56px;
+  margin-bottom: 56px;
+}
+
+.termsCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionTitle {
+  font-size: 17.5px;
+  font-weight: 700;
+  color: #001a72;
+  margin: 0 0 16px 0;
+}
+
+.sectionIntro {
+  font-size: 14.5px;
+  color: #475569;
+  line-height: 1.6;
+  margin: 0 0 12px 0;
+}
+
+.sectionBodyText {
+  font-size: 14.5px;
+  color: #475569;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.sectionList {
+  margin: 0 0 16px 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionList li {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.6;
+  position: relative;
+  list-style-type: disc;
+}
+
+/* Highlighted Note Boxes */
+.highlightNote {
+  background: #eff6ff;
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #1e40af;
+  font-weight: 500;
+  margin-top: auto; /* Pushes note box to align with bottom of sister columns */
+}
+
+/* ==========================================================================
+   BOTTOM INFO ALERT CARD
+   ========================================================================== */
+.bottomAlertBox {
+  display: flex;
+  gap: 18px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-top: 24px;
+}
+
+.bottomAlertIcon {
+  color: #2563eb;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.bottomAlertContent {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bottomAlertTitle {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: #1e40af;
+  margin: 0;
+}
+
+.bottomAlertBody {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #1e40af;
+  margin: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN RULES
+   ========================================================================== */
+@media (max-width: 900px) {
+  .termsGrid {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+  }
+
+  .disclaimerBox {
+    padding: 24px;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .disclaimerIconBox {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pageWrapper {
+    padding-top: 80px;
+  }
+
+  .pageTitle {
+    font-size: 30px;
+  }
+
+  .bottomAlertBox {
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+  }
+}

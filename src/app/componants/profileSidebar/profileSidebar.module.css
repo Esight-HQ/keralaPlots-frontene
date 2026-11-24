@@ -1,0 +1,421 @@
+/* ==========================================================================
+   PROFILE SIDEBAR
+   Sticks below the fixed site nav. The offset is a variable so a host page with
+   a different header height can set --profileSidebarTop instead of forking this.
+   ========================================================================== */
+.sidebar {
+  position: sticky;
+  top: var(--profileSidebarTop, 74px);
+  min-height: calc(100vh - var(--profileSidebarTop, 74px));
+  background: #ffffff;
+  border: 1px solid #e8edf6;
+  padding: 26px 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+}
+
+/* ==========================================================================
+   IDENTITY
+   ========================================================================== */
+.identity {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  border-bottom: 1px dashed #e2e8f0;
+  padding-bottom: 20px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
+  box-sizing: border-box;
+  flex: 0 0 auto;
+}
+
+.avatarLogo {
+  object-fit: cover !important;
+  padding: 2px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.avatarInitial {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: #0b132b;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  border: 3px solid #ffffff;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.14);
+  flex: 0 0 auto;
+}
+
+.identityText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.userName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #12296b;
+  margin: 0;
+  word-break: break-word;
+}
+
+.userRole {
+  color: #16a34a;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 4px;
+  margin-top: 4px;
+  padding: 2px 8px;
+  font-size: 10px;
+  width: fit-content;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.roleDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex: 0 0 auto;
+}
+
+.userEmail {
+  font-size: 12px;
+  color: #64748b;
+  margin: 8px 0 0 0;
+  word-break: break-word;
+}
+
+/* ==========================================================================
+   PROFILE COMPLETION WIDGET
+   ========================================================================== */
+.completionCard {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.completionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.completionTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.completionPercent {
+  font-size: 13px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.progressBarBg {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progressBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+
+.completionFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: #64748b;
+}
+
+.completionLink {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.completionLink:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+.sideNav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 22px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+  padding: 13px 15px;
+  border: none;
+  border-radius: 10px;
+  background: none;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #334155;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.navItem svg {
+  font-size: 19px;
+  flex-shrink: 0;
+  color: #64748b;
+}
+
+.navItem:hover {
+  background: #f1f5fc;
+  color: #12296b;
+}
+
+.navItemActive,
+.navItemActive:hover {
+  background: #12296b;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.navItemActive svg {
+  color: #ffffff;
+}
+
+.navItem:focus-visible,
+.logoutBtn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   LOG OUT
+   ========================================================================== */
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+  padding: 14px;
+  border: 1.5px solid #ef4444;
+  border-radius: 12px;
+  background: #ffffff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ef4444;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.logoutBtn:hover {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   Below this the column layout collapses, so the sidebar becomes a banner with
+   its navigation laid out in a row.
+   ========================================================================== */
+@media (max-width: 900px) {
+  .sidebar {
+    position: static;
+    min-height: 0;
+    border-right: none;
+    border-bottom: 1px solid #e8edf6;
+    padding: 16px;
+    gap: 16px;
+    display: none;
+  }
+
+  .identity {
+    flex-direction: row;
+    text-align: left;
+    gap: 16px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .avatar,
+  .avatarInitial {
+    width: 64px;
+    height: 64px;
+    border-width: 2px;
+    font-size: 24px;
+  }
+
+  .userName {
+    font-size: 17px;
+    margin: 0;
+  }
+
+  .userRole {
+    margin: 4px 0 0 0;
+    font-size: 12.5px;
+  }
+
+  .userEmail {
+    margin: 2px 0 0 0;
+    font-size: 12px;
+  }
+
+  .sideNav {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    padding-bottom: 4px;
+    width: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .sideNav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navItem {
+    width: auto;
+    white-space: nowrap;
+    padding: 8px 16px;
+    font-size: 13.5px;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .navItem svg {
+    font-size: 17px;
+  }
+}
+
+/* Unread count on a nav item (e.g. Enquiries) */
+.navBadge {
+  margin-left: auto;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #ffffff;
+  background: #1554d1;
+}
+
+.navItemActive .navBadge {
+  color: #12296b;
+  background: #ffffff;
+}
+
+/* Nav sections (e.g. "Builder Portal" for approved builders) */
+.navGroup,
+.navSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navSection {
+  margin-top: 12px;
+  padding-top: 14px;
+  border-top: 1px dashed #e2e8f0;
+}
+
+.navSectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 15px 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.navSectionBadge {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: #047857;
+  background: #d1fae5;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+/* The builder section sits between other links: divider above and below */
+.navSection {
+  margin: 10px 0;
+  padding: 12px 0;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+/* "Builder Portal" link: filled call-to-action style */
+.navItemHighlight {
+  background: linear-gradient(135deg, #dcc6fd 0%, #d4faff 100%);
+  color: #000;
+  font-weight: 600;
+}
+
+.navItemHighlight svg {
+  color: #000;
+}
+
+.navItemHighlight.navItemActive,
+.navItemHighlight.navItemActive:hover {
+  background: #12296b;
+  box-shadow: none;
+}
+
+/* Small "opens in new tab" marker */
+.navItem svg.navExternal {
+  margin-left: auto;
+  font-size: 15px;
+  opacity: 0.7;
+}

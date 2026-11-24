@@ -1,0 +1,257 @@
+/* Leaflet map styles for the /properties map view.
+   Loaded only with the properties page instead of on every page (moved out of globals.css). */
+
+/* ==========================================================================
+   LEAFLET REAL MAP CUSTOM PRICE MARKERS
+   ========================================================================== */
+.leaflet-custom-marker-wrapper {
+  background: transparent !important;
+  border: none !important;
+}
+
+.custom-leaflet-price-pin {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+  border: 1.5px solid #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  position: relative;
+}
+
+.custom-leaflet-price-pin:hover,
+.custom-leaflet-price-pin.active-pin {
+  background: #0f172a;
+  border-color: #2563eb;
+  transform: scale(1.1);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.35);
+  z-index: 1000 !important;
+}
+
+.custom-leaflet-price-pin .price-val {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.custom-leaflet-price-pin:hover .price-val,
+.custom-leaflet-price-pin.active-pin .price-val {
+  color: #ffffff;
+}
+
+.custom-leaflet-price-pin .home-icon {
+  font-size: 12px;
+}
+
+.custom-leaflet-price-pin::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0;
+  border-style: solid;
+  border-color: #ffffff transparent;
+  display: block;
+  width: 0;
+  transition: border-color 0.2s;
+}
+
+.custom-leaflet-price-pin:hover::after,
+.custom-leaflet-price-pin.active-pin::after {
+  border-color: #0f172a transparent;
+}
+
+/* ==========================================================================
+   LEAFLET POPUP CARD STYLING
+   ========================================================================== */
+.leaflet-popup-pane {
+  z-index: 900 !important;
+}
+
+.custom-leaflet-popup-card .leaflet-popup-content-wrapper {
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.22), 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(226, 232, 240, 0.95) !important;
+}
+
+.custom-leaflet-popup-card .leaflet-popup-content {
+  margin: 0 !important;
+  width: 260px !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+.custom-leaflet-popup-card .leaflet-popup-tip-container {
+  width: 22px;
+  height: 11px;
+}
+
+.custom-leaflet-popup-card .leaflet-popup-tip {
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.custom-leaflet-popup-card a.leaflet-popup-close-button {
+  top: 8px !important;
+  right: 8px !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  background: rgba(15, 23, 42, 0.65) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 15px !important;
+  line-height: 1 !important;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+  padding: 0 !important;
+  z-index: 10;
+}
+
+.custom-leaflet-popup-card a.leaflet-popup-close-button:hover {
+  background: rgba(15, 23, 42, 0.9) !important;
+  color: #ffffff !important;
+  transform: scale(1.08);
+}
+
+.leaflet-card-popup {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.leaflet-card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  background-color: #f1f5f9;
+}
+
+.leaflet-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.leaflet-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #059669;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.leaflet-card-content {
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: #ffffff;
+}
+
+.leaflet-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.leaflet-card-id {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #4f46e5;
+  background: #eef2ff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.leaflet-card-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0b132b;
+  margin: 0;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.leaflet-card-loc {
+  font-size: 11px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.leaflet-card-loc span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.leaflet-card-price {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1e40af;
+  margin-top: 1px;
+}
+
+.leaflet-card-specs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  color: #475569;
+  background: #f8fafc;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #edf2f7;
+}
+
+.leaflet-card-btn {
+  display: block;
+  width: 100%;
+  background: #0f172a;
+  color: #ffffff !important;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 0;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: all 0.2s ease;
+}
+
+.leaflet-card-btn:hover {
+  background: #2563eb;
+  color: #ffffff !important;
+}

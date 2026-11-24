@@ -1,0 +1,246 @@
+.whyChooseSection {
+  width: 100%;
+  padding: 80px 0;
+  background: #fff;
+}
+@media(max-width:768px){
+  .whyChooseSection{
+    padding: 60px 0px;
+  }
+}
+@media(max-width:480px){
+  .whyChooseSection{
+    padding: 40px 0px;
+  }
+}
+
+.container {
+  max-width: 1360px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* Outer Light Blue Container Card */
+.mainCard {
+  background: #edf4ff;
+  border: 1.5px solid #d4e3ff;
+  border-radius: 28px;
+  padding: 14px;
+  display: flex;
+  gap: 48px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(30, 58, 138, 0.03);
+}
+
+/* Left Section */
+.leftSection {
+  flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  padding-bottom: 100px;
+}
+
+.mainTitle {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  color: #0b132b;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+.leftFeature {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #d5eeff;
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.featureIcon {
+  color: #0b132b;
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+}
+.featureIcon svg{
+  width: 50px;
+  height: 50px;
+  stroke-width: 2px;
+}
+.featureIcon svg path{
+  stroke-width: 2px;
+}
+
+.featureTitle {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #0b132b;
+  margin: 0 0 4px 0;
+}
+
+.featureDesc {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #475569;
+  margin: 0;
+}
+
+/* Skyline Illustration */
+.skylineIllustration {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.skylineIllustration svg{
+  width: 100%;
+}
+
+/* Right Section */
+.rightSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 35px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Top 3 Features Grid */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.topFeature {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: #c8dcff;
+}
+
+/* Bottom 4 Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: white;
+  padding: 14px;
+  border-radius: 12px;
+}
+
+.statNumber {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: #0b132b;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.statLabel {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+}
+
+/* Responsive Rules */
+@media (max-width: 1024px) {
+  .mainCard {
+    flex-direction: column;
+    gap: 32px;
+    padding: 20px;
+  }
+  .leftSection {
+    flex: 1;
+    padding-bottom: 90px;
+  }
+  .skylineIllustration {
+    max-width: 240px;
+    left: auto;
+    right: 20px;
+  }
+  .featuresGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* .whyChooseSection {
+    padding: 40px 0;
+  } */
+  .mainTitle {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 640px) {
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .statNumber {
+    font-size: 26px;
+  }
+  .statLabel {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainCard {
+    padding: 12px;
+    gap: 20px;
+  }
+  .leftSection {
+    padding: 20px;
+    padding-bottom: 80px;
+  }
+  .skylineIllustration {
+    max-width: 180px;
+    right: 12px;
+  }
+  .mainTitle {
+    font-size: 22px;
+  }
+  .statNumber {
+    font-size: 22px;
+  }
+}

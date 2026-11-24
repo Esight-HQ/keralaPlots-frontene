@@ -1,0 +1,1537 @@
+/* ==========================================================================
+   MY ADDED PROPERTIES — the profile page's listing panel
+
+   This is a section inside the profile shell, not a page, so the table sizes
+   itself against the panel it is given rather than the viewport: the sidebar
+   takes ~264px, which would otherwise put a 1440px screen into the narrow
+   layout. Hence `container-type` here and `@container` further down.
+   ========================================================================== */
+/* The overlays and the toast are portalled outside `.page`, so the palette has
+   to be declared on them too — scoped only to `.page`, every var() inside a
+   dialog resolves to nothing and takes its whole declaration down with it. */
+.page,
+.overlay,
+.toast {
+  --apNavy: #0f2b52;
+  --apBlue: #1554d1;
+  --apBody: #475569;
+  --apMuted: #64748b;
+  --apFaint: #94a3b8;
+  --apBorder: #e8ecf3;
+  --apShell: #f7f9fc;
+}
+
+.page {
+  container-type: inline-size;
+  container-name: added;
+}
+
+.container {
+  width: 100%;
+}
+
+/* ==========================================================================
+   PAGE HEADER
+   ========================================================================== */
+/* Sized to sit level with "Personal Details" and "Dashboard" — this is one
+   panel among siblings now, not a page heading. */
+.pageTitle {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #12296b;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.pageSub {
+  margin: 8px 0 0 0;
+  font-size: 14.5px;
+  color: #5b6b8c;
+}
+
+/* ==========================================================================
+   TOOLBAR — total count, search, filter
+   ========================================================================== */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 34px;
+  flex-wrap: wrap;
+}
+
+.total {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--apNavy);
+}
+
+.toolbarActions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.searchWrap {
+  position: relative;
+  width: 470px;
+  max-width: 100%;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--apFaint);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  height: 50px;
+  border: 1px solid var(--apBorder);
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 0 44px 0 48px;
+  font-size: 15px;
+  color: var(--apNavy);
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.searchInput::placeholder {
+  color: var(--apFaint);
+}
+
+.searchInput:focus {
+  border-color: #b9cdf5;
+  box-shadow: 0 0 0 4px rgba(21, 84, 209, 0.08);
+}
+
+.searchClear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background: #eef2f8;
+  color: var(--apMuted);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.searchClear:hover {
+  background: #e2e8f0;
+  color: var(--apNavy);
+}
+
+.filterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
+  padding: 0 26px;
+  border: 1px solid var(--apBorder);
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--apNavy);
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.filterBtn:hover {
+  border-color: #cbd5e1;
+}
+
+.filterBtnActive {
+  border-color: var(--apBlue);
+  color: var(--apBlue);
+  background: #f2f6ff;
+}
+
+.filterIcon {
+  font-size: 18px;
+}
+
+.filterCount {
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--apBlue);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   FILTER PANEL
+   ========================================================================== */
+.filterPanel {
+  margin-top: 16px;
+  background: #ffffff;
+  border: 1px solid var(--apBorder);
+  border-radius: 14px;
+  padding: 22px 26px;
+  display: flex;
+  align-items: flex-start;
+  gap: 46px;
+  flex-wrap: wrap;
+}
+
+.filterGroupLabel {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--apFaint);
+  margin-bottom: 12px;
+}
+
+.chipRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  border: 1px solid var(--apBorder);
+  border-radius: 999px;
+  background: #ffffff;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--apBody);
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.chip:hover {
+  border-color: #c7d6f0;
+}
+
+.chipActive {
+  background: var(--apBlue);
+  border-color: var(--apBlue);
+  color: #ffffff;
+}
+
+.clearFilters {
+  margin-left: auto;
+  align-self: center;
+  border: none;
+  background: none;
+  color: var(--apBlue);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 2px;
+}
+
+.clearFilters:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   TABLE HEADER
+   ========================================================================== */
+.tableHead,
+.row {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) 130px 126px 124px 92px 90px 146px 60px;
+  align-items: center;
+}
+
+.tableHead {
+  margin-top: 22px;
+  background: #f4f7fb;
+  border: 1px solid var(--apBorder);
+  border-radius: 14px;
+  padding: 18px 24px;
+}
+
+.headCell {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--apNavy);
+  text-align: center;
+}
+
+.headCellFirst {
+  text-align: left;
+  padding-left: 26px;
+}
+
+.sortBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: none;
+  background: none;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--apNavy);
+  cursor: pointer;
+  padding: 0;
+}
+
+.sortBtn:hover {
+  color: var(--apBlue);
+}
+
+.sortIcon {
+  font-size: 15px;
+  color: var(--apFaint);
+  transition: color 0.16s ease;
+}
+
+.sortIconActive {
+  color: var(--apBlue);
+}
+
+/* ==========================================================================
+   PROPERTY ROWS
+   ========================================================================== */
+.rowList {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  background: #ffffff;
+  border: 1px solid var(--apBorder);
+  border-radius: 14px;
+  padding: 20px 24px;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.row:hover {
+  border-color: #d8e2f2;
+  box-shadow: 0 6px 20px rgba(15, 43, 82, 0.06);
+}
+
+/* ---- property details cell ---- */
+.details {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  min-width: 0;
+}
+
+.thumbWrap {
+  position: relative;
+  flex: 0 0 auto;
+  width: 256px;
+  height: 145px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #eef2f7;
+  display: block;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.thumbWrap:hover .thumb {
+  transform: scale(1.04);
+}
+
+.idBadge {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  background: #12203c;
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.2px;
+}
+
+.detailsText {
+  min-width: 0;
+}
+
+.titleRow {
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--apNavy);
+  line-height: 1.3;
+  transition: color 0.16s ease;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.title:hover {
+  color: var(--apBlue);
+}
+
+.location {
+  margin-top: 9px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  color: var(--apMuted);
+}
+
+.pinIcon {
+  font-size: 15px;
+  color: #3b82f6;
+  flex: 0 0 auto;
+}
+
+.specs {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.spec {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  color: var(--apBody);
+}
+
+.specIcon {
+  font-size: 16px;
+  color: var(--apFaint);
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+/* ---- price / type / date ---- */
+.price {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--apBlue);
+  text-align: center;
+}
+
+.typeCell {
+  display: flex;
+  justify-content: center;
+}
+
+.typePill {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 7px 20px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.typeVilla,
+.typeApartment {
+  background: #e9f0fe;
+  color: #1554d1;
+}
+
+.typePlot {
+  background: #e4f7ec;
+  color: #16a34a;
+}
+
+.typeHouse {
+  background: #f0ecfd;
+  color: #7c3aed;
+}
+
+/* Commercial, office, warehouse and the rest share a neutral pill. */
+.typeDefault {
+  background: #eef2f7;
+  color: #475569;
+}
+
+.addedOn {
+  font-size: 15px;
+  color: var(--apBody); 
+  text-align: center;
+}
+
+/* ---- metrics ---- */
+.metric {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.metricValue {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--apNavy);
+}
+
+.metricIcon {
+  font-size: 17px;
+  color: var(--apMuted);
+}
+
+.metricLabel {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--apFaint);
+}
+
+/* ---- status ---- */
+.statusCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.statusPill {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+  display: inline-block;
+  text-align: center;
+}
+
+.statusActive {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.statusInactive {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.statusBlocked {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.statusSold {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.statusDraft {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.statusIncomplete {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px dashed #cbd5e1;
+}
+
+.filterTabsBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding-bottom: 2px;
+  overflow-x: auto;
+}
+
+.filterTabItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--apBorder);
+  background: #ffffff;
+  color: var(--apBody);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  white-space: nowrap;
+}
+
+.filterTabItem:hover {
+  border-color: #c7d6f0;
+  color: var(--apNavy);
+}
+
+.filterTabItemActive {
+  background: var(--apBlue);
+  border-color: var(--apBlue);
+  color: #ffffff;
+}
+
+.filterTabBadge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.filterTabItemActive .filterTabBadge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.quickPayBtn {
+  margin-top: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: #001a72;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 26, 114, 0.2);
+}
+
+.quickPayBtn:hover {
+  background: #114d81;
+  transform: translateY(-1px);
+}
+
+.quickEditBtn {
+  margin-top: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  white-space: nowrap;
+}
+
+.quickEditBtn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+  transform: translateY(-1px);
+}
+
+
+/* ---- actions ---- */
+.actionsCell {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.actionsBtn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--apBody);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.16s ease;
+}
+
+.actionsBtn:hover,
+.actionsBtnOpen {
+  background: #eef2f8;
+  color: var(--apNavy);
+}
+
+.menu {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  z-index: 30;
+  width: 216px;
+  background: #ffffff;
+  border: 1px solid var(--apBorder);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(15, 43, 82, 0.14);
+  padding: 7px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Rows near the bottom of the list flip the menu above the button. */
+.menuUp {
+  top: auto;
+  bottom: 42px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--apBody);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.14s ease, color 0.14s ease;
+}
+
+.menuItem:hover {
+  background: #f4f7fb;
+  color: var(--apNavy);
+}
+
+.menuItemDanger {
+  color: #dc2626;
+}
+
+.menuItemDanger:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.menuDivider {
+  height: 1px;
+  background: var(--apBorder);
+  margin: 6px 4px;
+}
+
+/* ==========================================================================
+   LOADING SKELETON — holds the list's shape until localStorage is read
+   ========================================================================== */
+.skeletonRow {
+  background: #ffffff;
+  border: 1px solid var(--apBorder);
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.skeletonThumb {
+  flex: 0 0 auto;
+  width: 256px;
+  height: 145px;
+  border-radius: 10px;
+}
+
+.skeletonLines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skeletonLine {
+  height: 15px;
+  border-radius: 6px;
+  width: 40%;
+}
+
+.skeletonLineShort {
+  width: 24%;
+}
+
+.skeletonThumb,
+.skeletonLine {
+  background: linear-gradient(90deg, #eef2f7 25%, #f6f9fc 50%, #eef2f7 75%);
+  background-size: 400% 100%;
+  animation: apShimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes apShimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeletonThumb,
+  .skeletonLine {
+    animation: none;
+  }
+}
+
+@container added (max-width: 1400px) {
+  .skeletonThumb {
+    width: 200px;
+    height: 125px;
+  }
+}
+
+@container added (max-width: 1240px) {
+  .skeletonThumb {
+    width: 168px;
+    height: 110px;
+  }
+}
+
+@container added (max-width: 560px) {
+  .skeletonThumb {
+    width: 110px;
+    height: 84px;
+  }
+}
+
+/* ==========================================================================
+   DELETE CONFIRMATION
+   ========================================================================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(9, 20, 40, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.dialog {
+  width: 440px;
+  max-width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(9, 20, 40, 0.3);
+}
+
+/* ---- delete confirmation ---- */
+.deleteDialog {
+  position: relative;
+  width: 560px;
+  padding: 40px 44px 36px;
+  border-radius: 20px;
+}
+
+.dialogClose {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.dialogClose:hover {
+  background: #e2e8f0;
+  color: var(--apNavy);
+}
+
+/* Two concentric washes of red behind the bin, the outer one barely there —
+   enough weight to read as a warning without shouting. */
+.deleteHalo {
+  width: 102px;
+  height: 102px;
+  margin: 6px auto 4px;
+  border-radius: 50%;
+  background: #fef1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteRing {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: #fbd6d6;
+  color: #ef2b2b;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteTitle {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #0f2b52;
+  margin: 0;
+}
+
+.deleteDesc {
+  margin: 14px 0 0 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #64748b;
+}
+
+.deleteDescLine {
+  display: block;
+}
+
+.deletePreview {
+  margin-top: 26px;
+  border: 1px solid var(--apBorder);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-align: left;
+}
+
+.deletePreviewThumb {
+  flex: 0 0 auto;
+  width: 138px;
+  aspect-ratio: 3 / 2;
+  border-radius: 12px;
+  object-fit: cover;
+  background: #eef2f7;
+}
+
+.deletePreviewText {
+  min-width: 0;
+}
+
+.deletePreviewTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f2b52;
+  margin: 0;
+}
+
+.deletePreviewLocation {
+  margin: 5px 0 0 0;
+  font-size: 14px;
+  color: var(--apMuted);
+}
+
+.deletePreviewPrice {
+  margin: 7px 0 0 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f2b52;
+}
+
+.deleteDialog .dialogActions {
+  margin-top: 28px;
+  gap: 16px;
+}
+
+.deleteCancel,
+.deleteConfirm {
+  flex: 1;
+  height: 54px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.16s ease, border-color 0.16s ease;
+}
+
+.deleteCancel {
+  border: 1.5px solid #9aadcd;
+  background: #ffffff;
+  color: #0f2b52;
+}
+
+.deleteCancel:hover {
+  border-color: #0f2b52;
+  background: #f7f9fc;
+}
+
+.deleteConfirm {
+  border: none;
+  background: #ef2b2b;
+  color: #ffffff;
+  font-weight: 400;
+}
+
+.deleteConfirm:hover {
+  background: #d21f1f;
+}
+
+.dialogTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--apNavy);
+}
+
+.dialogDesc {
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--apMuted);
+  line-height: 1.6;
+}
+
+.dialogActions {
+  margin-top: 26px;
+  display: flex;
+  gap: 12px;
+}
+
+.dialogCancel {
+  flex: 1;
+  border-radius: 10px;
+  padding: 13px 0;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--apBorder);
+  background: #ffffff;
+  color: var(--apBody);
+}
+
+.dialogCancel:hover {
+  background: #f4f7fb;
+}
+
+/* ---- edit dialog ---- */
+.editDialog {
+  width: 560px;
+  text-align: left;
+}
+
+.field {
+  display: block;
+  margin-top: 18px;
+  flex: 1;
+  min-width: 0;
+}
+
+.fieldLabel {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: var(--apFaint);
+}
+
+.fieldInput {
+  width: 100%;
+  height: 46px;
+  border: 1px solid var(--apBorder);
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 0 14px;
+  font-size: 15px;
+  color: var(--apNavy);
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.fieldInput:focus {
+  border-color: #b9cdf5;
+  box-shadow: 0 0 0 4px rgba(21, 84, 209, 0.08);
+}
+
+.fieldRow {
+  display: flex;
+  gap: 16px;
+}
+
+/* The checkbox sits on the input's baseline rather than under a label of its
+   own, so it lines up with the select beside it. */
+.fieldCheck {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-end;
+  height: 46px;
+  font-size: 15px;
+  color: var(--apBody);
+  cursor: pointer;
+}
+
+.fieldCheck input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--apBlue);
+  cursor: pointer;
+}
+
+.dialogSave {
+  flex: 1;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 0;
+  font-size: 15px;
+  font-weight: 600;
+  background: var(--apBlue);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.dialogSave:hover:not(:disabled) {
+  background: #1246b3;
+}
+
+.dialogSave:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 620px) {
+  .fieldRow {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .fieldCheck {
+    align-self: flex-start;
+  }
+
+  .editDialog {
+    padding: 24px 20px;
+  }
+
+  .deleteDialog {
+    padding: 34px 20px 24px;
+  }
+
+  .deleteHalo {
+    width: 104px;
+    height: 104px;
+  }
+
+  .deleteRing {
+    width: 72px;
+    height: 72px;
+    font-size: 31px;
+  }
+
+  .deleteTitle {
+    font-size: 23px;
+  }
+
+  .deleteDesc {
+    font-size: 15px;
+  }
+
+  /* The two-line split is set for a 560px dialog; let it reflow when narrower. */
+  .deleteDescLine {
+    display: inline;
+  }
+
+  .deletePreviewThumb {
+    width: 78px;
+    height: 66px;
+  }
+
+  /* Side by side still, as drawn — neither action should be the one that
+     happens to sit under the thumb. */
+  .deleteDialog .dialogActions {
+    gap: 10px;
+  }
+
+  .deleteCancel,
+  .deleteConfirm {
+    height: 50px;
+    font-size: 15px;
+    padding: 0 4px;
+  }
+}
+
+/* ==========================================================================
+   TOAST
+   ========================================================================== */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 120px;
+  transform: translateX(-50%);
+  z-index: 210;
+  background: #12203c;
+  color: #ffffff;
+  font-size: 14.5px;
+  font-weight: 500;
+  padding: 13px 24px;
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(9, 20, 40, 0.28);
+}
+
+/* ==========================================================================
+   RESPONSIVE — measured against the panel, not the window
+
+   Widths here are container widths. The panel runs ~1436px on a 1700px screen
+   and ~1176px on a 1440px one, so the thresholds sit well below the viewport
+   figures they would need if this were still a full-width page.
+   ========================================================================== */
+
+/* The fixed columns give ground before the details cell does — the location
+   and the spec strip each need to stay on one line for the row to read the
+   way it was drawn. */
+@container added (max-width: 1400px) {
+  .tableHead,
+  .row {
+    grid-template-columns:
+      minmax(0, 1fr) 124px 136px 126px 106px 102px 110px 64px;
+  }
+
+  .thumbWrap {
+    width: 200px;
+    height: 125px;
+  }
+
+  .details {
+    gap: 20px;
+  }
+
+  /* The spec strip is the widest line in the cell; it tightens rather than
+     wrapping, which would push the row taller than its neighbours. */
+  .specs {
+    gap: 11px;
+    margin-top: 13px;
+  }
+
+  .spec {
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  .specIcon {
+    font-size: 15px;
+    width: 15px;
+    height: 15px;
+  }
+
+  .headCell,
+  .sortBtn {
+    font-size: 14px;
+  }
+}
+
+@container added (max-width: 1240px) {
+  .thumbWrap {
+    width: 168px;
+    height: 110px;
+  }
+
+  .specs {
+    gap: 12px;
+  }
+}
+
+/* Roughly a 1440px screen once the sidebar is taken out. The columns and the
+   thumbnail both give up more so the details cell keeps a workable width —
+   below this the table stops being worth defending and becomes cards. */
+@container added (max-width: 1160px) {
+  .tableHead,
+  .row {
+    grid-template-columns:
+      minmax(0, 1fr) 112px 124px 112px 94px 90px 98px 58px;
+  }
+
+  .tableHead {
+    padding: 16px 18px;
+  }
+
+  .row {
+    padding: 18px;
+  }
+
+  .thumbWrap {
+    width: 150px;
+    height: 100px;
+  }
+
+  .details {
+    gap: 16px;
+  }
+
+  .titleRow,
+  .title {
+    font-size: 16px;
+  }
+
+  .location {
+    margin-top: 7px;
+    font-size: 13px;
+  }
+
+  .specs {
+    margin-top: 10px;
+    gap: 9px;
+  }
+
+  .spec {
+    font-size: 12.5px;
+  }
+
+  .price {
+    font-size: 17px;
+  }
+
+  .typePill,
+  .statusPill {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .addedOn {
+    font-size: 13.5px;
+  }
+
+  .metricValue {
+    font-size: 15.5px;
+    gap: 6px;
+  }
+
+  .headCell,
+  .sortBtn {
+    font-size: 13px;
+  }
+}
+
+/* Narrower than this the eight columns stop being readable, so each row
+   becomes a card with its values labelled. */
+@container added (max-width: 1000px) {
+  .tableHead {
+    display: none;
+  }
+
+  .row {
+    display: block;
+    padding: 18px;
+    position: relative;
+  }
+
+  .stackCellActions {
+    position: absolute;
+    top: 14px;
+    right: 10px;
+  }
+
+  .stackCellActions :global(svg) {
+    color: var(--apNavy);
+  }
+
+  .stackCellActions button {
+    background: #ffffff;
+    /* box-shadow: 0 4px 12px rgba(15, 23, 42, 0.16); */
+    color: var(--apNavy);
+  }
+
+  .stackCellActions button:hover {
+    background: #f1f5fc;
+  }
+
+  .stackCellActions .stackLabel {
+    display: none;
+  }
+
+  .details {
+    gap: 18px;
+    padding-right: 40px;
+  }
+
+  .thumbWrap {
+    width: 168px;
+    height: 118px;
+  }
+
+  /* Values gain their own label once the column header is gone. */
+  .stack {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--apBorder);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 18px 16px;
+    align-items: start;
+  }
+
+  .stackCell {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    align-items: flex-start;
+  }
+
+  .stackLabel {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--apFaint);
+  }
+
+  .price,
+  .addedOn,
+  .metric {
+    text-align: left;
+  }
+
+  .typeCell,
+  .statusCell,
+  .actionsCell {
+    justify-content: flex-start;
+  }
+
+  .statusCell,
+  .stackCellViews {
+    border-left: none;
+  }
+
+  .metricLabel {
+    display: none;
+  }
+}
+
+/* On the wide table the stacked labels are redundant — the header carries them.
+   `display: contents` lets each cell become a grid item of the row itself, so
+   one markup tree serves both the table and the stacked card. */
+@container added (min-width: 1001px) {
+  .stack {
+    display: contents;
+  }
+
+  .stackCell {
+    display: block;
+  }
+
+  .stackLabel {
+    display: none;
+  }
+
+  /* Rules bracketing the engagement figures, so views and calls read as one
+     group rather than as two more columns of the listing's own facts. */
+  .stackCellViews,
+  .stackCellStatus {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid var(--apBorder);
+  }
+}
+
+@container added (max-width: 760px) {
+  .pageTitle {
+    font-size: 25px;
+  }
+
+  .toolbar {
+    align-items: stretch;
+  }
+
+  .toolbarActions {
+    width: 100%;
+  }
+
+  .searchWrap {
+    flex: 1;
+  }
+
+  .filterBtn {
+    padding: 0 18px;
+  }
+}
+
+@container added (max-width: 560px) {
+  .details {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .thumbWrap {
+    width: 100%;
+    height: 190px;
+  }
+
+  .filterPanel {
+    gap: 22px;
+  }
+
+  .clearFilters {
+    margin-left: 0;
+  }
+}
+
+@container added (max-width: 480px) {
+  .toolbarActions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .filterBtn {
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   EMPTY STATE — the card itself is the shared EmptyState component; this is
+   only where it sits relative to the toolbar above it.
+   ========================================================================== */
+.emptyPlacement {
+  margin-top: 22px;
+}

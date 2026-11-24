@@ -1,0 +1,935 @@
+/* ==========================================================================
+   SAVED PROPERTIES — the profile page's favorites list
+
+   A section inside the profile shell, mirroring contacted-properties: same
+   table shape, but three columns instead of four (no direction toggle — a
+   favorite has only one side) and a heart toggle on each thumbnail so a
+   property can be unsaved without leaving the list.
+   ========================================================================== */
+.page {
+  --spNavy: #0f2b52;
+  --spBlue: #1554d1;
+  --spBody: #475569;
+  --spMuted: #64748b;
+  --spFaint: #94a3b8;
+  --spBorder: #e8ecf3;
+  container-type: inline-size;
+  container-name: saved;
+}
+
+.container {
+  width: 100%;
+}
+
+/* ==========================================================================
+   SECTION HEADER
+   ========================================================================== */
+.pageTitle {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #12296b;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.pageSub {
+  margin: 8px 0 0 0;
+  font-size: 14.5px;
+  color: #5b6b8c;
+}
+
+/* ==========================================================================
+   TOOLBAR — total count and search
+   ========================================================================== */
+.toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.total {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--spNavy);
+}
+
+.searchWrap {
+  position: relative;
+  width: 470px;
+  max-width: 100%;
+  margin-left: auto;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--spFaint);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  height: 50px;
+  border: 1px solid var(--spBorder);
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 0 44px 0 48px;
+  font-size: 15px;
+  color: var(--spNavy);
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.searchInput::placeholder {
+  color: var(--spFaint);
+}
+
+.searchInput:focus {
+  border-color: #b9cdf5;
+  box-shadow: 0 0 0 4px rgba(21, 84, 209, 0.08);
+}
+
+.searchClear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background: #eef2f8;
+  color: var(--spMuted);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.searchClear:hover {
+  background: #e2e8f0;
+  color: var(--spNavy);
+}
+
+/* ==========================================================================
+   TABLE HEADER
+   ========================================================================== */
+.tableHead,
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 200px 210px 200px;
+  align-items: center;
+}
+
+.tableHead {
+  margin-top: 22px;
+  background: #f4f7fb;
+  border: 1px solid var(--spBorder);
+  border-radius: 14px;
+  padding: 18px 24px;
+}
+
+.headCell {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--spNavy);
+  text-align: center;
+}
+
+.headCellFirst {
+  text-align: left;
+  padding-left: 26px;
+}
+
+.sortBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: none;
+  background: none;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--spNavy);
+  cursor: pointer;
+  padding: 0;
+}
+
+.sortBtn:hover {
+  color: var(--spBlue);
+}
+
+.sortIcon {
+  font-size: 15px;
+  color: var(--spFaint);
+  transition: color 0.16s ease;
+}
+
+/* ==========================================================================
+   PROPERTY ROWS
+   ========================================================================== */
+.rowList {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  background: #ffffff;
+  border: 1px solid var(--spBorder);
+  border-radius: 14px;
+  padding: 20px 24px;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.row:hover {
+  border-color: #d8e2f2;
+  box-shadow: 0 6px 20px rgba(15, 43, 82, 0.06);
+}
+
+/* ---- property details cell ---- */
+.details {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  min-width: 0;
+}
+
+.thumbBox {
+  position: relative;
+  flex: 0 0 auto;
+  width: 210px;
+  height: 132px;
+}
+
+.thumbWrap {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #eef2f7;
+  cursor: pointer;
+}
+
+.thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.thumbWrap:hover .thumb {
+  transform: scale(1.04);
+}
+
+.idBadge {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  background: #12203c;
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.2px;
+}
+
+/* Unsaves the property without leaving the list — sits over the thumbnail
+   like the heart toggle on the standalone Favorites page. */
+.favToggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.94);
+  color: #e11d48;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(15, 43, 82, 0.18);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.favToggle:hover {
+  transform: scale(1.08);
+  background: #ffffff;
+}
+
+.detailsText {
+  min-width: 0;
+}
+
+.titleRow {
+  font-size: 18px;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--spNavy);
+  line-height: 1.3;
+  transition: color 0.16s ease;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.title:hover {
+  color: var(--spBlue);
+}
+
+.location {
+  margin: 9px 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  color: var(--spMuted);
+}
+
+.pinIcon {
+  font-size: 15px;
+  color: #3b82f6;
+  flex: 0 0 auto;
+}
+
+.specs {
+  margin: 16px 0 0 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.spec {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  color: var(--spBody);
+}
+
+.specIcon {
+  font-size: 16px;
+  color: var(--spFaint);
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+/* ---- price / type / date ---- */
+.price {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--spBlue);
+  text-align: center;
+}
+
+.typeCell {
+  display: flex;
+  justify-content: center;
+}
+
+.typePill {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 7px 20px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.typeVilla,
+.typeApartment {
+  background: #e9f0fe;
+  color: #1554d1;
+}
+
+.typePlot {
+  background: #e4f7ec;
+  color: #16a34a;
+}
+
+.typeHouse {
+  background: #f0ecfd;
+  color: #7c3aed;
+}
+
+.typeDefault {
+  background: #eef2f7;
+  color: #475569;
+}
+
+.savedOn {
+  font-size: 15px;
+  color: var(--spBody);
+  text-align: center;
+}
+
+/* ==========================================================================
+   EMPTY STATE — the card is the shared EmptyState component; this is only
+   where it sits relative to the header above it.
+   ========================================================================== */
+.emptyPlacement {
+  margin-top: 22px;
+}
+
+/* ==========================================================================
+   RESPONSIVE — measured against the panel, not the window
+   ========================================================================== */
+@container saved (max-width: 1180px) {
+  .tableHead,
+  .row {
+    grid-template-columns: minmax(0, 1fr) 160px 168px 160px;
+  }
+
+  .thumbBox {
+    width: 170px;
+    height: 112px;
+  }
+
+  .details {
+    gap: 18px;
+  }
+
+  .specs {
+    gap: 11px;
+    margin-top: 12px;
+  }
+
+  .spec {
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  .headCell,
+  .sortBtn {
+    font-size: 14px;
+  }
+
+  .price {
+    font-size: 17px;
+  }
+}
+
+/* Narrower than this the four columns stop being readable, so each row becomes
+   a card with its values labelled. */
+@container saved (max-width: 880px) {
+  .tableHead {
+    display: none;
+  }
+
+  .row {
+    display: block;
+    padding: 18px;
+  }
+
+  .thumbBox {
+    width: 160px;
+    height: 110px;
+  }
+
+  .stack {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--spBorder);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 18px 16px;
+    align-items: start;
+  }
+
+  .stackCell {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    align-items: flex-start;
+  }
+
+  .stackLabel {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--spFaint);
+  }
+
+  .price,
+  .savedOn {
+    text-align: left;
+  }
+
+  .typeCell {
+    justify-content: flex-start;
+  }
+}
+
+/* On the wide table the stacked labels are redundant — the header carries them. */
+@container saved (min-width: 881px) {
+  .stack {
+    display: contents;
+  }
+
+  .stackCell {
+    display: block;
+  }
+
+  .stackLabel {
+    display: none;
+  }
+}
+
+@container saved (max-width: 700px) {
+  .pageTitle {
+    font-size: 25px;
+  }
+
+  .toolbar {
+    align-items: stretch;
+  }
+
+  .searchWrap {
+    width: 100%;
+  }
+}
+
+@container saved (max-width: 520px) {
+  .details {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .thumbBox {
+    width: 100%;
+    height: 180px;
+  }
+}
+
+@container saved (max-width: 480px) {
+  .pageTitle {
+    font-size: 22px;
+  }
+  .pageSub {
+    font-size: 13.5px;
+  }
+  .searchInput {
+    height: 44px;
+    font-size: 14px;
+    padding: 0 36px 0 40px;
+  }
+  .searchIcon {
+    left: 14px;
+    font-size: 16px;
+  }
+  .searchClear {
+    right: 10px;
+    width: 22px;
+    height: 22px;
+    font-size: 13px;
+  }
+  .row {
+    padding: 14px;
+  }
+}
+
+/* ==========================================================================
+   TABS — Properties / Reels
+   ========================================================================== */
+.savedTabs {
+  display: inline-flex;
+  gap: 4px;
+  margin-top: 20px;
+  padding: 4px;
+  background: #f1f4f9;
+  border-radius: 12px;
+}
+
+.savedTab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--spMuted);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.savedTab svg {
+  font-size: 16px;
+}
+
+.savedTab:hover {
+  color: var(--spNavy);
+}
+
+.savedTabActive {
+  background: #ffffff;
+  color: var(--spBlue);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.1);
+}
+
+.savedTabCount {
+  min-width: 22px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #e6ebf3;
+  color: var(--spBody);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.savedTabActive .savedTabCount {
+  background: #e8efff;
+  color: var(--spBlue);
+}
+
+.savedTab:focus-visible {
+  outline: 2px solid var(--spBlue);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   SAVED REELS — vertical "shorts" style cards
+   ========================================================================== */
+.reelGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.reelCard {
+  position: relative;
+  aspect-ratio: 9 / 14;
+  /* max-height: 460px; */
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0b1120;
+  box-shadow: 0 6px 18px rgba(11, 19, 43, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  isolation: isolate;
+}
+
+.reelCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(11, 19, 43, 0.2);
+}
+
+.reelSkeleton {
+  background: linear-gradient(90deg, #eef2f7 0%, #f8fafc 50%, #eef2f7 100%);
+  background-size: 200% 100%;
+  animation: spReelPulse 1.2s ease-in-out infinite;
+  box-shadow: none;
+}
+
+@keyframes spReelPulse {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+.reelLink {
+  position: absolute;
+  inset: 0;
+  display: block;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.reelLink:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: -3px;
+  border-radius: 16px;
+}
+
+.reelImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.reelCard:hover .reelImg {
+  transform: scale(1.05);
+}
+
+.reelNoThumb {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #1e293b, #0b1120);
+}
+
+.reelShade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 22%),
+    linear-gradient(0deg, rgba(2, 6, 23, 0.92) 0%, rgba(2, 6, 23, 0.55) 32%, rgba(2, 6, 23, 0) 58%);
+}
+
+.reelViews {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(6px);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.reelPlayBtn {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.reelPlayBtn svg {
+  margin-left: 3px;
+}
+
+.reelCard:hover .reelPlayBtn {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.reelInfo {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.reelPrice {
+  align-self: flex-start;
+  padding: 3px 9px;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #0b132b;
+  font-size: 12.5px;
+  font-weight: 800;
+}
+
+.reelTitle {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  padding-right: 44px;
+}
+
+.reelMeta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  padding-right: 44px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.reelMeta span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reelMeta svg {
+  flex-shrink: 0;
+  color: #93c5fd;
+}
+
+.reelCreator {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  margin-top: 3px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.reelAvatar {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--spBlue);
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reelCreatorName {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reelSaveBtn,
+.reelLikeBtn {
+  position: absolute;
+  z-index: 2;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reelSaveBtn {
+  top: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--spBlue);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.25);
+  transition: transform 0.15s ease;
+}
+
+.reelSaveBtn:hover {
+  transform: scale(1.08);
+}
+
+.reelLikeBtn {
+  right: 10px;
+  bottom: 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: none;
+  color: #ffffff;
+  font-size: 22px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
+  transition: transform 0.15s ease;
+}
+
+.reelLikeBtn span {
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.reelLikeBtn:active {
+  transform: scale(0.9);
+}
+
+.reelLikeActive {
+  color: #f43f5e;
+}
+
+.reelLikeActive span {
+  color: #ffffff;
+}
+
+.reelSaveBtn:focus-visible,
+.reelLikeBtn:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+/* Narrow panel (phones): tabs stretch, two reels per row */
+@container saved (max-width: 520px) {
+  .savedTabs {
+    display: flex;
+    width: 100%;
+  }
+
+  .savedTab {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .reelGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .reelInfo {
+    padding: 10px 9px 11px;
+    gap: 4px;
+  }
+
+  .reelTitle {
+    font-size: 13px;
+    padding-right: 36px;
+  }
+
+  .reelMeta {
+    padding-right: 36px;
+  }
+
+  .reelLikeBtn {
+    right: 6px;
+    bottom: 52px;
+    font-size: 20px;
+  }
+
+  .reelPlayBtn {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+}

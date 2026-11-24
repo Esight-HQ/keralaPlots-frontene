@@ -1,0 +1,333 @@
+/* ── Public builder webpage shell (header extras, mobile CTA bar, toast, skeleton) ── */
+
+.root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #f8fafc;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  overflow-x: clip;
+}
+
+/* Anchored sections must clear the sticky header */
+.root :global(section[id]),
+.root :global([id^="t2-"]),
+.root :global([id^="t3-"]) {
+  scroll-margin-top: 84px;
+}
+
+/* ── Header ── */
+.header {
+  gap: 12px;
+  backdrop-filter: saturate(180%) blur(8px);
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.brand {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.brandLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.brandName {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.verifiedPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 3px;
+  width: fit-content;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #047857;
+  background: #d1fae5;
+  padding: 2px 7px 2px 5px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.verifiedPill svg {
+  color: #10b981;
+  font-size: 12px;
+}
+
+.backBtn {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #f1f5f9;
+  color: #1e293b;
+  font-size: 18px;
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.backBtn:hover {
+  background: #e2e8f0;
+  transform: translateX(-1px);
+}
+
+.headerActions {
+  flex-shrink: 0;
+}
+
+.shareBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.shareBtn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.backBtn:focus-visible,
+.brandLink:focus-visible,
+.shareBtn:focus-visible,
+.ctaBtn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* ── Mobile sticky CTA bar ── */
+.mobileCta {
+  display: none;
+}
+
+.ctaBtn {
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 44px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+}
+
+.ctaWa {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #a7f3d0;
+}
+
+.ctaPrimary {
+  background: #12296b;
+  color: #ffffff;
+  border-color: #12296b;
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: min(420px, calc(100vw - 32px));
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: toastIn 0.25s ease-out;
+}
+
+.toastIcon {
+  flex-shrink: 0;
+  color: #10b981;
+  font-size: 18px;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Loading skeleton ── */
+.skeletonPage {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.skeletonHeader {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 max(16px, calc((100% - 1240px) / 2));
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.skeletonBody {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.skel {
+  display: block;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.3s ease-in-out infinite;
+}
+
+.skelLogo { width: 40px; height: 40px; border-radius: 10px; }
+.skelLine { height: 14px; }
+.skelHero { height: clamp(260px, 42vw, 520px); border-radius: 0; }
+.skelCard { height: 140px; border-radius: 14px; }
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skel, .toast { animation: none; }
+}
+
+/* ── Tablet ── */
+@media (max-width: 1000px) {
+  .root :global(section[id]),
+  .root :global([id^="t2-"]),
+  .root :global([id^="t3-"]) {
+    scroll-margin-top: 72px;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .header {
+    flex-wrap: nowrap !important;
+    padding: 8px 12px !important;
+    min-height: 58px;
+  }
+
+  .brandName {
+    font-size: 14.5px;
+  }
+
+  .verifiedPill {
+    font-size: 10px;
+  }
+
+  .hideOnMobile {
+    display: none !important;
+  }
+
+  .btnLabel {
+    display: none;
+  }
+
+  .shareBtn {
+    width: 36px;
+    padding: 0;
+    justify-content: center;
+    font-size: 17px;
+  }
+
+  .backBtn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .mobileCta {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, 0.97);
+    border-top: 1px solid #e2e8f0;
+    box-shadow: 0 -6px 18px rgba(15, 23, 42, 0.08);
+    backdrop-filter: saturate(180%) blur(8px);
+  }
+
+  /* Keep the footer clear of the fixed CTA bar */
+  .root {
+    padding-bottom: calc(66px + env(safe-area-inset-bottom));
+  }
+
+  .toast {
+    left: 16px;
+    right: 16px;
+    bottom: calc(78px + env(safe-area-inset-bottom));
+    max-width: none;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .verifiedPill {
+    display: none;
+  }
+
+  .ctaBtn {
+    font-size: 12.5px;
+    gap: 4px;
+  }
+}

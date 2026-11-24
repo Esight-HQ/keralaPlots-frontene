@@ -1,0 +1,394 @@
+.servicesSection {
+  width: 100%;
+  padding: 80px 0;
+  background: #f8fafc;
+}
+@media(max-width:768px){
+  .servicesSection{
+    padding: 60px 0px;
+  }
+}
+@media(max-width:480px){
+  .servicesSection{
+    padding: 40px 0px;
+  }
+}
+
+.container {
+  max-width: 1360px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(11, 19, 43, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(11, 19, 43, 0.08);
+}
+
+/* Card 1: EMI Calculator */
+.cardTitle {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #0b132b;
+  margin: 0 0 4px 0;
+}
+
+.cardSubtitle {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  color: #64748b;
+  margin: 0 0 24px 0;
+}
+
+.calcInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.inputLabel {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  flex: 0 0 120px;
+}
+
+.sliderTrack {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.rangeSlider {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #e2e8f0;
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+}
+
+.rangeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0b132b;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.inputBox {
+  flex: 0 0 110px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0b132b;
+  text-align: right;
+}
+
+.calcBottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.emiResultLabel {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  display: block;
+}
+
+.emiResultVal {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: #0b132b;
+}
+
+.emiResultSub {
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #0b132b;
+  color: #ffffff;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.actionBtn:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+}
+
+/* Card 2: What Our Customers Say */
+.centerCardHeader {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.quoteIcon {
+  margin-bottom: 8px;
+  color: #0b132b;
+}
+
+/* Horizontal Drag Slider Viewport */
+.testimonialViewport {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+
+.testimonialViewport:active,
+.grabbing {
+  cursor: grabbing !important;
+}
+
+.testimonialSliderTrack {
+  display: flex;
+  width: 100%;
+  will-change: transform;
+}
+
+.testimonialSlide {
+  flex: 0 0 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+  background: #f8fafc;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid #f1f5f9;
+}
+
+.testimonialText {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #334155;
+  margin: 0;
+  font-weight: 500;
+}
+
+.customerMeta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: auto;
+}
+
+.customerAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+}
+
+.customerDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.customerName {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0b132b;
+}
+
+.customerLocation {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.starsRow {
+  display: flex;
+  gap: 2px;
+}
+
+.dotsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.activeDot {
+  background: #0b132b;
+  width: 10px;
+  height: 10px;
+}
+
+/* Card 3: List Your Property With Us */
+.propertyImageWrapper {
+  width: 100%;
+  height: 180px;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.propertyImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .propertyImage {
+  transform: scale(1.04);
+}
+
+.fullWidthBtn {
+  width: 100%;
+}
+
+/* Responsive Rules */
+@media (max-width: 1024px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .cardsGrid > div:last-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  /* .servicesSection {
+    padding: 40px 0;
+  } */
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .cardsGrid > div:last-child {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .inputRow {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .inputLabel {
+    flex: 1;
+  }
+  .inputBox {
+    flex: 0 0 auto;
+  }
+  .sliderTrack {
+    flex: 0 0 100%;
+    order: 3;
+    margin-top: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+  .cardTitle {
+    font-size: 20px;
+  }
+  .cardSubtitle {
+    margin-bottom: 16px;
+  }
+  .calcBottomRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .actionBtn {
+    width: 100%;
+  }
+  .propertyImageWrapper {
+    height: 150px;
+    margin-bottom: 16px;
+  }
+  .testimonialSlide {
+    padding: 16px;
+    gap: 12px;
+  }
+}

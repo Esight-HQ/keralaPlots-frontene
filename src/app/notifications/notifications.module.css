@@ -1,0 +1,409 @@
+.pageWrapper {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding-top: 40px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.mainContent {
+  padding: 60px 0 80px 0;
+}
+
+.container {
+  max-width: 1000px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   NOTIFICATIONS CARD
+   ========================================================================== */
+.notificationsCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  padding: 30px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.cardTitle {
+  font-size: 24px;
+  font-weight: 500;
+  color: #001a72;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.markReadBtn {
+  background: none;
+  border: none;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #2563eb;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s;
+}
+
+.markReadBtn:hover:not(:disabled) {
+  color: #00114d;
+}
+
+.markReadBtn:disabled {
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   TABS BAR
+   ========================================================================== */
+.tabsContainer {
+  display: flex;
+  gap: 32px;
+  border-bottom: 1.5px solid #edf2f7;
+  margin-bottom: 8px;
+}
+
+.tabBtn {
+  background: none;
+  border: none;
+  padding: 12px 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1.5px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tabBtn:hover {
+  color: #001a72;
+}
+
+.tabBtnActive {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 50px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  transition: background 0.15s, color 0.15s;
+}
+
+.badgeUnread {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.badgeActive {
+  background: #2563eb !important;
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   NOTIFICATIONS LIST ROW
+   ========================================================================== */
+.notificationsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.notificationItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 16px;
+  border-bottom: 1.5px solid #edf2f7;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  border-radius: 12px;
+  margin: 4px 0;
+}
+
+.notificationItem:hover {
+  background-color: #f8fafc;
+}
+
+.leftCol {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  min-width: 0;
+}
+
+.iconContainer {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+/* Color codes matching mockup */
+.iconApproval {
+  background: #ecfdf5;
+  color: #10b981;
+}
+
+.iconWelcome {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.iconReview {
+  background: #faf5ff;
+  color: #a855f7;
+}
+
+.iconOffer {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.iconMatch {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.iconMessage {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+
+.iconGeneral {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.itemTitle {
+  font-size: 15.5px;
+  font-weight: 500;
+  color: #0b132b;
+  margin: 0;
+}
+
+.itemDesc {
+  font-size: 13.5px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.rightCol {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: 24px;
+  flex-shrink: 0;
+}
+
+.dateTime {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.unreadDot {
+  width: 9px;
+  height: 9px;
+  background-color: #2563eb;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.emptyState {
+  padding: 64px 20px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 15px;
+}
+
+/* ==========================================================================
+   CARD FOOTER LINK
+   ========================================================================== */
+.cardFooter {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.viewAllBtn {
+  background: none;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2563eb;
+  cursor: pointer;
+  padding: 8px 16px;
+  transition: color 0.15s, gap 0.15s;
+}
+
+.viewAllBtn:hover {
+  color: #00114d;
+  gap: 10px;
+}
+
+.viewAllBtn svg {
+  font-size: 18px;
+  transition: transform 0.15s;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN RULES
+   ========================================================================== */
+@media (max-width: 768px) {
+  .notificationsCard {
+    padding: 24px;
+  }
+  
+  .notificationItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 12px;
+  }
+  
+  .rightCol {
+    margin-left: 66px; /* indent to line up with text content */
+    width: calc(100% - 66px);
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .tabsContainer {
+    gap: 16px;
+  }
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.notificationItem:hover .deleteBtn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.deleteBtn:hover {
+  background-color: #fee2e2;
+  color: #ef4444;
+}
+
+/* ==========================================================================
+   EMPTY STATE (ELSE DESIGN)
+   ========================================================================== */
+.noResultsArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.noResultsArt {
+  width: 260px;
+  height: auto;
+  max-width: 90%;
+  margin-bottom: 24px;
+}
+
+.noResultsTitle {
+  font-size: 20px;
+  font-weight: 500;
+  color: #001a72;
+  margin: 0 0 10px 0;
+}
+
+.noResultsDesc {
+  font-size: 14px;
+  color: #64748b;
+  max-width: 440px;
+  line-height: 1.6;
+  margin: 0 0 28px 0;
+}
+
+.resetNotifBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #001a72;
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-size: 14.5px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 26, 114, 0.15);
+  transition: background 0.15s, transform 0.1s ease, box-shadow 0.15s;
+}
+
+.resetNotifBtn:hover {
+  background: #00114d;
+  box-shadow: 0 6px 20px rgba(0, 26, 114, 0.25);
+}
+
+.resetNotifBtn:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .deleteBtn {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+

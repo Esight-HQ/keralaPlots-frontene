@@ -1,0 +1,890 @@
+/* ==========================================================================
+   PROFILE / DASHBOARD
+   ========================================================================== */
+.page {
+  min-height: 100vh;
+  background: #f6f8fc;
+  padding-top: 74px;
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 264px minmax(0, 1fr);
+  align-items: start;
+  gap: 0;
+  padding-bottom: 110px;
+  padding-left: 10px;
+}
+
+/* ==========================================================================
+   MAIN
+   ========================================================================== */
+.main {
+  padding: 26px 30px 0px 30px;
+  min-width: 0;
+}
+
+.pageHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #12296b;
+  margin: 0;
+}
+
+.pageSub {
+  font-size: 14.5px;
+  color: #5b6b8c;
+  margin: 8px 0 0 0;
+}
+
+.headerArt {
+  width: 400px;
+  max-width: 40%;
+  height: auto;
+  flex-shrink: 0;
+  margin-top: -14px;
+}
+
+/* ==========================================================================
+   STAT CARDS
+   ========================================================================== */
+.statRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #e8edf6;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.statIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.blue { background: #eaf0fe; color: #2563eb; }
+.green { background: #e8f7ee; color: #16a34a; }
+.amber { background: #fdf3e3; color: #f59e0b; }
+.purple { background: #f3ecfd; color: #9333ea; }
+
+.statValue {
+  font-size: 30px;
+  font-weight: 600;
+  color: #12296b;
+  line-height: 1.1;
+}
+
+.statLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1e293b;
+  margin-top: 8px;
+}
+
+.statHint {
+  font-size: 12.5px;
+  color: #94a3b8;
+  margin-top: 5px;
+}
+
+/* ==========================================================================
+   PANELS
+   ========================================================================== */
+.panel {
+  background: #ffffff;
+  border: 1px solid #e8edf6;
+  border-radius: 16px;
+  padding: 22px;
+  margin-top: 20px;
+}
+
+.panelHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.panelTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #12296b;
+  margin: 0;
+}
+
+.infoDot {
+  display: inline-flex;
+  color: #94a3b8;
+  font-size: 17px;
+  cursor: help;
+}
+
+.panelSub {
+  font-size: 13.5px;
+  color: #7b8aa5;
+  margin: 6px 0 0 0;
+}
+
+.viewAll {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+.viewAll:hover {
+  text-decoration: underline;
+}
+
+.rangeWrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.rangeSelect {
+  appearance: none;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 10px 34px 10px 14px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1e293b;
+  cursor: pointer;
+  outline: none;
+}
+
+.rangeSelect:focus-visible {
+  border-color: #2563eb;
+}
+
+.rangeChevron {
+  position: absolute;
+  right: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  font-size: 17px;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   ACTIVITY — property picker + chart
+   ========================================================================== */
+.activityBody {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 22px;
+  margin-top: 20px;
+}
+
+.trackPanel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.trackSelectAll {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 10px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.trackSelectAllLabel {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.trackList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 340px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+}
+
+.trackItem {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 9px 10px;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.trackItem:hover {
+  background: #f8fafd;
+}
+
+.trackItemActive {
+  background: #eef4ff;
+  border-color: #cfe0fb;
+}
+
+.trackCheckInput {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.trackCheck {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border: 1.8px solid #cbd5e1;
+  border-radius: 5px;
+  background: #ffffff;
+  flex-shrink: 0;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.trackItemActive .trackCheck {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.trackItemActive .trackCheck::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.trackCheckInput:focus-visible + .trackCheck {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.trackSelectAll .trackCheckInput:checked + .trackCheck,
+.trackSelectAll .trackCheckInput:indeterminate + .trackCheck {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.trackSelectAll .trackCheckInput:checked + .trackCheck::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.trackSelectAll .trackCheckInput:indeterminate + .trackCheck::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 7px;
+  width: 10px;
+  height: 2px;
+  background: #ffffff;
+}
+
+.trackThumb {
+  width: 46px;
+  height: 38px;
+  border-radius: 7px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.trackName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.35;
+}
+
+/* ==========================================================================
+   CHART
+   ========================================================================== */
+.chartWrap {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 34px;
+  grid-template-rows: auto 210px auto;
+  min-width: 0;
+}
+
+.chartLegend {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  gap: 18px;
+  align-self: start;
+  padding-left: 4px;
+}
+
+.chartLegend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #475569;
+}
+
+.legendViews,
+.legendCalls {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.legendViews { background: #2563eb; }
+.legendCalls { background: #a855f7; }
+
+.chartAxisLeft,
+.chartAxisRight {
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: #94a3b8;
+  padding: 14px 0 26px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.chartAxisLeft {
+  grid-column: 1;
+  align-items: flex-end;
+  padding-right: 10px;
+}
+
+.chartAxisRight {
+  grid-column: 3;
+  align-items: flex-start;
+  padding-left: 10px;
+}
+
+.chartPlot {
+  grid-column: 2;
+  grid-row: 2;
+  position: relative;
+  min-width: 0;
+}
+
+.chartSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.chartGrid line {
+  stroke: #eef2f8;
+  stroke-width: 1;
+}
+
+.chartLineViews,
+.chartLineCalls {
+  fill: none;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.chartLineViews { stroke: #2563eb; }
+.chartLineCalls { stroke: #a855f7; }
+
+.chartCrosshair {
+  stroke: #8b5cf6;
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.chartDotViews,
+.chartDotCalls {
+  stroke: #ffffff;
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.chartDotViews { fill: #2563eb; }
+.chartDotCalls { fill: #a855f7; }
+
+.chartHitArea {
+  position: absolute;
+  inset: 14px 0 26px 0;
+  cursor: crosshair;
+}
+
+.chartTooltip {
+  position: absolute;
+  top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 148px;
+  background: #ffffff;
+  border: 1px solid #e8edf6;
+  border-radius: 10px;
+  padding: 11px 13px;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.14);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.tooltipDate {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.tooltipRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: #64748b;
+}
+
+.tooltipRow strong {
+  margin-left: auto;
+  color: #0f172a;
+  font-variant-numeric: tabular-nums;
+}
+
+.chartAxisX {
+  grid-column: 2;
+  grid-row: 3;
+  position: relative;
+  height: 22px;
+}
+
+.chartAxisX span {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 11.5px;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.axisLabelActive {
+  color: #2563eb !important;
+  font-weight: 700;
+}
+
+.chartEmpty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  font-size: 13.5px;
+  color: #94a3b8;
+}
+
+/* ==========================================================================
+   RECENTLY VIEWED CAROUSEL
+   ========================================================================== */
+.carouselWrap {
+  position: relative;
+  margin-top: 18px;
+}
+
+.carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 280px;
+  gap: 18px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.propCard {
+  position: relative;
+  width: 280px;
+  scroll-snap-align: start;
+  border: 1px solid #e8edf6;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.propCardLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.propCardLink:hover .propTitle {
+  color: #1d4ed8;
+}
+
+.propMedia {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+/* Out of flow so a portrait photo cannot stretch the box. */
+.propMedia img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.propCardLink:hover img {
+  transform: scale(1.04);
+}
+
+.propBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #ffffff;
+  color: #12296b;
+  font-size: 11.5px;
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 5px 10px;
+}
+
+.propHeart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: #12296b;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.16);
+  transition: transform 0.18s ease;
+}
+
+.propHeart:hover {
+  transform: scale(1.08);
+}
+
+.propHeart:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.heartOn {
+  color: #ef4444;
+}
+
+.propBody {
+  padding: 14px 16px 16px 16px;
+}
+
+.propTitle {
+  font-size: 15px;
+  font-weight: 500;
+  color: #12296b;
+  margin: 0;
+  text-overflow: ellipsis;
+  --line-clamp: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: var(--line-clamp);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+}
+
+.propLocation {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 12.5px;
+  color: #64748b;
+  margin: 8px 0 0 0;
+}
+
+.propLocation svg {
+  color: #2563eb;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.propFoot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.propPrice {
+  font-size: 17px;
+  font-weight: 600;
+  color: #1d4ed8;
+}
+
+.propSpec {
+  font-size: 12.5px;
+  color: #475569;
+  white-space: nowrap;
+}
+
+.carouselBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border: 1px solid #e8edf6;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #12296b;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
+  z-index: 2;
+  transition: background 0.18s ease;
+}
+
+.carouselBtn:hover {
+  background: #f1f5fc;
+}
+
+.carouselBtn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.carouselPrev { left: -14px; }
+.carouselNext { right: -14px; }
+
+/* ==========================================================================
+   PLACEHOLDER SECTIONS
+   ========================================================================== */
+.placeholder {
+  background: #ffffff;
+  border: 1px solid #e8edf6;
+  border-radius: 16px;
+  padding: 46px 28px;
+  text-align: center;
+}
+
+.placeholderNote {
+  font-size: 13.5px;
+  color: #94a3b8;
+  margin: 20px 0 0 0;
+}
+
+.placeholderBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 50px;
+  background: #12296b;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.placeholderBtn:hover {
+  background: #0d1f52;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .statRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .activityBody {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .trackList {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .trackItem {
+    flex: 1 1 200px;
+  }
+}
+
+@media (max-width: 900px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+    padding-left: 0;
+  }
+
+  .main {
+    padding: 22px 18px 0px 18px;
+  }
+
+  .headerArt {
+    display: none;
+  }
+
+  .pageTitle {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carouselBtn {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-top: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .statRow {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .statCard {
+    padding: 14px;
+  }
+  .statValue {
+    font-size: 24px;
+  }
+  .statLabel {
+    font-size: 12.5px;
+    margin-top: 6px;
+  }
+  .statHint {
+    font-size: 11px;
+  }
+  .panelHead {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .trackList {
+    max-height: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chartWrap {
+    grid-template-columns: 36px minmax(0, 1fr) 24px;
+  }
+  .chartAxisLeft {
+    padding-right: 4px;
+  }
+  .chartAxisRight {
+    padding-left: 4px;
+  }
+  .chartAxisLeft,
+  .chartAxisRight,
+  .chartAxisX span {
+    font-size: 10px;
+  }
+  .trackItem {
+    padding: 6px 8px;
+  }
+  .trackName {
+    font-size: 12px;
+  }
+}
+
+.dashboardEmpty {
+  margin-top: 20px;
+}
+
+/* Favorites stat card links to the Saved page */
+.statCardLink {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.statCardLink:hover {
+  border-color: #c7d6f5;
+  box-shadow: 0 8px 22px rgba(21, 84, 209, 0.08);
+  transform: translateY(-2px);
+}
+
+.statCardLink:focus-visible {
+  outline: 2px solid #1554d1;
+  outline-offset: 2px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: spin 0.8s linear infinite;
+}

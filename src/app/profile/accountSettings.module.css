@@ -1,0 +1,612 @@
+/* ==========================================================================
+   ACCOUNT SETTINGS — the profile page's preferences panel
+   ========================================================================== */
+.page,
+.overlay,
+.toast {
+  --asNavy: #12296b;
+  --asInk: #0f2b52;
+  --asBlue: #2563eb;
+  --asBody: #475569;
+  --asMuted: #64748b;
+  --asFaint: #94a3b8;
+  --asBorder: #e8ecf3;
+}
+
+.page {
+  container-type: inline-size;
+  container-name: settings;
+}
+
+.head {
+  margin-bottom: 4px;
+}
+
+.pageTitle {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--asNavy);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.pageSub {
+  margin: 8px 0 0 0;
+  font-size: 14.5px;
+  color: #5b6b8c;
+}
+
+/* ==========================================================================
+   DEACTIVATED BANNER
+   ========================================================================== */
+.notice {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fffaf0;
+  border: 1px solid #f6d9a6;
+  border-radius: 14px;
+  padding: 16px 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #7a5312;
+}
+
+.notice strong {
+  font-weight: 700;
+}
+
+.noticeIcon {
+  font-size: 22px;
+  color: #d97706;
+  flex: 0 0 auto;
+}
+
+.noticeBtn {
+  margin-left: auto;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e0b874;
+  border-radius: 9px;
+  background: #ffffff;
+  padding: 9px 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #7a5312;
+  cursor: pointer;
+}
+
+.noticeBtn:hover {
+  background: #fdf3e2;
+}
+
+/* ==========================================================================
+   CARDS
+   ========================================================================== */
+.card {
+  margin-top: 20px;
+  background: #ffffff;
+  border: 1px solid var(--asBorder);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.cardHead {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.cardIcon {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #eef3fd;
+  color: var(--asBlue);
+  font-size: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardTitle {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--asNavy);
+  margin: 0;
+}
+
+.cardDesc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--asMuted);
+  margin: 6px 0 0 0;
+}
+
+/* ==========================================================================
+   FORM FIELDS
+   ========================================================================== */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.field {
+  display: block;
+  min-width: 0;
+}
+
+.label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--asNavy);
+  margin-bottom: 8px;
+}
+
+.inputWrap {
+  position: relative;
+  display: block;
+}
+
+.input,
+.select {
+  width: 100%;
+  border: 1px solid #dbe3ef;
+  border-radius: 9px;
+  background: #ffffff;
+  padding: 13px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--asNavy);
+  outline: none;
+  transition: border-color 0.18s ease;
+}
+
+.input {
+  padding-right: 44px;
+}
+
+.input:focus,
+.select:focus {
+  border-color: var(--asBlue);
+}
+
+.inputInvalid {
+  border-color: #ef4444;
+  background: #fffbfb;
+}
+
+/* Eye toggle inside the password inputs. */
+.reveal {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--asFaint);
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.reveal:hover {
+  background: #f1f5f9;
+  color: var(--asBody);
+}
+
+/* ==========================================================================
+   PASSWORD STRENGTH
+   ========================================================================== */
+.strength {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.strengthBar {
+  display: flex;
+  gap: 5px;
+  flex: 0 0 auto;
+}
+
+.strengthStep {
+  width: 40px;
+  height: 6px;
+  border-radius: 999px;
+  background: #e6ebf3;
+  transition: background 0.18s ease;
+}
+
+.strength1 { background: #ef4444; }
+.strength2 { background: #f59e0b; }
+.strength3 { background: #3b82f6; }
+.strength4 { background: #16a34a; }
+
+.strengthLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--asBody);
+}
+
+.strengthMissing {
+  font-size: 12.5px;
+  color: var(--asMuted);
+}
+
+/* ==========================================================================
+   FORM FEEDBACK
+   ========================================================================== */
+.formError,
+.formOk {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  margin: 0;
+}
+
+.formError {
+  color: #dc2626;
+}
+
+.formOk {
+  color: #16a34a;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.primaryBtn {
+  border: none;
+  border-radius: 10px;
+  background: var(--asBlue);
+  color: #ffffff;
+  padding: 13px 26px;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.16s ease;
+}
+
+.primaryBtn:hover {
+  background: #1d4ed8;
+}
+
+.ghostBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #d5dded;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--asNavy);
+  cursor: pointer;
+  transition: border-color 0.16s ease, background 0.16s ease;
+}
+
+.ghostBtn:hover {
+  border-color: var(--asNavy);
+  background: #f7f9fc;
+}
+
+/* ==========================================================================
+   SWITCHES
+   ========================================================================== */
+.switchList {
+  display: flex;
+  flex-direction: column;
+}
+
+.switchRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 0;
+  border-top: 1px solid #f1f4fa;
+  cursor: pointer;
+}
+
+.switchRow:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.switchText {
+  flex: 1;
+  min-width: 0;
+}
+
+.switchLabel {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--asNavy);
+}
+
+.switchHint {
+  display: block;
+  margin-top: 3px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--asMuted);
+}
+
+/* The real checkbox stays in the layout for keyboard and screen readers; the
+   track and thumb beside it are what actually get painted. */
+.switchInput {
+  position: absolute;
+  opacity: 0;
+  width: 46px;
+  height: 26px;
+  right: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.switchTrack {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 26px;
+  border-radius: 999px;
+  background: #cbd5e1;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  transition: background 0.18s ease;
+}
+
+.switchThumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(15, 43, 82, 0.28);
+  transition: transform 0.18s ease;
+}
+
+.switchInput:checked ~ .switchTrack {
+  background: var(--asBlue);
+}
+
+.switchInput:checked ~ .switchTrack .switchThumb {
+  transform: translateX(20px);
+}
+
+.switchInput:focus-visible ~ .switchTrack {
+  outline: 2px solid var(--asBlue);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   DANGER ZONE
+   ========================================================================== */
+.dangerCard {
+  border-color: #f6d3d3;
+}
+
+.dangerIcon {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.dangerRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 0;
+  border-top: 1px solid #f1f4fa;
+  flex-wrap: wrap;
+}
+
+.dangerRow:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.dangerBtn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  border-radius: 10px;
+  background: #ef2b2b;
+  color: #ffffff;
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.16s ease;
+}
+
+.dangerBtn:hover {
+  background: #d21f1f;
+}
+
+/* ==========================================================================
+   CONFIRMATION DIALOG
+   ========================================================================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(9, 20, 40, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.dialog {
+  width: 470px;
+  max-width: 100%;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 34px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(9, 20, 40, 0.3);
+}
+
+.dialogIcon {
+  width: 66px;
+  height: 66px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: #eef3fd;
+  color: var(--asBlue);
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialogIconDanger {
+  background: #fde0e0;
+  color: #ef2b2b;
+}
+
+.dialogTitle {
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--asInk);
+  margin: 0;
+}
+
+.dialogDesc {
+  margin: 10px 0 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--asMuted);
+}
+
+.dialogActions {
+  margin-top: 26px;
+  display: flex;
+  gap: 12px;
+}
+
+.dialogActions > * {
+  flex: 1;
+}
+
+.dialogCancel {
+  border: 1px solid #c9d4e6;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 13px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--asInk);
+  cursor: pointer;
+}
+
+.dialogCancel:hover {
+  background: #f7f9fc;
+}
+
+.dialogDanger {
+  border: none;
+  border-radius: 10px;
+  background: #ef2b2b;
+  color: #ffffff;
+  padding: 13px 0;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dialogDanger:hover {
+  background: #d21f1f;
+}
+
+/* ==========================================================================
+   TOAST
+   ========================================================================== */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 120px;
+  transform: translateX(-50%);
+  z-index: 210;
+  background: #12203c;
+  color: #ffffff;
+  font-size: 14.5px;
+  font-weight: 500;
+  padding: 13px 24px;
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(9, 20, 40, 0.28);
+}
+
+/* ==========================================================================
+   RESPONSIVE — measured against the panel, not the window
+   ========================================================================== */
+@container settings (max-width: 720px) {
+  .card {
+    padding: 20px 18px;
+  }
+
+  .grid2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pageTitle {
+    font-size: 25px;
+  }
+
+  .notice {
+    flex-wrap: wrap;
+  }
+
+  .noticeBtn {
+    margin-left: 0;
+  }
+
+  .formActions .primaryBtn {
+    width: 100%;
+  }
+
+  .dangerRow .ghostBtn,
+  .dangerRow .dangerBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@container settings (max-width: 480px) {
+  .strengthStep {
+    width: 100%;
+  }
+
+  .strengthBar {
+    flex: 1 1 100%;
+  }
+}

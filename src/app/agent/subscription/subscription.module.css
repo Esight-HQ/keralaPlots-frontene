@@ -1,0 +1,579 @@
+.pageContainer {
+    min-height: 100vh;
+    background-color: #f8fafc;
+    padding-bottom: 60px;
+}
+
+.heroSection {
+    background: linear-gradient(135deg, #0b132b 0%, #1c2541 100%);
+    color: #ffffff;
+    padding: 60px 24px 70px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.heroBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #34d399;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.heroTitle {
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.5px;
+}
+
+.heroDesc {
+    font-size: 16px;
+    color: #cbd5e1;
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.mainContent {
+    max-width: 1200px;
+    margin: -35px auto 0 auto;
+    padding: 0 20px;
+}
+
+/* Current Subscription Card */
+.activePlanCard {
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1.5px solid #10b981;
+    box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.12), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 32px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.activePlanHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.activePlanTitleWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.activePlanBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    width: fit-content;
+}
+
+.activePlanTitle {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+}
+
+.activePlanDateMeta {
+    font-size: 13.5px;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.activePlanInvoiceBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    color: #065f46;
+    border: 1.5px solid #10b981;
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.activePlanInvoiceBtn:hover {
+    background: #ecfdf5;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.historyInvoiceBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f8fafc;
+    color: #0f172a;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.historyInvoiceBtn:hover {
+    background: #10b981;
+    color: #ffffff;
+    border-color: #10b981;
+}
+
+.activePlanActions {
+    display: flex;
+    gap: 10px;
+}
+
+.quotaGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.quotaCard {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.quotaCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.quotaCardTitle {
+    font-size: 14px;
+    font-weight: 700;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quotaRemainingBadge {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 8px;
+}
+
+.progressBarTrack {
+    background: #e2e8f0;
+    height: 10px;
+    border-radius: 9999px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progressBarFill {
+    background: #10b981;
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.4s ease;
+}
+
+.quotaNumbers {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 600;
+}
+
+/* Warnings */
+.warningBanner {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    color: #92400e;
+    padding: 14px 18px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.dangerBanner {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+    padding: 14px 18px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Plans Section */
+.sectionHeader {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 26px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.sectionTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0 0 8px 0;
+}
+
+.sectionSubtitle {
+    font-size: 15px;
+    color: #64748b;
+    margin: 0;
+}
+
+.plansGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+}
+
+.planCard {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.25s ease;
+}
+
+.planCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.1);
+    border-color: #cbd5e1;
+}
+
+.planCardFeatured {
+    border-color: #10b981;
+    box-shadow: 0 16px 36px -8px rgba(16, 185, 129, 0.2);
+}
+
+.featuredRibbon {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: #10b981;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.planCardTitle {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 6px 0;
+}
+
+.planPriceWrap {
+    margin: 16px 0 20px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.planPrice {
+    font-size: 34px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.planDuration {
+    font-size: 13px;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.planFeatureList {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.planFeatureItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    color: #334155;
+}
+
+.featureCheckIcon {
+    color: #10b981;
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.subscribeBtn {
+    background: #0b132b;
+    color: #ffffff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.subscribeBtn:hover:not(:disabled) {
+    background: #1c2541;
+}
+
+.subscribeBtnFeatured {
+    background: #10b981;
+}
+
+.subscribeBtnFeatured:hover:not(:disabled) {
+    background: #059669;
+}
+
+.subscribeBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* History Section */
+.historyCard {
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    padding: 28px;
+    box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+}
+
+.historyTitle {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 20px 0;
+}
+
+.tableWrap {
+    overflow-x: auto;
+}
+
+.historyTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    text-align: left;
+}
+
+.historyTable th {
+    background: #f8fafc;
+    color: #64748b;
+    font-weight: 700;
+    padding: 12px 16px;
+    border-bottom: 1.5px solid #e2e8f0;
+}
+
+.historyTable td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #1e293b;
+}
+
+.statusPill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.statusActive {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.statusExpired {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+/* Top-up Booster Styles */
+.planCardTopup {
+    border-color: #8b5cf6;
+    box-shadow: 0 16px 36px -8px rgba(139, 92, 246, 0.2);
+}
+
+.planCardTopup:hover {
+    border-color: #7c3aed;
+    box-shadow: 0 20px 40px -8px rgba(124, 58, 237, 0.25);
+}
+
+.topupRibbon {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: #7c3aed;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.topupBtn {
+    background: #7c3aed;
+    color: #ffffff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.topupBtn:hover:not(:disabled) {
+    background: #6d28d9;
+}
+
+.topupBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.topupSectionCard {
+    background: #ffffff;
+    border: 1.5px solid #c4b5fd;
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 40px;
+    box-shadow: 0 16px 36px -8px rgba(139, 92, 246, 0.12);
+}
+
+.purchasedTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #dcfce7;
+    color: #15803d;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    border: 1px solid #86efac;
+}
+
+.typeBadgeTopup {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #f5f3ff;
+    color: #7c3aed;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #ddd6fe;
+    white-space: nowrap;
+}
+
+.typeBadgeSub {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #bfdbfe;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .heroTitle {
+        font-size: 28px;
+    }
+    .activePlanCard {
+        padding: 20px;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    animation: spin 0.8s linear infinite;
+}

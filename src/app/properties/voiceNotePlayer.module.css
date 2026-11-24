@@ -1,0 +1,379 @@
+/* ==========================================================================
+   WhatsApp-style voice note player
+   ========================================================================== */
+.player {
+  --vp-bar: #c4c7c9;          /* unplayed bars */
+  --vp-bar-played:var(--secondaryColor);   /* played bars */
+  --vp-dot: var(--secondaryColor);          /* playhead */
+  --vp-text: #667781;
+  --vp-icon: #111b21;
+
+  position: relative;
+  width: 100%;
+  padding: 10px 14px 8px 10px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  font-family: inherit;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mainRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ---------- Play / pause (bare icon, like WhatsApp) ---------- */
+.playBtn {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--vp-icon);
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.playBtn:hover:not(:disabled) {
+  background: #f0f2f5;
+}
+
+.playBtn:active:not(:disabled) {
+  transform: scale(0.9);
+}
+
+.playBtn:focus-visible {
+  outline: 2px solid var(--vp-dot);
+  outline-offset: 1px;
+}
+
+.playBtn:disabled {
+  color: #c4c7c9;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2.5px solid #d1d7db;
+  border-top-color: var(--vp-dot);
+  animation: vpSpin 0.8s linear infinite;
+}
+
+/* ---------- Waveform track ---------- */
+.track {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.wave {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.bar {
+  width: 3px;
+  min-height: 3px;
+  border-radius: 999px;
+  background: var(--vp-bar);
+  transition: background-color 0.12s linear;
+}
+
+.barPlayed {
+  background: var(--vp-bar-played);
+}
+
+.thumb {
+  position: absolute;
+  top: 50%;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--vp-dot);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+  transition: transform 0.12s ease;
+}
+
+.track:active .thumb,
+.track:has(.seek:focus-visible) .thumb {
+  transform: translate(-50%, -50%) scale(1.25);
+}
+
+.track:has(.seek:focus-visible) .thumb {
+  box-shadow: 0 0 0 4px rgba(83, 189, 235, 0.3);
+}
+
+/* Fully transparent native range on top for seeking */
+.seek {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.seek:disabled {
+  cursor: default;
+}
+
+/* ---------- Right column: chevron + speed pill ---------- */
+.sideCol {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  margin-left: 4px;
+}
+
+.menuWrap {
+  position: relative;
+}
+
+.chevronBtn {
+  width: 28px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  color: #8696a0;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.chevronBtn:hover,
+.chevronBtn[aria-expanded="true"] {
+  color: #54656f;
+  background: #f0f2f5;
+}
+
+.chevronBtn:focus-visible {
+  outline: 2px solid var(--vp-dot);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 30;
+  min-width: 150px;
+  padding: 6px 0;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(11, 20, 26, 0.26), 0 6px 18px rgba(11, 20, 26, 0.16);
+  animation: vpMenuIn 0.14s ease-out;
+  transform-origin: top right;
+}
+
+.menuItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border: none;
+  background: none;
+  color: #3b4a54;
+  font-family: inherit;
+  font-size: 14px;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.menuItem svg {
+  font-size: 17px;
+  color: #54656f;
+}
+
+.menuItem:hover,
+.menuItem:focus-visible {
+  background: #f5f6f6;
+  outline: none;
+}
+
+.speedBtn {
+  min-width: 52px;
+  height: 26px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 999px;
+  background: #8696a0;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.speedBtn:hover:not(:disabled) {
+  background: #667781;
+}
+
+.speedBtn:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.speedBtn:focus-visible {
+  outline: 2px solid var(--vp-dot);
+  outline-offset: 2px;
+}
+
+.speedBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---------- Bottom meta row ---------- */
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  /* aligned under the waveform: play button width + gap; right side clears the pill */
+  padding: 2px 76px 0 50px;
+  font-size: 12px;
+  color: var(--vp-text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+}
+
+.time {
+  min-width: 32px;
+}
+
+.metaRight {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mutedIcon {
+  font-size: 13px;
+  color: #ea0038;
+  flex-shrink: 0;
+}
+
+/* ---------- Error ---------- */
+.errorRow {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+
+.errorText {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 13px;
+  color: #ea0038;
+}
+
+.retryBtn {
+  background: #f0f2f5;
+  border: 1px solid #d1d7db;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #3b4a54;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease;
+}
+
+.retryBtn:hover,
+.retryBtn:active {
+  background: #e2e8f0;
+}
+
+/* ---------- Animations ---------- */
+@keyframes vpSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes vpMenuIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner,
+  .menu {
+    animation: none;
+  }
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 480px) {
+  .player {
+    padding: 8px 10px 6px 6px;
+  }
+
+  .mainRow {
+    gap: 6px;
+  }
+
+  .bar {
+    width: 2px;
+  }
+
+  .speedBtn {
+    min-width: 44px;
+    height: 24px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+
+  .metaRow {
+    padding: 2px 58px 0 46px;
+    font-size: 11.5px;
+  }
+}

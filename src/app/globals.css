@@ -1,0 +1,181 @@
+
+
+/* Google Fonts are loaded without blocking rendering by componants/fonts/DeferredFonts.jsx */
+
+:root {
+  --primaryColor: #6d53fd;
+  --secondaryColor: #ff4701;
+  --font-banner-fallback: 'Playfair Display', Georgia, serif;
+}
+
+html,
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.048);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(117, 117, 117);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primaryColor);
+}
+
+.container {
+  width: 1440px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1800px) {
+  .container {
+    width: calc(100% - 100px);
+  }
+}
+
+@media (max-width: 1060px) {
+  .container {
+    width: calc(100% - 80px);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: calc(100% - 30px);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: calc(100% - 30px);
+  }
+}
+
+a,
+article,
+button,
+div,
+span,
+i,
+b,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+input,
+ul,
+li,
+select,
+label,
+textarea {
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+}
+
+.font-caveat-script {
+  font-family: 'Caveat', cursive, -apple-system, sans-serif !important;
+}
+
+.font-banner-fallback {
+  font-family: var(--font-banner-fallback);
+}
+
+/* Stop double-tap / pinch zoom on touch devices (PreventZoom.jsx covers the rest). */
+html,
+body {
+  touch-action: pan-x pan-y;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* iOS Safari zooms into any focused field whose text is under 16px.
+   Keep every form control at 16px on phones/tablets so focus never zooms. */
+@media (hover: none) and (pointer: coarse) {
+  input,
+  select,
+  textarea,
+  [contenteditable="true"] {
+    font-size: 16px !important;
+  }
+}
+
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::-webkit-datetime-edit-year-field:not([aria-valuenow]),
+::-webkit-datetime-edit-month-field:not([aria-valuenow]),
+::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
+  color: transparent;
+}
+
+/* The Cast button is hidden with the standard `disableRemotePlayback` attribute on each <video>
+   (the old ::-internal-media-controls-overlay-cast-button selector is deprecated). */
+
+textarea {
+  resize: none;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+::-moz-selection {
+  color: white;
+  background: #1d1d1d;
+}
+
+::selection {
+  color: white;
+  background: #1d1d1d;
+}
+
+p {
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Hide Chatpier widget on messages page */
+body.kp-hide-chatpier .bb-wrap,
+body.kp-hide-chatpier .bb-bubble,
+body.kp-hide-chatpier .bb-frame {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
