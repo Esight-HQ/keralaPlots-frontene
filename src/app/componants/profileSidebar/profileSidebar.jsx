@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSyncExternalStore } from "react";
 import { getEnquiries, getServerEnquiries, subscribeEnquiries } from "../../lib/builderEnquiries";
 import styles from "./profileSidebar.module.css";
 import { RiExternalLinkLine } from "react-icons/ri";
 import { useAuth } from "../../context/AuthContext";
 import { PROFILE_NAV_ITEMS, buildProfileNav, isNavItemActive } from "../../lib/profileNav";
-import { useBuilderStatus } from "../../lib/builderStatus";
+import { useProfileRole } from "../../lib/profileRole";
 
 const USER_PLACEHOLDER = "/user-placeholder.jpg";
 const OLD_STOCK_AVATAR = "images.unsplash.com/photo-1573496359142-b8d87734a5a2";
@@ -27,6 +27,7 @@ export { PROFILE_NAV_ITEMS };
 
 export default function ProfileSidebar({ user: initialUser, items = PROFILE_NAV_ITEMS, onLogout }) {
     const pathname = usePathname();
+    const router = useRouter();
     const { user: authUser, completion } = useAuth();
     const enquiries = useSyncExternalStore(subscribeEnquiries, getEnquiries, getServerEnquiries);
     const unreadEnquiries = enquiries.filter((e) => !e.read).length;
@@ -39,22 +40,38 @@ export default function ProfileSidebar({ user: initialUser, items = PROFILE_NAV_
     };
 
     const displayName = activeUser.name || activeUser.personal_details?.fullname || activeUser.username || "User";
-    const rawRole = String(activeUser.role || activeUser.role_val || "User").toLowerCase();
-    const displayRole = rawRole === "agent" ? "Agent" : "User";
     const displayEmail = activeUser.email || activeUser.personal_details?.email || (activeUser.phone ? `+91 ${activeUser.phone}` : "");
     const displayAvatar = realAvatar(activeUser.avatar || activeUser.personal_details?.Image);
 
     const completionPercent = completion?.percentage ?? 75;
     const isLogo = !displayAvatar || displayAvatar === USER_PLACEHOLDER || String(displayAvatar).includes("user-placeholder");
 
-    const builder = useBuilderStatus(activeUser);
+    const {
+        activeRole,
+        setActiveRole,
+        hasDualRoles,
+        hasAgent,
+        hasBuilder,
+        builder,
+        displayRoleLabel,
+    } = useProfileRole(activeUser, pathname || "");
+
+    const handleRoleChange = (e) => {
+        const nextRole = e.target.value;
+        setActiveRole(nextRole);
+        if (nextRole === "agent" && pathname?.startsWith("/profile/enquiries")) {
+            router.push("/profile");
+        }
+    };
+
     const navSections = buildProfileNav({
         items,
         showSubscription:
-            displayRole === "Agent" ||
-            builder.isApproved ||
+            hasAgent ||
+            hasBuilder ||
             Boolean(pathname?.startsWith("/agent/subscription")),
         builder,
+        activeRole,
     });
 
     return (
@@ -78,10 +95,22 @@ export default function ProfileSidebar({ user: initialUser, items = PROFILE_NAV_
                 )}
                 <div className={styles.identityText}>
                     <h2 className={styles.userName}>{displayName}</h2>
-                    <p className={styles.userRole}>
-                        <span className={styles.roleDot} aria-hidden="true" />
-                        {displayRole}
-                    </p>
+                    {hasDualRoles ? (
+                        <select
+                            className={styles.roleSelect}
+                            value={activeRole}
+                            onChange={handleRoleChange}
+                            aria-label="Switch active role"
+                        >
+                            <option value="agent">Agent</option>
+                            <option value="builder">Builder</option>
+                        </select>
+                    ) : (
+                        <p className={styles.userRole}>
+                            <span className={styles.roleDot} aria-hidden="true" />
+                            {displayRoleLabel}
+                        </p>
+                    )}
                     {displayEmail && <p className={styles.userEmail}>{displayEmail}</p>}
                 </div>
             </div>

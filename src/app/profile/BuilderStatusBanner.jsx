@@ -76,6 +76,7 @@ export default function BuilderStatusBanner() {
 
     const status = decided ? builder.status : banner.status || "pending";
     const isSuccess = status === "success" || status === "completed" || status === "approved";
+    if (isSuccess) return null;
     const isFailed = status === "failed" || status === "rejected";
     const isPending = !isSuccess && !isFailed;
 

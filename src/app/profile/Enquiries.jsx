@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "./enquiries.module.css";
 import EmptyState from "./EmptyState";
 import { useAuth } from "../context/AuthContext";
-import { useBuilderStatus } from "../lib/builderStatus";
+import { useProfileRole } from "../lib/profileRole";
 import {
     ENQUIRY_STATUSES,
     getEnquiries,
@@ -279,8 +280,17 @@ function EnquiryDrawer({ enquiry, onClose }) {
 /* ───────────── Page ───────────── */
 export default function Enquiries() {
     const { user } = useAuth();
-    const builder = useBuilderStatus(user);
+    const router = useRouter();
+    const { builder, hasDualRoles, activeRole } = useProfileRole(user, "/profile/enquiries");
+
+    useEffect(() => {
+        if (hasDualRoles && activeRole === "agent") {
+            router.replace("/profile");
+        }
+    }, [hasDualRoles, activeRole, router]);
+
     if (!builder.isApproved) return <BuilderOnlyNotice status={builder.status} />;
+    if (hasDualRoles && activeRole === "agent") return null;
     return <EnquiriesList />;
 }
 
@@ -296,7 +306,7 @@ function BuilderOnlyNotice({ status }) {
             : status === "rejected"
                 ? {
                     title: "Builder Verification Needed",
-                    lines: ["Your builder registration was not approved.", "Update your details and resubmit to unlock the Builder Portal and Enquiries."],
+                    lines: ["Your builder registration was not approved.", "Update your details and resubmit to unlock Your website and Enquiries."],
                     cta: { href: "/register-builder?recheck=true", label: "Recheck Registration" },
                 }
                 : {
@@ -414,7 +424,7 @@ function EnquiriesList() {
                         "their details will show up here.",
                     ]}
                 >
-                    <Link href="/builder-portal" className={styles.primaryBtn}>Open Builder Portal</Link>
+                    <Link href="/builder-portal" className={styles.primaryBtn}>Your website</Link>
                 </EmptyState>
             ) : (
                 <>
@@ -455,6 +465,19 @@ function EnquiriesList() {
                                 </button>
                             )}
                         </label>
+                        <select
+                            className={styles.select}
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
+                            aria-label="Filter by status"
+                        >
+                            <option value="all">All Status ({counts.all || 0})</option>
+                            {ENQUIRY_STATUSES.map((s) => (
+                                <option key={s.id} value={s.id}>
+                                    {s.label} ({counts[s.id] || 0})
+                                </option>
+                            ))}
+                        </select>
                         {builders.length > 1 && (
                             <select className={styles.select} value={builder} onChange={(e) => setBuilder(e.target.value)} aria-label="Filter by builder page">
                                 <option value="all">All builder pages</option>

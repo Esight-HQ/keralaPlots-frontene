@@ -310,9 +310,10 @@ function transformTopupPlans(rawPlans, category) {
 function isRedundantQuotaFeature(featureText) {
     return (
         /^everything in\s+/i.test(featureText) ||
-        /^(?:\d+|unlimited)\s+(?:active\s+)?(?:property listing|project|listing credit)/i.test(featureText) ||
-        /^(?:up to\s+\d+|\d+|unlimited)\s+floor plan/i.test(featureText) ||
-        /^(?:\d+|unlimited)\s+video reel/i.test(featureText)
+        /^(?:publish|showcase|add|up\s+to|\+?\d+|unlimited)\b.*\b(?:active\s+)?(?:builder\s+)?projects?\b/i.test(featureText) ||
+        /^(?:add|up\s+to|\+?\d+|unlimited)\b.*\b(?:floor\s+plans?|unit\s+configurations?)\b/i.test(featureText) ||
+        /^(?:post|add|publish|up\s+to|\+?\d+|unlimited)\b.*\b(?:verified\s+)?(?:property\s+listings?|listing\s+credits?)\b/i.test(featureText) ||
+        /^(?:feature|add|post|publish|up\s+to|\+?\d+|unlimited)\b.*\b(?:(?:property\s+)?video\s+reels?|reel\s+spotlights?)\b/i.test(featureText)
     );
 }
 

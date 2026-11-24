@@ -72,7 +72,7 @@ export default function AgentStatusBanner() {
     }, [isAuthenticated, authLoading]);
 
     const copy = STATUS_COPY[status];
-    if (!copy || status === "none" || !has_applied || dismissedFor === status) return null;
+    if (!copy || status === "none" || status === "approved" || !has_applied || dismissedFor === status) return null;
 
     return (
         <div className={`${styles.banner} ${copy.tone}`} role="status">

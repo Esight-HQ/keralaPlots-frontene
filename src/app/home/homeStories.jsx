@@ -8,9 +8,93 @@ import reelsApi from "../lib/reelsApi";
 
 function getStreamPoster(src) {
     if (!src) return null;
+    const subMatch = src.match(/https?:\/\/([a-zA-Z0-9.-]*cloudflarestream\.com)\/([a-zA-Z0-9]+)/);
+    if (subMatch) {
+        return `https://${subMatch[1]}/${subMatch[2]}/thumbnails/thumbnail.jpg?time=1s&height=900`;
+    }
     const match = src.match(/(?:videodelivery\.net|cloudflarestream\.com)\/([a-zA-Z0-9]+)/);
     if (!match) return null;
-    return `https://customer-hrtlsfl7dijstj5i.cloudflarestream.com/${match[1]}/thumbnails/thumbnail.jpg?time=1s&height=1200`;
+    return `https://customer-hrtlsfl7dijstj5i.cloudflarestream.com/${match[1]}/thumbnails/thumbnail.jpg?time=1s&height=900`;
+}
+
+function isDirectVideoFile(url) {
+    if (!url) return false;
+    return /\.(mp4|webm|mov|m4v)(?:[?#]|$)/i.test(String(url));
+}
+
+function StoryCard({ story, onOpen }) {
+    const id = story.id || story.reel_id;
+    const name = story.creator?.name || story.name || "KeralaPlots User";
+    const location = story.location || "Kerala";
+    const avatar = story.creator?.avatar || story.avatar || "/logo_placeholder.png";
+    const streamPoster = getStreamPoster(story.video_url);
+    const candidates = [story.thumbnail_url, streamPoster].filter(Boolean);
+    const [imgIndex, setImgIndex] = useState(0);
+    const activePoster = candidates[imgIndex] || null;
+    const showVideoFallback = !activePoster && isDirectVideoFile(story.video_url);
+
+    return (
+        <div
+            className={styles.storyCard}
+            onClick={() => onOpen(id)}
+        >
+            {activePoster ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                    src={activePoster}
+                    alt={story.caption || name}
+                    loading="lazy"
+                    decoding="async"
+                    className={styles.storyBgMedia}
+                    onError={() => setImgIndex((prev) => prev + 1)}
+                />
+            ) : showVideoFallback ? (
+                <video
+                    src={`${story.video_url}#t=0.5`}
+                    preload="metadata"
+                    muted
+                    playsInline
+                    className={styles.storyBgMedia}
+                />
+            ) : (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                    src="/logo_placeholder.png"
+                    alt={name}
+                    loading="lazy"
+                    decoding="async"
+                    className={styles.storyBgMedia}
+                />
+            )}
+
+            <div className={styles.cardOverlay}>
+                <div className={styles.avatarContainer}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                        loading="lazy"
+                        decoding="async"
+                        src={avatar}
+                        alt={name}
+                        className={styles.avatarImage}
+                        onError={(e) => {
+                            e.currentTarget.src = "/logo_placeholder.png";
+                        }}
+                    />
+                </div>
+
+                <div className={styles.cardContent}>
+                    <h3 className={styles.clientName}>{name}</h3>
+                    <div className={styles.locationRow}>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        <span className={styles.locationName}>{location}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default function HomeStories() {
@@ -129,44 +213,12 @@ export default function HomeStories() {
                     <div className={styles.cardsTrack} ref={trackRef}>
                         {reels.map((story) => {
                             const id = story.id || story.reel_id;
-                            const name = story.creator?.name || story.name || "KeralaPlots User";
-                            const location = story.location || "Kerala";
-                            const avatar = story.creator?.avatar || story.avatar || "/logo_placeholder.png";
-                            const bgImage = story.thumbnail_url || getStreamPoster(story.video_url) || "https://imagedelivery.net/QePV2rqDMo30QKb63DbO_w/e3d764f0-33ee-4ecf-82c7-3c87c7612200/public";
-
                             return (
-                                <div
+                                <StoryCard
                                     key={id}
-                                    className={styles.storyCard}
-                                    style={{ backgroundImage: `url("${bgImage}")` }}
-                                    onClick={() => router.push(`/reels?reel=${id}`)}
-                                >
-                                    <div className={styles.cardOverlay}>
-                                        <div className={styles.avatarContainer}>
-                                            <img
-                                                loading="lazy"
-                                                decoding="async"
-                                                src={avatar}
-                                                alt={name}
-                                                className={styles.avatarImage}
-                                                onError={(e) => {
-                                                    e.currentTarget.src = "/logo_placeholder.png";
-                                                }}
-                                            />
-                                        </div>
-
-                                        <div className={styles.cardContent}>
-                                            <h3 className={styles.clientName}>{name}</h3>
-                                            <div className={styles.locationRow}>
-                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                                    <circle cx="12" cy="10" r="3" />
-                                                </svg>
-                                                <span className={styles.locationName}>{location}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    story={story}
+                                    onOpen={(reelId) => router.push(`/reels?reel=${reelId}`)}
+                                />
                             );
                         })}
                     </div>

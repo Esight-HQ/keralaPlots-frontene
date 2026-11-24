@@ -2,11 +2,11 @@
 
 import styles from "./nav.module.css";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSyncExternalStore } from "react";
 import { RiLogoutBoxRLine, RiExternalLinkLine } from "react-icons/ri";
 import { buildProfileNav, isNavItemActive } from "../../lib/profileNav";
-import { useBuilderStatus } from "../../lib/builderStatus";
+import { useProfileRole } from "../../lib/profileRole";
 import { getEnquiries, getServerEnquiries, subscribeEnquiries } from "../../lib/builderEnquiries";
 
 /* Split out of nav.jsx so it loads as its own chunk, only when needed.
@@ -20,15 +20,35 @@ export default function NavAccountMenu({
     setShowLogoutModal,
 }) {
     const pathname = usePathname() || "";
+    const router = useRouter();
     const enquiries = useSyncExternalStore(subscribeEnquiries, getEnquiries, getServerEnquiries);
     const unreadEnquiries = enquiries.filter((e) => !e.read).length;
-    // Same rule as the profile sidebar: agents get the "My Subscription" link
-    const isAgent = String(authUser?.role || authUser?.role_val || "").toLowerCase() === "agent";
 
-    const builder = useBuilderStatus(authUser);
-    const sections = buildProfileNav({ showSubscription: isAgent, builder });
+    const {
+        activeRole,
+        setActiveRole,
+        hasDualRoles,
+        hasAgent,
+        hasBuilder,
+        builder,
+        displayRoleLabel,
+    } = useProfileRole(authUser, pathname);
+
+    const sections = buildProfileNav({
+        showSubscription: hasAgent || hasBuilder,
+        builder,
+        activeRole,
+    });
 
     const close = () => setAccountMenuOpen(false);
+
+    const handleRoleChange = (e) => {
+        const nextRole = e.target.value;
+        setActiveRole(nextRole);
+        if (nextRole === "agent" && pathname.startsWith("/profile/enquiries")) {
+            router.push("/profile");
+        }
+    };
 
     return (
         <>
@@ -39,8 +59,21 @@ export default function NavAccountMenu({
                     <div>
                         <div className={styles.accountDropdownName}>{displayName}</div>
                         {displayEmail && <div className={styles.accountDropdownEmail}>{displayEmail}</div>}
-                        {(authUser?.role || authUser?.role_val) && (
-                            <span className={styles.agentTag}>{isAgent ? "Agent" : "User"}</span>
+                        {hasDualRoles ? (
+                            <select
+                                className={styles.roleSelect}
+                                value={activeRole}
+                                onClick={(e) => e.stopPropagation()}
+                                onChange={handleRoleChange}
+                                aria-label="Switch active role"
+                            >
+                                <option value="agent">Agent</option>
+                                <option value="builder">Builder</option>
+                            </select>
+                        ) : (
+                            (hasAgent || hasBuilder || authUser?.role || authUser?.role_val) && (
+                                <span className={styles.agentTag}>{displayRoleLabel}</span>
+                            )
                         )}
                     </div>
                 </div>

@@ -42,9 +42,10 @@ export const SUBSCRIPTION_ITEM = {
 
 /**
  * Menu sections for the current user.
- * Approved builders get a "Builder Portal" section (editor, public page, enquiries).
+ * Approved builders get a "Your website" section (editor, public page, enquiries),
+ * unless the user holds both Agent + Builder roles and currently selected "agent".
  */
-export function buildProfileNav({ items = PROFILE_NAV_ITEMS, showSubscription = false, builder = {} } = {}) {
+export function buildProfileNav({ items = PROFILE_NAV_ITEMS, showSubscription = false, builder = {}, activeRole = null } = {}) {
     const main = [...items];
 
     if (showSubscription && !main.some((i) => i.id === "subscription")) {
@@ -52,14 +53,15 @@ export function buildProfileNav({ items = PROFILE_NAV_ITEMS, showSubscription = 
         main.splice(at === -1 ? 1 : at + 1, 0, SUBSCRIPTION_ITEM);
     }
 
-    // Enquiries come from the builder webpage, so only approved builders see them
-    if (!builder.isApproved) return [{ id: "main", items: main.filter((i) => i.id !== "enquiries") }];
+    // Hide builder website & enquiries if not an approved builder OR if dual-role user chose "agent"
+    const showBuilderSection = Boolean(builder.isApproved) && activeRole !== "agent";
+    if (!showBuilderSection) return [{ id: "main", items: main.filter((i) => i.id !== "enquiries") }];
 
     // Builder section: Enquiries moves here because they come from the builder webpage
     const enquiries = main.find((i) => i.id === "enquiries");
     const rest = main.filter((i) => i.id !== "enquiries");
     const builderItems = [
-        { id: "builder-portal", label: "Builder Portal", Icon: RiPaletteLine, href: "/builder-portal", highlight: true, newTab: true },
+        { id: "builder-portal", label: "Your website", Icon: RiPaletteLine, href: "/builder-portal", highlight: true, newTab: true },
         builder.webpageHref && {
             id: "builder-webpage",
             label: "View My Webpage",
@@ -74,7 +76,7 @@ export function buildProfileNav({ items = PROFILE_NAV_ITEMS, showSubscription = 
     const split = rest.findIndex((i) => i.id === "personal") + 1 || 1;
     return [
         { id: "main", items: rest.slice(0, split) },
-        { id: "builder", title: "Builder Portal", items: builderItems },
+        { id: "builder", title: "Your website", items: builderItems },
         { id: "more", items: rest.slice(split) },
     ];
 }

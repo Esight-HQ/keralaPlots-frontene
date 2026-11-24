@@ -269,7 +269,24 @@ export default function BuildersPage() {
     const [sortBy, setSortBy] = useState("popular");
     const [view, setView] = useState("grid"); // grid | list
     const [pendingVerification, setPendingVerification] = useState(null);
-    const [showPendingAlert, setShowPendingAlert] = useState(true);
+    const [showPendingAlert, setShowPendingAlert] = useState(false);
+
+    const normalizeBannerKey = (raw) => {
+        const s = String(raw || "").toLowerCase();
+        if (s === "success" || s === "completed" || s === "approved") return "approved";
+        if (s === "failed" || s === "rejected") return "rejected";
+        return "pending";
+    };
+
+    const isBannerDismissedFor = (rawStatus, currentUser) => {
+        try {
+            const norm = normalizeBannerKey(rawStatus);
+            const uid = currentUser?.id || currentUser?.loginId || "";
+            if (uid && localStorage.getItem(`kp_builder_banner_dismissed_${uid}`) === norm) return true;
+            if (localStorage.getItem("kp_builder_banner_dismissed") === norm) return true;
+        } catch { }
+        return false;
+    };
 
     useEffect(() => {
         try {
@@ -288,7 +305,9 @@ export default function BuildersPage() {
                 }
                 if (vStatus !== "pending") {
                     setBuilderStatus(vStatus === "success" ? "approved" : "rejected", { companyName: data?.companyName || "" });
-                    if (data) localStorage.setItem("kp_builder_verification_pending", JSON.stringify({ ...data, status: vStatus }));
+                    if (data && !isBannerDismissedFor(vStatus, user)) {
+                        localStorage.setItem("kp_builder_verification_pending", JSON.stringify({ ...data, status: vStatus }));
+                    }
                 }
                 // eslint-disable-next-line react-hooks/set-state-in-effect
                 setPendingVerification({
@@ -297,10 +316,13 @@ export default function BuildersPage() {
                     submittedAt: data?.submittedAt || Date.now(),
                     status: vStatus,
                 });
+                setShowPendingAlert(!isBannerDismissedFor(vStatus, user));
             } else if (data) {
                 setPendingVerification(data);
+                setShowPendingAlert(!isBannerDismissedFor(data.status || "pending", user));
             } else if (isReg) {
                 setPendingVerification({ companyName: "", submittedAt: Date.now(), status: "pending" });
+                setShowPendingAlert(!isBannerDismissedFor("pending", user));
             }
 
             // Sync with authoritative backend builder registration status
@@ -359,8 +381,14 @@ export default function BuildersPage() {
                             status: mappedStatus,
                         };
                         setPendingVerification(synced);
+                        const alreadyDismissed = isBannerDismissedFor(mappedStatus, user);
+                        setShowPendingAlert(!alreadyDismissed);
                         try {
-                            localStorage.setItem("kp_builder_verification_pending", JSON.stringify(synced));
+                            if (alreadyDismissed) {
+                                localStorage.removeItem("kp_builder_verification_pending");
+                            } else {
+                                localStorage.setItem("kp_builder_verification_pending", JSON.stringify(synced));
+                            }
                         } catch { }
                     }
                 }).catch(() => {});
@@ -371,7 +399,13 @@ export default function BuildersPage() {
     const dismissVerificationAlert = () => {
         setShowPendingAlert(false);
         try {
+            const norm = normalizeBannerKey(pendingVerification?.status || "approved");
+            const uid = user?.id || user?.loginId || "";
             localStorage.removeItem("kp_builder_verification_pending");
+            localStorage.setItem("kp_builder_banner_dismissed", norm);
+            if (uid) {
+                localStorage.setItem(`kp_builder_banner_dismissed_${uid}`, norm);
+            }
         } catch { }
     };
 
@@ -684,7 +718,7 @@ export default function BuildersPage() {
                                             rel="noopener noreferrer"
                                             className={`${styles.alertActionBtn} ${styles.alertBtnSuccess}`}
                                         >
-                                            <RiBuilding2Line aria-hidden="true" /> Builder Portal
+                                            <RiBuilding2Line aria-hidden="true" /> Your website
                                         </Link>
                                         <Link
                                             href="/register-builder?edit=true"
@@ -717,25 +751,6 @@ export default function BuildersPage() {
                         </div>
                     );
                 })()}
-
-
-                {/* Persistent quick management buttons if verification approved and alert dismissed */}
-                {(!showPendingAlert && hasApprovedBuilderProfile) && (
-                    <div className={styles.approvedStickyBar}>
-                        <div className={styles.approvedStickyText}>
-                            <RiCheckboxCircleLine className={styles.approvedStickyIcon} />
-                            <span><strong>Builder verification approved!</strong> Manage your official builder presence:</span>
-                        </div>
-                        <div className={styles.approvedStickyActions}>
-                            <Link href="/builder-portal" target="_blank" rel="noopener noreferrer" className={styles.portalActionBtn}>
-                                <RiBuilding2Line /> Builder Portal
-                            </Link>
-                            <Link href="/register-builder?edit=true" className={styles.profileActionBtn}>
-                                <RiEditLine /> Profile / Edit Profile
-                            </Link>
-                        </div>
-                    </div>
-                )}
 
                 <div className={styles.mainRow}>
                     {/* ── Builder CTA / Management Card ── */}
@@ -770,7 +785,7 @@ export default function BuildersPage() {
                             </div>
                             <div className={styles.ownerCardActions}>
                                 <Link href="/builder-portal" target="_blank" rel="noopener noreferrer" className={styles.ownerCardPrimaryBtn}>
-                                    <RiBuilding2Line /> Open Builder Portal
+                                    <RiBuilding2Line /> Your website
                                 </Link>
                                 <Link href="/register-builder?edit=true" className={styles.ownerCardSecondaryBtn}>
                                     <RiEditLine /> Edit Builder Profile

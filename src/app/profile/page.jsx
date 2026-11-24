@@ -6,7 +6,6 @@ import styles from "./profile.module.css";
 import ActivityChart from "./ActivityChart";
 import AgentStatusBanner from "./AgentStatusBanner";
 import BuilderStatusBanner from "./BuilderStatusBanner";
-import AgentSubscriptionDashboardCard from "./AgentSubscriptionDashboardCard";
 import EmptyState from "./EmptyState";
 import emptyStyles from "./emptyState.module.css";
 import { useAuth } from "../context/AuthContext";
@@ -198,15 +197,9 @@ export default function ProfileDashboardPage() {
                 <DashboardArt />
             </header>
 
-            {/* Where the agent registration stands — directly
-                under the heading, above everything it gates. */}
+            {/* Pending / rejected registration notices only (approved banners & subscription plans hidden on Dashboard) */}
             <AgentStatusBanner />
-
-            {/* Builder registration verification alert */}
             <BuilderStatusBanner />
-
-            {/* Agent Subscription & Pending Quotas Balance Card */}
-            <AgentSubscriptionDashboardCard />
 
             {/* ---- stat cards ---- */}
             <section className={styles.statRow}>

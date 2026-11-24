@@ -457,11 +457,34 @@ export default function PostedReels() {
                                 return (
                                     <article key={r.id} className={styles.row}>
                                         <div className={styles.rowThumbWrap}>
-                                            <img loading="lazy" decoding="async"
-                                                src={r.thumbnail_url || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=80"}
-                                                alt={r.caption || "Reel"}
-                                                className={styles.thumb}
-                                            />
+                                            {(() => {
+                                                const streamThumb = r.video_url?.match(/(?:videodelivery\.net|cloudflarestream\.com)\/([a-zA-Z0-9]+)/)
+                                                    ? `https://customer-hrtlsfl7dijstj5i.cloudflarestream.com/${r.video_url.match(/(?:videodelivery\.net|cloudflarestream\.com)\/([a-zA-Z0-9]+)/)[1]}/thumbnails/thumbnail.jpg?time=1s&height=600`
+                                                    : null;
+                                                const thumbSrc = r.thumbnail_url || streamThumb;
+                                                const isMp4 = !thumbSrc && r.video_url && /\.(mp4|webm|mov|m4v)(?:[?#]|$)/i.test(r.video_url);
+                                                return isMp4 ? (
+                                                    <video
+                                                        src={`${r.video_url}#t=0.5`}
+                                                        preload="metadata"
+                                                        muted
+                                                        playsInline
+                                                        className={styles.thumb}
+                                                    />
+                                                ) : (
+                                                    /* eslint-disable-next-line @next/next/no-img-element */
+                                                    <img
+                                                        loading="lazy"
+                                                        decoding="async"
+                                                        src={thumbSrc || "/logo_placeholder.png"}
+                                                        alt={r.caption || "Reel"}
+                                                        className={styles.thumb}
+                                                        onError={(e) => {
+                                                            e.currentTarget.src = "/logo_placeholder.png";
+                                                        }}
+                                                    />
+                                                );
+                                            })()}
                                             <span className={styles.mediaTypeBadge}>
                                                 <RiPlayFill />
                                             </span>
