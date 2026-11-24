@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Nav from "../componants/nav/nav";
 import Footer from "../componants/footer/footer";
+import PropertiesBanner from "../componants/propertiesBanner/propertiesBanner";
 import styles from "./builders.module.css";
 import { useAuth } from "../context/AuthContext";
 import { builderApi } from "../lib/api";
@@ -503,72 +504,48 @@ export default function BuildersPage() {
         <div className={styles.page}>
             <Nav />
 
-            {/* ── Hero ── */}
-            <section className={styles.hero} aria-labelledby="builders-hero-title">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={HERO_IMAGE} alt="" className={styles.heroImg} fetchPriority="high" decoding="async" />
-                <div className={styles.heroOverlay} aria-hidden="true" />
-
-                <div className={styles.heroInner}>
-                    <span className={styles.eyebrow}>
-                        <RiBuilding2Line aria-hidden="true" /> Builders in Kerala
-                    </span>
-                    <h1 id="builders-hero-title" className={styles.heroTitle}>
-                        Build your dream home with trusted builders
-                    </h1>
-                    <p className={styles.heroSub}>
-                        Browse verified builders, construction companies and developers across Kerala.
-                        Check their service area and starting rates, then contact them directly.
-                    </p>
-
-                    <form className={styles.heroSearch} onSubmit={handleHeroSearch} role="search">
-                        <label className={styles.heroField}>
-                            <RiSearchLine aria-hidden="true" />
-                            <input
-                                type="search"
-                                value={draftQuery}
-                                onChange={(e) => setDraftQuery(e.target.value)}
-                                placeholder="Builder name or type of work"
-                                aria-label="Search builders"
-                            />
-                        </label>
-                        <label className={`${styles.heroField} ${styles.heroSelect}`}>
-                            <RiMapPin2Line aria-hidden="true" />
-                            <select
-                                value={draftDistrict}
-                                onChange={(e) => setDraftDistrict(e.target.value)}
-                                aria-label="District"
-                            >
-                                <option value="all">All districts</option>
-                                {KERALA_DISTRICTS.map((d) => (
-                                    <option key={d.slug} value={d.slug}>{d.name}</option>
-                                ))}
-                            </select>
-                            <RiArrowDownSLine aria-hidden="true" className={styles.selectChevron} />
-                        </label>
-                        <button type="submit" className={styles.heroBtn}>
-                            <RiSearchLine aria-hidden="true" /> Search
-                        </button>
-                    </form>
-
-                    {/* <ul className={styles.heroStats}>
-                        <li>
-                            <strong>{status === "ready" ? builders.length : "—"}</strong>
-                            <span>Verified builders</span>
-                        </li>
-                        <li>
-                            <strong>{status === "ready" ? districtsCovered : "—"}</strong>
-                            <span>Districts covered</span>
-                        </li>
-                        <li>
-                            <strong>0%</strong>
-                            <span>Brokerage – contact directly</span>
-                        </li>
-                    </ul> */}
-                </div>
-            </section>
+            {/* ── Hero (same design as the /properties banner) ── */}
+            <div className={styles.bannerWrap}>
+                <PropertiesBanner
+                    eyebrow="Builders in Kerala"
+                    title="Build your dream home with trusted builders"
+                    subtitle="Browse verified builders, construction companies and developers across Kerala – and contact them directly."
+                    image={HERO_IMAGE}
+                    headingLevel="h1"
+                />
+            </div>
 
             <main className={styles.container}>
+                <form className={styles.heroSearch} onSubmit={handleHeroSearch} role="search">
+                    <label className={styles.heroField}>
+                        <RiSearchLine aria-hidden="true" />
+                        <input
+                            type="search"
+                            value={draftQuery}
+                            onChange={(e) => setDraftQuery(e.target.value)}
+                            placeholder="Builder name or type of work"
+                            aria-label="Search builders"
+                        />
+                    </label>
+                    <label className={`${styles.heroField} ${styles.heroSelect}`}>
+                        <RiMapPin2Line aria-hidden="true" />
+                        <select
+                            value={draftDistrict}
+                            onChange={(e) => setDraftDistrict(e.target.value)}
+                            aria-label="District"
+                        >
+                            <option value="all">All districts</option>
+                            {KERALA_DISTRICTS.map((d) => (
+                                <option key={d.slug} value={d.slug}>{d.name}</option>
+                            ))}
+                        </select>
+                        <RiArrowDownSLine aria-hidden="true" className={styles.selectChevron} />
+                    </label>
+                    <button type="submit" className={styles.heroBtn}>
+                        <RiSearchLine aria-hidden="true" /> Search
+                    </button>
+                </form>
+
                 {pendingVerification && showPendingAlert && (() => {
                     const status = pendingVerification.status || "success";
                     const isSuccess = status === "success" || status === "completed" || status === "approved";
