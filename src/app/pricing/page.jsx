@@ -26,22 +26,6 @@ import {
 
 const formatINR = (n) => `₹${Number(n || 0).toLocaleString("en-IN")}`;
 
-const yearlyDiscountOf = (plan) =>
-    typeof plan.yearlyDiscount === "number" && !isNaN(plan.yearlyDiscount) ? plan.yearlyDiscount : 20;
-
-const annualizedBaseOf = (plan) => {
-    const durVal = Math.max(1, Number(plan.durationValue || 1));
-    const durUnit = String(plan.durationUnit || "months").toLowerCase();
-    if (durUnit === "days") return (plan.monthly / durVal) * 365;
-    if (durUnit === "years") return plan.monthly / durVal;
-    return (plan.monthly / durVal) * 12;
-};
-
-const yearlyPrice = (plan) => {
-    const pct = yearlyDiscountOf(plan);
-    return Math.round(annualizedBaseOf(plan) * (1 - pct / 100));
-};
-
 const remember = (key, value) => {
     try {
         sessionStorage.setItem(key, value);
@@ -200,30 +184,20 @@ function transformSubscriptionPlans(rawPlans, category) {
         const shortName = deriveShortName(p.plan_title, isBuilder ? "Builder" : "Agent");
         const prefixRegex = isBuilder ? /^builder_/ : /^agent_/;
         const slug = String(p.code || `plan_${p.id}`).replace(prefixRegex, "").replace(/_/g, "-");
-        const price = Math.round(Number(p.price || 0));
+        const originalPrice = Math.round(Number(p.price || 0));
         const durationValue = Math.max(1, Number(p.duration_value || 1));
         const durationUnit = String(p.duration_unit || "months").toLowerCase();
-        const discount =
-            typeof p.yearly_discount_percentage === "number" && !isNaN(p.yearly_discount_percentage)
-                ? p.yearly_discount_percentage
-                : 20;
+        const rawDiscountPrice =
+            durationUnit === "years"
+                ? Math.round(Number(p.discount_amount || 0))
+                : 0;
+        const hasValidDiscount =
+            durationUnit === "years" && rawDiscountPrice > 0 && rawDiscountPrice < originalPrice;
+        const effectivePrice = hasValidDiscount ? rawDiscountPrice : originalPrice;
+        const saveAmount = hasValidDiscount ? Math.max(0, originalPrice - effectivePrice) : 0;
 
         const isSingleMonth = durationUnit === "months" && durationValue === 1;
-        const isAlreadyAnnualOrMore =
-            (durationUnit === "years" && durationValue >= 1) ||
-            (durationUnit === "months" && durationValue >= 12) ||
-            (durationUnit === "days" && durationValue >= 365);
-
-        // Enable Yearly toggle for both 1-month plans AND multi-month plans (e.g. 3 months free plan)
-        const supportsYearly = !isAlreadyAnnualOrMore && discount > 0 && price > 0;
-
-        const baseBillingLabel = isSingleMonth
-            ? "Monthly"
-            : durationUnit === "months"
-            ? `${durationValue} Months`
-            : durationUnit === "days"
-            ? `${durationValue} Days`
-            : "Standard";
+        const billingInterval = durationUnit === "years" ? "yearly" : "monthly";
 
         const perLabel = isSingleMonth
             ? "/ month"
@@ -255,14 +229,15 @@ function transformSubscriptionPlans(rawPlans, category) {
             slug,
             name: p.plan_title,
             shortName,
-            monthly: price,
+            monthly: effectivePrice,
+            originalPrice,
+            discountAmount: hasValidDiscount ? rawDiscountPrice : 0,
+            saveAmount,
+            billingInterval,
             durationValue,
             durationUnit,
             durationDisplay: p.duration_display || `${durationValue} ${durationUnit}`,
-            baseBillingLabel,
             perLabel,
-            supportsYearly,
-            yearlyDiscount: discount,
             pill,
             tagline: parsed.tagline,
             features: parsed.features,
@@ -464,51 +439,19 @@ function FeatureList({ features, label }) {
     );
 }
 
-function BillingToggle({ value, onChange, baseLabel = "Monthly", saveLabel, size = "sm", label }) {
-    return (
-        <div
-            className={`${styles.billingToggle} ${size === "lg" ? styles.billingToggleLg : ""}`}
-            role="radiogroup"
-            aria-label={label}
-        >
-            {["monthly", "yearly"].map((opt) => (
-                <button
-                    key={opt}
-                    type="button"
-                    role="radio"
-                    aria-checked={value === opt}
-                    className={`${styles.billingOption} ${value === opt ? styles.billingOptionActive : ""}`}
-                    onClick={() => onChange(opt)}
-                >
-                    {opt === "monthly" ? baseLabel : "Yearly"}
-                    {opt === "yearly" && saveLabel && (
-                        <span className={styles.saveTag}>{saveLabel}</span>
-                    )}
-                </button>
-            ))}
-        </div>
-    );
-}
-
 /* --------------------------------------------------------------------------
    Subscription Card
    -------------------------------------------------------------------------- */
 function SubscriptionCard({
     plan,
-    billing,
-    onBillingChange,
     onSelectPlan,
     activeSubscription,
     roleStatus,
     isPurchasing,
 }) {
-    const canToggleYearly = Boolean(plan.supportsYearly);
-    const isYearly = canToggleYearly && billing === "yearly";
-    const discount = yearlyDiscountOf(plan);
-    const yearTotal = yearlyPrice(plan);
-    const undiscountedMonthly = Math.round(annualizedBaseOf(plan) / 12);
-    const displayAmount = isYearly ? Math.round(yearTotal / 12) : plan.monthly;
-    const effectiveBilling = isYearly ? "yearly" : "monthly";
+    const displayAmount = plan.monthly;
+    const hasDiscount = plan.durationUnit === "years" && Number(plan.saveAmount || 0) > 0;
+    const effectiveBilling = plan.billingInterval || (plan.durationUnit === "years" ? "yearly" : "monthly");
 
     const hasAnyActiveSub = Boolean(activeSubscription?.is_active);
     const isPurchasedPlan =
@@ -564,32 +507,22 @@ function SubscriptionCard({
                 {plan.tagline && <p className={styles.cardTagline}>{plan.tagline}</p>}
             </header>
 
-            {canToggleYearly && (
-                <BillingToggle
-                    value={effectiveBilling}
-                    onChange={onBillingChange}
-                    baseLabel={plan.baseBillingLabel}
-                    saveLabel={`-${discount}%`}
-                    label={`${plan.name} billing period`}
-                />
-            )}
-
             <div className={styles.priceBlock} aria-live="polite">
                 <p className={styles.price}>
                     <span className={styles.currency}>₹</span>
                     {displayAmount.toLocaleString("en-IN")}
-                    <span className={styles.per}>{isYearly ? "/ month" : plan.perLabel}</span>
-                    {isYearly && (
-                        <s className={styles.oldPrice} aria-label={`was ${formatINR(undiscountedMonthly)} per month`}>
-                            {formatINR(undiscountedMonthly)}
+                    <span className={styles.per}>{plan.perLabel}</span>
+                    {hasDiscount && (
+                        <s className={styles.oldPrice} aria-label={`was ${formatINR(plan.originalPrice)}`}>
+                            {formatINR(plan.originalPrice)}
                         </s>
                     )}
                 </p>
                 <p className={styles.priceNote}>
-                    {isYearly ? (
+                    {hasDiscount ? (
                         <>
-                            Billed yearly {formatINR(yearTotal)} ·{" "}
-                            <span className={styles.saveText}>Save {discount}%</span>
+                            Valid for {plan.durationDisplay} ·{" "}
+                            <span className={styles.saveText}>Save {formatINR(plan.saveAmount)}</span>
                         </>
                     ) : plan.durationUnit === "months" && plan.durationValue === 1 ? (
                         "Billed monthly"
@@ -1313,7 +1246,7 @@ function PricingContent() {
     const builderColumns = useMemo(
         () =>
             builderPlans.map((p) => {
-                const b = cardBilling[p.id] || "monthly";
+                const b = p.billingInterval || (p.durationUnit === "years" ? "yearly" : "monthly");
                 const hasActive = Boolean(entitlementState.activeBuilderSubscription?.is_active);
                 const isPurchased =
                     hasActive &&
@@ -1335,13 +1268,13 @@ function PricingContent() {
                     meta: `${formatINR(p.monthly)} ${p.perLabel} · ${p.pill}`,
                 };
             }),
-        [builderPlans, cardBilling, entitlementState.activeBuilderSubscription, handleSelectPlan]
+        [builderPlans, entitlementState.activeBuilderSubscription, handleSelectPlan]
     );
 
     const agentColumns = useMemo(
         () =>
             agentPlans.map((p) => {
-                const b = cardBilling[p.id] || "monthly";
+                const b = p.billingInterval || (p.durationUnit === "years" ? "yearly" : "monthly");
                 const hasActive = Boolean(entitlementState.activeAgentSubscription?.is_active);
                 const isPurchased =
                     hasActive &&
@@ -1363,7 +1296,7 @@ function PricingContent() {
                     meta: `${formatINR(p.monthly)} ${p.perLabel} · ${p.pill}`,
                 };
             }),
-        [agentPlans, cardBilling, entitlementState.activeAgentSubscription, handleSelectPlan]
+        [agentPlans, entitlementState.activeAgentSubscription, handleSelectPlan]
     );
 
     const builderComparisonRows = useMemo(
@@ -1516,14 +1449,10 @@ function PricingContent() {
                                     <SubscriptionCard
                                         key={plan.id}
                                         plan={plan}
-                                        billing={cardBilling[plan.id] || "monthly"}
                                         activeSubscription={activeSubForAudience}
                                         roleStatus={roleStatusForAudience}
                                         isPurchasing={purchasingPlanId === plan.id}
                                         onSelectPlan={handleSelectPlan}
-                                        onBillingChange={(v) =>
-                                            setCardBilling((prev) => ({ ...prev, [plan.id]: v }))
-                                        }
                                     />
                                 ))}
                             </div>

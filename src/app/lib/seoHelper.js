@@ -1,4 +1,4 @@
-const LOCAL_API_BASE_URL = "http://127.0.0.1:8000/api";
+const LOCAL_API_BASE_URL = "http://127.0.0.1:8002/api";
 const STAGING_API_BASE_URL = "https://api.keralaplots.com/api";
 const TEST_API_BASE_URL = "https://apitest.keralaplots.com/api";
 

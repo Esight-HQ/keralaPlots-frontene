@@ -61,6 +61,10 @@ const nextConfig = {
         hostname: "apitest.keralaplots.com",
       },
       {
+        protocol: "https",
+        hostname: "searchlens.syscrow.com",
+      },
+      {
         protocol: "http",
         hostname: "127.0.0.1",
         port: "8000",
@@ -101,10 +105,10 @@ const nextConfig = {
       // to reconstruct server error stacks. Neither uses eval() in production.
       `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://connect.facebook.net https://checkout.razorpay.com https://chatpier.com https://*.chatpier.com https://cdn.jsdelivr.net https://unpkg.com https://embed.cloudflarestream.com`,
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com https://chatpier.com https://*.chatpier.com",
-      "img-src 'self' data: blob: http://127.0.0.1:8000 http://localhost:8000 http://127.0.0.1:8000 http://localhost:8001 https://imagedelivery.net https://images.unsplash.com https://*.tile.openstreetmap.org https://www.googletagmanager.com https://www.google-analytics.com https://www.facebook.com https://keralaplots.com https://test.keralaplots.com https://api.keralaplots.com https://apitest.keralaplots.com https://chatpier.com https://*.chatpier.com",
+      "img-src 'self' data: blob: http://127.0.0.1:8002 http://localhost:8000 http://127.0.0.1:8002 http://localhost:8001 https://imagedelivery.net https://images.unsplash.com https://*.tile.openstreetmap.org https://www.googletagmanager.com https://www.google-analytics.com https://www.facebook.com https://keralaplots.com https://test.keralaplots.com https://api.keralaplots.com https://apitest.keralaplots.com https://chatpier.com https://*.chatpier.com https://searchlens.syscrow.com https://*.syscrow.com",
       "font-src 'self' data: https://fonts.gstatic.com https://chatpier.com https://*.chatpier.com",
-      "connect-src 'self' http://127.0.0.1:8000 http://localhost:8000 http://127.0.0.1:8000 http://localhost:8001 ws://localhost:3000 ws://127.0.0.1:3000 https://keralaplots.com https://test.keralaplots.com https://api.keralaplots.com https://apitest.keralaplots.com https://imagedelivery.net https://videodelivery.net https://images.unsplash.com https://*.tile.openstreetmap.org https://nominatim.openstreetmap.org https://checkout.razorpay.com https://api.razorpay.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.cloudflarestream.com https://chatpier.com https://*.chatpier.com wss://chatpier.com wss://*.chatpier.com",
-      "media-src 'self' blob: http://127.0.0.1:8000 http://localhost:8000 https://keralaplots.com https://test.keralaplots.com https://api.keralaplots.com https://apitest.keralaplots.com https://*.cloudflarestream.com https://videodelivery.net https://chatpier.com https://*.chatpier.com",
+      "connect-src 'self' http://127.0.0.1:8002 http://localhost:8000 http://127.0.0.1:8002 http://localhost:8001 ws://localhost:3000 ws://127.0.0.1:3000 https://keralaplots.com https://test.keralaplots.com https://api.keralaplots.com https://apitest.keralaplots.com https://imagedelivery.net https://videodelivery.net https://images.unsplash.com https://searchlens.syscrow.com https://*.syscrow.com https://*.tile.openstreetmap.org https://nominatim.openstreetmap.org https://checkout.razorpay.com https://api.razorpay.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.cloudflarestream.com https://chatpier.com https://*.chatpier.com wss://chatpier.com wss://*.chatpier.com",
+      "media-src 'self' blob: http://127.0.0.1:8002 http://localhost:8000 https://keralaplots.com https://test.keralaplots.com https://api.keralaplots.com https://apitest.keralaplots.com https://*.cloudflarestream.com https://videodelivery.net https://chatpier.com https://*.chatpier.com",
       "frame-src 'self' https://www.youtube.com https://player.vimeo.com https://checkout.razorpay.com https://api.razorpay.com https://*.cloudflarestream.com https://iframe.videodelivery.net https://www.googletagmanager.com https://chatpier.com https://*.chatpier.com",
       // hls.js (reels player) runs its demuxer in a blob: Web Worker.
       "worker-src 'self' blob:",

@@ -55,7 +55,7 @@ function normalizeAudioUrl(url) {
         : "";
     const base = typeof window !== "undefined"
         ? (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-            ? "http://127.0.0.1:8000"
+            ? "http://127.0.0.1:8002"
             : window.location.hostname === "test.keralaplots.com"
                 ? "https://api.keralaplots.com"
                 : "https://apitest.keralaplots.com")
