@@ -300,39 +300,183 @@ body.kp-hide-chatpier .bb-frame {
   100% { scale: 1 1; }
 }
 
-/* Speech-bubble greeting above the AI orb */
+/* Mini chat card above the AI orb */
 .kp-bot-tip {
   position: fixed;
   z-index: 2147483000;
-  max-width: 240px;
+  width: 270px;
+  max-width: calc(100vw - 32px);
+  padding: 12px 14px 14px;
+  background: #ffffff;
+  color: #0f172a;
+  font-family: system-ui, -apple-system, sans-serif;
+  border: 1px solid rgba(37, 99, 235, 0.14);
+  border-radius: 18px 18px 6px 18px;
+  box-shadow:
+    0 18px 40px -14px rgba(29, 78, 216, 0.45),
+    0 2px 6px rgba(15, 23, 42, 0.06);
+  transform-origin: bottom right;
+  animation: kp-bot-tip-in 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+}
+
+/* Tail pointing down at the orb */
+.kp-bot-tip::after {
+  content: "";
+  position: absolute;
+  right: 22px;
+  bottom: -7px;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-right: 1px solid rgba(37, 99, 235, 0.14);
+  border-bottom: 1px solid rgba(37, 99, 235, 0.14);
+  transform: rotate(45deg);
+}
+
+.kp-bot-tip--hover {
+  width: auto;
+  padding: 10px 14px 12px;
+  pointer-events: none;
+}
+
+.kp-bot-tip-head {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 14px;
-  background: #ffffff;
-  color: #0f172a;
-  font: 500 13.5px/1.35 system-ui, -apple-system, sans-serif;
-  border: 1px solid rgba(37, 99, 235, 0.18);
-  border-radius: 14px 14px 4px 14px;
-  box-shadow: 0 12px 30px -10px rgba(29, 78, 216, 0.45), 0 0 0 4px rgba(56, 189, 248, 0.08);
-  pointer-events: none;
-  animation: kp-bot-tip-in 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+  margin-bottom: 8px;
 }
 
-.kp-bot-tip-badge {
+/* Tiny version of the orb so the card reads as "from the AI" */
+.kp-bot-tip-avatar {
+  width: 22px;
+  height: 22px;
   flex-shrink: 0;
-  padding: 2px 6px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 36% 50%, #fff 0 1.8px, transparent 2.2px),
+    radial-gradient(circle at 64% 50%, #fff 0 1.8px, transparent 2.2px),
+    radial-gradient(circle at 32% 28%, #7dd3fc 0%, #38bdf8 22%, #2563eb 62%, #1d2fe0 100%);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.55);
+}
+
+.kp-bot-tip-name {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.kp-bot-tip-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #16a34a;
+}
+
+.kp-bot-tip-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18);
+}
+
+.kp-bot-tip-close {
+  margin-left: auto;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.kp-bot-tip-close:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.kp-bot-tip-body {
+  min-height: 20px;
+}
+
+.kp-bot-tip-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #1e293b;
+  animation: kp-bot-text-in 0.35s ease-out;
+}
+
+/* "AI is typing…" dots */
+.kp-bot-typing {
+  display: inline-flex;
+  gap: 4px;
+  padding: 7px 10px;
+  border-radius: 12px;
+  background: #eff6ff;
+}
+
+.kp-bot-typing i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2563eb;
+  opacity: 0.35;
+  animation: kp-bot-dot 1s ease-in-out infinite;
+}
+
+.kp-bot-typing i:nth-child(2) { animation-delay: 0.15s; }
+.kp-bot-typing i:nth-child(3) { animation-delay: 0.3s; }
+
+.kp-bot-tip-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 8px 14px;
+  border: none;
   border-radius: 999px;
   background: linear-gradient(135deg, #38bdf8, #2563eb);
   color: #fff;
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font: 600 13px/1 system-ui, -apple-system, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 6px 16px -6px rgba(37, 99, 235, 0.7);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.kp-bot-tip-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px -8px rgba(37, 99, 235, 0.8);
+}
+
+.kp-bot-tip-cta span {
+  transition: transform 0.15s ease;
+}
+
+.kp-bot-tip-cta:hover span {
+  transform: translateX(3px);
 }
 
 @keyframes kp-bot-tip-in {
-  from { opacity: 0; transform: translateY(8px) scale(0.92); }
+  from { opacity: 0; transform: translateY(10px) scale(0.9); }
   to { opacity: 1; transform: none; }
+}
+
+@keyframes kp-bot-text-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes kp-bot-dot {
+  0%, 100% { opacity: 0.35; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-3px); }
 }
 
 body.kp-hide-chatpier .kp-bot-tip {
@@ -343,7 +487,9 @@ body.kp-hide-chatpier .kp-bot-tip {
   .bb-bubble:not(.bb-video),
   .bb-bubble:not(.bb-video)::before,
   .bb-bubble:not(.bb-video)::after,
-  .kp-bot-tip {
+  .kp-bot-tip,
+  .kp-bot-tip-text,
+  .kp-bot-typing i {
     animation: none !important;
   }
 }
