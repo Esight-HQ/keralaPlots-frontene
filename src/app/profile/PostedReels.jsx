@@ -41,6 +41,7 @@ const InvoiceModal = dynamic(() => import("../componants/invoice/InvoiceModal"),
 import { RiFileTextLine } from "react-icons/ri";
 
 import { useAuth } from "../context/AuthContext";
+import { profileApi } from "../lib/api";
 
 const SKELETON_ROWS = [0, 1, 2];
 
@@ -65,6 +66,9 @@ export default function PostedReels() {
     const [showPayModal, setShowPayModal] = useState(false);
     const [showInvoiceModal, setShowInvoiceModal] = useState(false);
     const [activeInvoice, setActiveInvoice] = useState(null);
+    const [isFreeReelUser, setIsFreeReelUser] = useState(
+        Boolean(user && (user.pay_for_reels === 0 || user.pay_for_reels === false))
+    );
 
     // Create Reel Modal State
     const [showUploadModal, setShowUploadModal] = useState(false);
@@ -90,13 +94,16 @@ export default function PostedReels() {
         setTimeout(() => setToast(""), 3000);
     };
 
-    // Load User's Reels
+    // Load User's Reels & Free Reel Entitlement
     const fetchUserReels = useCallback(async () => {
         setIsLoading(true);
         try {
             const res = await reelsApi.getMyReels();
             if (res.success && Array.isArray(res.data)) {
                 setReels(res.data);
+            }
+            if (typeof res?.is_free_reels === "boolean") {
+                setIsFreeReelUser(res.is_free_reels);
             }
         } catch (err) {
             console.error("Failed to load user reels:", err);
@@ -108,6 +115,22 @@ export default function PostedReels() {
 
     useEffect(() => {
         fetchUserReels();
+        profileApi
+            .getProfile()
+            .then((res) => {
+                const payReels = res?.data?.user?.pay_for_reels;
+                if (payReels !== undefined) {
+                    setIsFreeReelUser(payReels === 0 || payReels === false);
+                    try {
+                        const cached = JSON.parse(localStorage.getItem("kp_auth_user") || "null");
+                        if (cached) {
+                            cached.pay_for_reels = payReels;
+                            localStorage.setItem("kp_auth_user", JSON.stringify(cached));
+                        }
+                    } catch {}
+                }
+            })
+            .catch(() => {});
     }, [fetchUserReels]);
 
     // Close menu on click outside or Escape
@@ -283,7 +306,7 @@ export default function PostedReels() {
                 setUploadLocation("");
                 fetchUserReels();
 
-                if (!res.data.is_paid) {
+                if (!res.data.is_paid && !isFreeReelUser) {
                     setPayReelId(res.data.id || res.data.reel_id);
                     setShowPayModal(true);
                 } else {
@@ -519,9 +542,9 @@ export default function PostedReels() {
                                                 </div>
 
                                                 <div className={styles.rowMeta}>
-                                                    {r.is_paid ? (
-                                                        <span className={`${styles.statusPill} ${STATUS_PILL_CLASS[r.status] ?? ""}`}>
-                                                            {r.status}
+                                                    {r.is_paid || isFreeReelUser ? (
+                                                        <span className={`${styles.statusPill} ${STATUS_PILL_CLASS[r.is_paid ? r.status : "Active"] ?? styles.statusActive}`}>
+                                                            {r.is_paid ? r.status : "Active"}
                                                         </span>
                                                     ) : (
                                                         <>
@@ -726,7 +749,11 @@ export default function PostedReels() {
             {/* Reel Subscription & Spotlight Info Modal */}
             <ReelInfoModal
                 isOpen={showInfoModal}
-                onClose={() => setShowInfoModal(false)}
+                skipExitWarning={true}
+                onClose={() => {
+                    setShowInfoModal(false);
+                    setPayReelId(null);
+                }}
                 onPayNow={() => {
                     setShowInfoModal(false);
                     setShowPayModal(true);
@@ -735,6 +762,7 @@ export default function PostedReels() {
                 user={user}
                 onPublishSuccess={() => {
                     setShowInfoModal(false);
+                    setPayReelId(null);
                     showToast("Reel published successfully! 🎉");
                     fetchUserReels();
                 }}
@@ -743,11 +771,15 @@ export default function PostedReels() {
             {/* Reel Checkout Payment Modal */}
             <ReelCheckoutModal
                 isOpen={showPayModal}
-                onClose={() => setShowPayModal(false)}
+                onClose={() => {
+                    setShowPayModal(false);
+                    setPayReelId(null);
+                }}
                 reelId={payReelId}
                 user={user}
                 onSuccess={() => {
                     setShowPayModal(false);
+                    setPayReelId(null);
                     showToast("Payment verified! Your reel is now live in the feed! 🎉");
                     fetchUserReels();
                 }}

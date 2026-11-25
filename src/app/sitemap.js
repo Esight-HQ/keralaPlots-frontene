@@ -6,7 +6,10 @@ import { getPropertyUrl } from "./lib/seoHelper";
 export const revalidate = 3600;
 
 const BASE_URL = "https://keralaplots.com";
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://apitest.keralaplots.com/api";
+const API_URL =
+  process.env.NODE_ENV === "development"
+    ? "http://127.0.0.1:8000/api"
+    : process.env.NEXT_PUBLIC_API_URL || "https://apitest.keralaplots.com/api";
 
 // Google's limit is 50,000 URLs per sitemap; stay well under it.
 const MAX_PROPERTIES = 20000;

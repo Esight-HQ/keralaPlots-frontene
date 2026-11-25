@@ -1,12 +1,8 @@
-// const LOCAL_API_BASE_URL = "http://127.0.0.1:8002/api";
-// const ALT_LOCAL_API_BASE_URL = "http://127.0.0.1:8002/api";
-
-const LOCAL_API_BASE_URL = "https://apitest.keralaplots.com/api";
-const ALT_LOCAL_API_BASE_URL = "https://apitest.keralaplots.com/api";
-
-
-const STAGING_API_BASE_URL = "https://api.keralaplots.com/api";
-const TEST_API_BASE_URL = "https://apitest.keralaplots.com/api";
+const LOCAL_API_BASE_URL = "http://127.0.0.1:8000/api";
+const ALT_LOCAL_API_BASE_URL = "http://127.0.0.1:8000/api";
+const LIVE_API_BASE_URL = "https://apitest.keralaplots.com/api";
+const STAGING_API_BASE_URL = LIVE_API_BASE_URL;
+const TEST_API_BASE_URL = LIVE_API_BASE_URL;
 
 const isLocalHostname = () => {
     if (typeof window === "undefined") return false;
@@ -16,22 +12,14 @@ const isLocalHostname = () => {
 
 export const resolveApiBaseUrl = () => {
     if (typeof window !== "undefined") {
-        if (isLocalHostname()) {
-            return LOCAL_API_BASE_URL;
-        }
-        if (window.location.hostname === "test.keralaplots.com") {
-            return STAGING_API_BASE_URL;
-        }
-        if (window.location.hostname === "keralaplots.com" || window.location.hostname === "www.keralaplots.com") {
-            return TEST_API_BASE_URL;
-        }
+        return isLocalHostname() ? LOCAL_API_BASE_URL : LIVE_API_BASE_URL;
     }
 
-    if (process.env.NEXT_PUBLIC_API_URL) {
-        return process.env.NEXT_PUBLIC_API_URL;
+    if (process.env.NODE_ENV === "development") {
+        return LOCAL_API_BASE_URL;
     }
 
-    return process.env.NODE_ENV === "development" ? LOCAL_API_BASE_URL : TEST_API_BASE_URL;
+    return process.env.NEXT_PUBLIC_API_URL || LIVE_API_BASE_URL;
 };
 
 const API_BASE_URL = resolveApiBaseUrl();

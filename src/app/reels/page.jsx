@@ -45,16 +45,11 @@ function normalizeVideoUrl(url) {
     }
     if (/^https?:\/\//i.test(clean) || clean.startsWith("blob:") || clean.startsWith("data:")) return clean;
     const cleanPath = clean.replace(/^\/+/, "");
-    const envOrigin = process.env.NEXT_PUBLIC_API_URL
-        ? process.env.NEXT_PUBLIC_API_URL.replace(/\/api\/?$/, "")
-        : "";
     const base = typeof window !== "undefined"
-        ? (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-            ? "http://127.0.0.1:8002"
-            : window.location.hostname === "test.keralaplots.com"
-                ? "https://api.keralaplots.com"
-                : "https://apitest.keralaplots.com")
-        : (envOrigin || "https://apitest.keralaplots.com");
+        ? (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "::1"
+            ? "http://127.0.0.1:8000"
+            : "https://apitest.keralaplots.com")
+        : (process.env.NODE_ENV === "development" ? "http://127.0.0.1:8000" : "https://apitest.keralaplots.com");
     return `${base}/${cleanPath}`;
 }
 

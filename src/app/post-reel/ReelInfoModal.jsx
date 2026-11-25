@@ -44,6 +44,7 @@ export default function ReelInfoModal({
     reelId,
     onPublishSuccess,
     user,
+    skipExitWarning = false,
 }) {
     const router = useRouter();
     const [showExitWarning, setShowExitWarning] = useState(false);
@@ -78,6 +79,18 @@ export default function ReelInfoModal({
             let reelStatus = null;
             if (reelId) {
                 reelStatus = await reelPaymentApi.getStatus(reelId).catch(() => null);
+            }
+
+            // Auto-publish immediately if admin granted free reel access or reel is already paid
+            const userFreeOverride =
+                Boolean(reelStatus?.data?.is_free) ||
+                user?.pay_for_reels === 0 ||
+                user?.pay_for_reels === false;
+            if (reelId && (userFreeOverride || reelStatus?.data?.already_paid)) {
+                await reelPaymentApi.createOrder(reelId).catch(() => null);
+                if (onPublishSuccess) onPublishSuccess(reelStatus?.data);
+                if (onClose) onClose();
+                return;
             }
 
             // 3. Check current subscription, base plans & top-up plans (filtered specifically for reels)
@@ -143,29 +156,32 @@ export default function ReelInfoModal({
         fetchModalData();
 
         const handleKeyDown = (e) => {
-            if (e.key === "Escape") {
-                if (showExitWarning) {
-                    onClose();
-                } else {
-                    setShowExitWarning(true);
-                }
+            if (e.key === "Escape" && !actionLoading) {
+                setShowExitWarning(false);
+                onClose();
             }
         };
         document.addEventListener("keydown", handleKeyDown);
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
         };
-    }, [isOpen, onClose, showExitWarning, fetchModalData]);
+    }, [isOpen, onClose, actionLoading, fetchModalData]);
 
     if (!isOpen) return null;
 
-    const handleAttemptClose = () => {
-        setShowExitWarning(true);
-    };
-
     const handleConfirmExit = () => {
+        if (actionLoading) return;
         setShowExitWarning(false);
         onClose();
+    };
+
+    const handleAttemptClose = () => {
+        if (actionLoading) return;
+        if (skipExitWarning || showExitWarning) {
+            handleConfirmExit();
+        } else {
+            setShowExitWarning(true);
+        }
     };
 
     // Calculate subscription states
@@ -440,7 +456,10 @@ export default function ReelInfoModal({
                     <button
                         type="button"
                         className={styles.infoModalCloseBtn}
-                        onClick={handleAttemptClose}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            handleConfirmExit();
+                        }}
                         aria-label="Close"
                         title="Close"
                         disabled={actionLoading}
