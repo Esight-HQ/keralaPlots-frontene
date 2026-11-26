@@ -588,7 +588,6 @@ export default function BuilderDetailPage({ params }) {
                                     src={data.logoUrl}
                                     alt={data.companyName || "Builder logo"}
                                     className={styles.webLogoImg}
-                                    style={{ width: "auto", height: "52px", maxWidth: "180px", objectFit: "contain", objectPosition: "center", flexShrink: 0 }}
                                 />
                             ) : (
                                 <span className={styles.webLogoInitials}>
