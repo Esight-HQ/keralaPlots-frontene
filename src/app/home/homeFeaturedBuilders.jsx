@@ -98,8 +98,6 @@ function BuilderCard({ builder }) {
     return (
         <Link
             href={detailHref}
-            target="_blank"
-            rel="noopener noreferrer"
             className={styles.builderCard}
             aria-label={`View details of ${name}`}
         >
@@ -148,7 +146,7 @@ function BuilderCard({ builder }) {
                         )}
                         {builder.projects ? (
                             <li>
-                                <RiHomeSmileLine aria-hidden="true" /> {builder.projects} projects
+                                <RiHomeSmileLine aria-hidden="true" /> {builder.projects} {Number(builder.projects) === 1 ? "project" : "projects"}
                             </li>
                         ) : null}
                         {rate && (

@@ -638,8 +638,8 @@
   position: absolute;
   bottom: 6px;
   left: 6px;
-  height: 45px;
-  padding: 4px 10px;
+  height: 64px;
+  padding: 6px 10px;
   border-radius: 10px;
   background: #fff;
   border: 1px solid #fff;
@@ -649,12 +649,18 @@
   place-items: center;
 }
 
+.logoWithImage {
+  box-sizing: border-box;
+  width: 180px;
+  max-width: calc(100% - 12px);
+  height: 64px;
+}
+
 .logo img {
   display: block;
-  height: 100%;
-  width: auto;
-  max-width: 160px;
+  min-width: 0;
   object-fit: contain;
+  object-position: center;
   background: #fff;
 }
 
@@ -1135,7 +1141,7 @@
   }
 
   .cardRow .logo {
-    height: 32px;
+    height: 48px;
     padding: 3px 6px;
     max-width: calc(100% - 12px);
   }

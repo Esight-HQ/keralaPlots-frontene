@@ -2,6 +2,7 @@
 
 import { use, useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "../../builder-portal/builderPortal.module.css";
 import page from "./builderPage.module.css";
 import { BUILDERS as LOCAL_BUILDERS } from "../buildersData";
@@ -74,6 +75,21 @@ const getLayout = (width) => (width <= MOBILE_MAX ? "mobile" : width <= TABLET_M
 export default function BuilderDetailPage({ params }) {
     const resolvedParams = use(params);
     const rawId = resolvedParams?.id ? decodeURIComponent(resolvedParams.id) : "";
+    const router = useRouter();
+
+    const handleGoBack = () => {
+        if (typeof window !== "undefined" && window.history.length > 1) {
+            try {
+                if (document.referrer && new URL(document.referrer).origin === window.location.origin) {
+                    router.back();
+                    return;
+                }
+            } catch {
+                // fallback to /builders
+            }
+        }
+        router.push("/builders");
+    };
 
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -553,13 +569,27 @@ export default function BuilderDetailPage({ params }) {
                 {/* Header (Universal) */}
                 <header className={`${styles.webHeader} ${page.header}`}>
                     <div className={`${styles.webLogoGroup} ${page.brand}`}>
-                        {/* <Link href="/builders" className={page.backBtn} aria-label="Back to all builders" title="All builders">
-                            <RiArrowLeftLine />
-                        </Link> */}
+                        <button
+                            type="button"
+                            onClick={handleGoBack}
+                            className={page.backBtn}
+                            aria-label="Go back"
+                            title="Go back"
+                        >
+                            <RiArrowLeftLine aria-hidden="true" />
+                            <span className={page.backLabel}>Back</span>
+                        </button>
                         <a href="#top" className={page.brandLink} aria-label={`${data.companyName || "Builder"} – back to top`}>
                             {data.logoUrl ? (
                                 /* eslint-disable-next-line @next/next/no-img-element */
-                                <img onError={hideBrokenImg} onLoad={showLoadedImg} src={data.logoUrl} alt={data.companyName || "Builder logo"} className={styles.webLogoImg} />
+                                <img
+                                    onError={hideBrokenImg}
+                                    onLoad={showLoadedImg}
+                                    src={data.logoUrl}
+                                    alt={data.companyName || "Builder logo"}
+                                    className={styles.webLogoImg}
+                                    style={{ width: "auto", height: "52px", maxWidth: "180px", objectFit: "contain", objectPosition: "center", flexShrink: 0 }}
+                                />
                             ) : (
                                 <span className={styles.webLogoInitials}>
                                     {data.companyName?.trim()?.charAt(0)?.toUpperCase() || "B"}

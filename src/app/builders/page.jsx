@@ -149,9 +149,16 @@ function BuilderLogo({ name, logo }) {
     const [failed, setFailed] = useState(false);
     if (logo && !failed) {
         return (
-            <span className={styles.logo}>
+            <span className={`${styles.logo} ${styles.logoWithImage}`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={logo} alt={`${name} logo`} loading="lazy" decoding="async" onError={() => setFailed(true)} />
+                <img
+                    src={logo}
+                    alt={`${name} logo`}
+                    loading="lazy"
+                    decoding="async"
+                    onError={() => setFailed(true)}
+                    style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center" }}
+                />
             </span>
         );
     }
@@ -180,8 +187,6 @@ function BuilderCard({ builder, view = "grid", isOwn = false }) {
     return (
         <Link
             href={detailHref}
-            target="_blank"
-            rel="noopener noreferrer"
             className={`${styles.card} ${view === "list" ? styles.cardRow : ""}`}
             aria-label={`View details of ${name}`}
         >
@@ -227,7 +232,7 @@ function BuilderCard({ builder, view = "grid", isOwn = false }) {
                             <li><RiCalendarLine aria-hidden="true" /> {years}+ yrs</li>
                         )}
                         {builder.projects ? (
-                            <li><RiHomeSmileLine aria-hidden="true" /> {builder.projects} projects</li>
+                            <li><RiHomeSmileLine aria-hidden="true" /> {builder.projects} {Number(builder.projects) === 1 ? "project" : "projects"}</li>
                         ) : null}
                         {rate && (
                             <li><RiPriceTag3Line aria-hidden="true" /> From {rate}</li>
